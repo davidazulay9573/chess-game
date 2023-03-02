@@ -128,7 +128,7 @@ export class Skipping {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
 
-          king.htmlElement.addEventListener("dragend", (event) => {
+          king.htmlElement.addEventListener("dragend", () => {
             if (king.orderOfMovements.length == 1) {
               let tool = document
                 .getElementById(`${king.location.row}7`)
