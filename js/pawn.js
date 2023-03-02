@@ -17,7 +17,9 @@ export class Pawn extends GameTool {
                         if (!div.querySelector("img")) {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
-                            // div.classList.add("soltsCanMov");
+                            if (!div.querySelector("img")) {
+                                div.setAttribute("data-toggle", "canMove");
+                            }
                         }
                     }
                 }
@@ -26,7 +28,9 @@ export class Pawn extends GameTool {
                     if (!div.querySelector("img")) {
                         div.setAttribute("ondrop", "drop(event)");
                         div.setAttribute("ondragover", "allowDrop(event)");
-                        // div.classList.add("soltsCanMov");
+                        if (!div.querySelector("img")) {
+                            div.setAttribute("data-toggle", "canMove");
+                        }
                     }
                 }
                 if (this.location.col == Number(div.id[1]) - 1 ||
@@ -35,7 +39,9 @@ export class Pawn extends GameTool {
                         if (div.querySelector("img")) {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
-                            // div.classList.add("soltsCanMov");
+                            if (!div.querySelector("img")) {
+                                div.setAttribute("data-toggle", "canMove");
+                            }
                         }
                     }
                 }
@@ -47,7 +53,9 @@ export class Pawn extends GameTool {
                         if (!div.querySelector("img")) {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
-                            // div.classList.add("soltsCanMov");
+                            if (!div.querySelector("img")) {
+                                div.setAttribute("data-toggle", "canMove");
+                            }
                         }
                     }
                 }
@@ -56,7 +64,9 @@ export class Pawn extends GameTool {
                     if (!div.querySelector("img")) {
                         div.setAttribute("ondrop", "drop(event)");
                         div.setAttribute("ondragover", "allowDrop(event)");
-                        // div.classList.add("soltsCanMov");
+                        if (!div.querySelector("img")) {
+                            div.setAttribute("data-toggle", "canMove");
+                        }
                     }
                 }
                 if (this.location.col == Number(div.id[1]) - 1 ||
@@ -65,7 +75,9 @@ export class Pawn extends GameTool {
                         if (div.querySelector("img")) {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
-                            // div.classList.add("soltsCanMov");
+                            if (!div.querySelector("img")) {
+                                div.setAttribute("data-toggle", "canMove");
+                            }
                         }
                     }
                 }

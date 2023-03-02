@@ -37,6 +37,7 @@ export class GameTool {
         divs.forEach((div) => {
             div.removeAttribute("ondrop");
             div.removeAttribute("ondragover");
+            div.removeAttribute("data-toggle");
         });
         this.setLocation();
         this.setsOfMovs();

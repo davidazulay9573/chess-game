@@ -24,6 +24,7 @@ export class Skipping {
               if (Number(div.id[0]) < Number(tool.parentElement!.id[0])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -32,6 +33,7 @@ export class Skipping {
               if (Number(div.id[0]) > Number(tool.parentElement!.id[0])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -42,6 +44,7 @@ export class Skipping {
               if (Number(div.id[1]) > Number(tool.parentElement!.id[1])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -50,6 +53,7 @@ export class Skipping {
               if (Number(div.id[1]) < Number(tool.parentElement!.id[1])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -79,6 +83,7 @@ export class Skipping {
               ) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -90,6 +95,7 @@ export class Skipping {
               ) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -103,6 +109,7 @@ export class Skipping {
               ) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -114,6 +121,7 @@ export class Skipping {
               ) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
+                div.removeAttribute("data-toggle");
               }
             });
           }
@@ -127,6 +135,9 @@ export class Skipping {
         if (this.location.col == Number(div.id[1]) - 2) {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
+          if (!div.querySelector("img")) {
+            div.setAttribute("data-toggle", "canMove");
+          }
 
           king.htmlElement.addEventListener("dragend", () => {
             if (king.orderOfMovements.length == 1) {
@@ -162,6 +173,9 @@ export class Skipping {
             ) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
+              if (!div.querySelector("img")) {
+                div.setAttribute("data-toggle", "canMove");
+              }
 
               king.htmlElement.addEventListener("dragend", (event) => {
                 if (king.orderOfMovements.length == 1) {

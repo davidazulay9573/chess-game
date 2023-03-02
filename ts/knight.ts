@@ -18,7 +18,9 @@ export class Knight extends GameTool {
         ) {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
-          // div.classList.add("soltsCanMov");
+          if (!div.querySelector("img")) {
+            div.setAttribute("data-toggle", "canMove");
+          }
         }
       }
       if (
@@ -35,7 +37,9 @@ export class Knight extends GameTool {
         ) {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
-          // div.classList.add("soltsCanMov");
+          if (!div.querySelector("img")) {
+            div.setAttribute("data-toggle", "canMove");
+          }
         }
       }
     });

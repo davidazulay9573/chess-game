@@ -20,7 +20,9 @@ export class Pawn extends GameTool {
             if (!div.querySelector("img")) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
-              // div.classList.add("soltsCanMov");
+              if (!div.querySelector("img")) {
+                div.setAttribute("data-toggle", "canMove");
+              }
             }
           }
         }
@@ -31,7 +33,9 @@ export class Pawn extends GameTool {
           if (!div.querySelector("img")) {
             div.setAttribute("ondrop", "drop(event)");
             div.setAttribute("ondragover", "allowDrop(event)");
-            // div.classList.add("soltsCanMov");
+            if (!div.querySelector("img")) {
+              div.setAttribute("data-toggle", "canMove");
+            }
           }
         }
         if (
@@ -42,7 +46,9 @@ export class Pawn extends GameTool {
             if (div.querySelector("img")) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
-              // div.classList.add("soltsCanMov");
+              if (!div.querySelector("img")) {
+                div.setAttribute("data-toggle", "canMove");
+              }
             }
           }
         }
@@ -56,7 +62,9 @@ export class Pawn extends GameTool {
             if (!div.querySelector("img")) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
-              // div.classList.add("soltsCanMov");
+              if (!div.querySelector("img")) {
+                div.setAttribute("data-toggle", "canMove");
+              }
             }
           }
         }
@@ -67,7 +75,9 @@ export class Pawn extends GameTool {
           if (!div.querySelector("img")) {
             div.setAttribute("ondrop", "drop(event)");
             div.setAttribute("ondragover", "allowDrop(event)");
-            // div.classList.add("soltsCanMov");
+            if (!div.querySelector("img")) {
+              div.setAttribute("data-toggle", "canMove");
+            }
           }
         }
         if (
@@ -78,13 +88,14 @@ export class Pawn extends GameTool {
             if (div.querySelector("img")) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
-              // div.classList.add("soltsCanMov");
+              if (!div.querySelector("img")) {
+                div.setAttribute("data-toggle", "canMove");
+              }
             }
           }
         }
       }
     });
-      new Skipping(this.location).skipLimitStrat();
-    
+    new Skipping(this.location).skipLimitStrat();
   }
 }

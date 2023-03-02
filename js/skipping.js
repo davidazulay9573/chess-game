@@ -19,6 +19,7 @@ export class Skipping {
                             if (Number(div.id[0]) < Number(tool.parentElement.id[0])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -27,6 +28,7 @@ export class Skipping {
                             if (Number(div.id[0]) > Number(tool.parentElement.id[0])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -37,6 +39,7 @@ export class Skipping {
                             if (Number(div.id[1]) > Number(tool.parentElement.id[1])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -45,6 +48,7 @@ export class Skipping {
                             if (Number(div.id[1]) < Number(tool.parentElement.id[1])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -70,6 +74,7 @@ export class Skipping {
                                 Number(div.id[0]) > Number(tool.parentElement.id[0])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -79,6 +84,7 @@ export class Skipping {
                                 Number(div.id[0]) < Number(tool.parentElement.id[0])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -90,6 +96,7 @@ export class Skipping {
                                 Number(div.id[0]) < Number(tool.parentElement.id[0])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -99,6 +106,7 @@ export class Skipping {
                                 Number(div.id[0]) > Number(tool.parentElement.id[0])) {
                                 div.removeAttribute("ondrop");
                                 div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
                             }
                         });
                     }
@@ -113,7 +121,10 @@ export class Skipping {
                 if (this.location.col == Number(div.id[1]) - 2) {
                     div.setAttribute("ondrop", "drop(event)");
                     div.setAttribute("ondragover", "allowDrop(event)");
-                    king.htmlElement.addEventListener("dragend", (event) => {
+                    if (!div.querySelector("img")) {
+                        div.setAttribute("data-toggle", "canMove");
+                    }
+                    king.htmlElement.addEventListener("dragend", () => {
                         var _a, _b, _c;
                         if (king.orderOfMovements.length == 1) {
                             let tool = (_a = document
@@ -137,6 +148,9 @@ export class Skipping {
                         if (((_a = document.getElementById(`${this.location.row}2`)) === null || _a === void 0 ? void 0 : _a.children.length) == 0) {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
+                            if (!div.querySelector("img")) {
+                                div.setAttribute("data-toggle", "canMove");
+                            }
                             king.htmlElement.addEventListener("dragend", (event) => {
                                 var _a, _b, _c;
                                 if (king.orderOfMovements.length == 1) {

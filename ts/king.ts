@@ -16,6 +16,9 @@ export class King extends GameTool {
         ) {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
+          if (!div.querySelector("img")) {
+            div.setAttribute("data-toggle", "canMove");
+          }
         }
       }
       let skip = new Skipping(this.location);

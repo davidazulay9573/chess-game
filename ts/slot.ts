@@ -10,7 +10,7 @@ export class Slot {
   }
   private renderHTML(): void {
     this.element.className = "slot";
-    this.element.id = `${this.row}${this.col}`;
+    this.element.id = `${this.col}${this.row}`;
     if ((this.row + this.col) % 2 != 0) {
       this.element.classList.add("black");
     }

@@ -12,7 +12,9 @@ export class Queen extends GameTool {
                     this.location.col - Number(div.id[1])) {
                 div.setAttribute("ondrop", "drop(event)");
                 div.setAttribute("ondragover", "allowDrop(event)");
-                // div.classList.add("soltsCanMov");
+                if (!div.querySelector("img")) {
+                    div.setAttribute("data-toggle", "canMove");
+                }
             }
         });
         let skip = new Skipping(this.location);

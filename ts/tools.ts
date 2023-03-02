@@ -40,7 +40,6 @@ export class GameTool {
           row: Number(div.id[0]),
           col: Number(div.id[1]),
         });
-        
       }
     }
   }
@@ -50,10 +49,10 @@ export class GameTool {
     divs.forEach((div) => {
       div.removeAttribute("ondrop");
       div.removeAttribute("ondragover");
+      div.removeAttribute("data-toggle");
     });
 
     this.setLocation();
     this.setsOfMovs();
   }
- 
 }

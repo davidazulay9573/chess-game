@@ -13,7 +13,9 @@ export class Knight extends GameTool {
                     Number(div.id[1]) - this.location.col == 2) {
                     div.setAttribute("ondrop", "drop(event)");
                     div.setAttribute("ondragover", "allowDrop(event)");
-                    // div.classList.add("soltsCanMov");
+                    if (!div.querySelector("img")) {
+                        div.setAttribute("data-toggle", "canMove");
+                    }
                 }
             }
             if (this.location.row - Number(div.id[0]) == 6 ||
@@ -26,7 +28,9 @@ export class Knight extends GameTool {
                     Number(div.id[1]) - this.location.col == 1) {
                     div.setAttribute("ondrop", "drop(event)");
                     div.setAttribute("ondragover", "allowDrop(event)");
-                    // div.classList.add("soltsCanMov");
+                    if (!div.querySelector("img")) {
+                        div.setAttribute("data-toggle", "canMove");
+                    }
                 }
             }
         });
