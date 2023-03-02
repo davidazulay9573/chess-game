@@ -12,7 +12,10 @@ export class Rook extends GameTool {
     filterDivs.forEach((div) => {
       div.setAttribute("ondrop", "drop(event)");
       div.setAttribute("ondragover", "allowDrop(event)");
-      if (!div.querySelector("img")) {
+      if (
+        !div.querySelector("img") ||
+        div.querySelector("img")?.id[0] != this.color
+      ) {
         div.setAttribute("data-toggle", "canMove");
       }
     });

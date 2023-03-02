@@ -4,6 +4,7 @@ export class Queen extends GameTool {
     setsOfMovs() {
         let divs = this.chesBoard.querySelectorAll("div");
         divs.forEach((div) => {
+            var _a;
             if (this.location.row == Number(div.id[0]) ||
                 this.location.col == Number(div.id[1]) ||
                 this.location.row - Number(div.id[0]) ==
@@ -12,7 +13,8 @@ export class Queen extends GameTool {
                     this.location.col - Number(div.id[1])) {
                 div.setAttribute("ondrop", "drop(event)");
                 div.setAttribute("ondragover", "allowDrop(event)");
-                if (!div.querySelector("img")) {
+                if (!div.querySelector("img") ||
+                    ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.color) {
                     div.setAttribute("data-toggle", "canMove");
                 }
             }

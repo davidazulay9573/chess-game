@@ -35,8 +35,8 @@ export class Game {
     const knightB2 = new Knight("B", `Bnight2`, "./bN.png");
 
     for (let i = 1; i <= 8; i++) {
-      let pawnW = new Pawn("white", `Wpawn${i}`, "./wP.png");
-      let pawnB = new Pawn("black", `Bpawn${i}`, "./bP.png");
+      let pawnW = new Pawn("W", `Wpawn${i}`, "./wP.png");
+      let pawnB = new Pawn("B", `Bpawn${i}`, "./bP.png");
       pawnB.startPoint = 2;
       pawnW.startPoint = 7;
       this.white.push(pawnW);
