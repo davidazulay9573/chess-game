@@ -12,8 +12,8 @@ export class Game {
     }
     createTools() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
-        const kingW = new King("w", "Wking", "./wK.png");
-        const kingB = new King("b", "Bking", "./bK.png");
+        const kingW = new King("W", "Wking", "./wK.png");
+        const kingB = new King("B", "Bking", "./bK.png");
         const QueenW = new Queen("W", "Wqueen", "./wQ.png");
         const QueenB = new Queen("B", "Bqueen", "./bQ.png");
         const rookW1 = new Rook("W", `Wrook1`, "./wR.png");

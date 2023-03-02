@@ -135,7 +135,10 @@ export class Skipping {
         if (this.location.col == Number(div.id[1]) - 2) {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
-          if (!div.querySelector("img")) {
+          if (
+            !div.querySelector("img") ||
+            div.querySelector("img")?.id[0] != king.color
+          ) {
             div.setAttribute("data-toggle", "canMove");
           }
 
@@ -152,7 +155,7 @@ export class Skipping {
                 const rook = new Rook(
                   king.color,
                   `${king.color}rook1`,
-                  `./${king.color}R.png`
+                  `./${king.color.toLowerCase()}R.png`
                 );
 
                 document
@@ -160,7 +163,6 @@ export class Skipping {
                   ?.appendChild(rook.htmlElement);
                 rook.htmlElement.addEventListener("mousedown", () => {
                   rook.Initialize();
-                  console.log(rook.location);
                 });
               }
             }
@@ -173,7 +175,10 @@ export class Skipping {
             ) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
-              if (!div.querySelector("img")) {
+              if (
+                !div.querySelector("img") ||
+                div.querySelector("img")?.id[0] != king.color
+              ) {
                 div.setAttribute("data-toggle", "canMove");
               }
 
@@ -192,7 +197,7 @@ export class Skipping {
                     const rook = new Rook(
                       king.color,
                       `${king.color}rook2`,
-                      `./${king.color}R.png`
+                      `./${king.color.toLowerCase()}R.png`
                     );
 
                     document

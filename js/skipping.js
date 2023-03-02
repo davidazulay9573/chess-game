@@ -115,13 +115,14 @@ export class Skipping {
         });
     }
     castling(div, king) {
-        var _a;
+        var _a, _b, _c;
         if (king.orderOfMovements.length === 1) {
             if (this.location.row == Number(div.id[0])) {
                 if (this.location.col == Number(div.id[1]) - 2) {
                     div.setAttribute("ondrop", "drop(event)");
                     div.setAttribute("ondragover", "allowDrop(event)");
-                    if (!div.querySelector("img")) {
+                    if (!div.querySelector("img") ||
+                        ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != king.color) {
                         div.setAttribute("data-toggle", "canMove");
                     }
                     king.htmlElement.addEventListener("dragend", () => {
@@ -132,12 +133,11 @@ export class Skipping {
                             if (tool.id[1] == "k") {
                                 let rookOldLocation = document.getElementById(`${this.location.row}8`);
                                 (_b = rookOldLocation.querySelector("img")) === null || _b === void 0 ? void 0 : _b.remove();
-                                const rook = new Rook(king.color, `${king.color}rook1`, `./${king.color}R.png`);
+                                const rook = new Rook(king.color, `${king.color}rook1`, `./${king.color.toLowerCase()}R.png`);
                                 (_c = document
                                     .getElementById(`${this.location.row}6`)) === null || _c === void 0 ? void 0 : _c.appendChild(rook.htmlElement);
                                 rook.htmlElement.addEventListener("mousedown", () => {
                                     rook.Initialize();
-                                    console.log(rook.location);
                                 });
                             }
                         }
@@ -145,10 +145,11 @@ export class Skipping {
                 }
                 else {
                     if (this.location.col == Number(div.id[1]) + 2) {
-                        if (((_a = document.getElementById(`${this.location.row}2`)) === null || _a === void 0 ? void 0 : _a.children.length) == 0) {
+                        if (((_b = document.getElementById(`${this.location.row}2`)) === null || _b === void 0 ? void 0 : _b.children.length) == 0) {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
-                            if (!div.querySelector("img")) {
+                            if (!div.querySelector("img") ||
+                                ((_c = div.querySelector("img")) === null || _c === void 0 ? void 0 : _c.id[0]) != king.color) {
                                 div.setAttribute("data-toggle", "canMove");
                             }
                             king.htmlElement.addEventListener("dragend", (event) => {
@@ -160,7 +161,7 @@ export class Skipping {
                                     if (tool.id[1] == "k") {
                                         let rookOldLocation = document.getElementById(`${this.location.row}1`);
                                         (_b = rookOldLocation.querySelector("img")) === null || _b === void 0 ? void 0 : _b.remove();
-                                        const rook = new Rook(king.color, `${king.color}rook2`, `./${king.color}R.png`);
+                                        const rook = new Rook(king.color, `${king.color}rook2`, `./${king.color.toLowerCase()}R.png`);
                                         (_c = document
                                             .getElementById(`${this.location.row}4`)) === null || _c === void 0 ? void 0 : _c.appendChild(rook.htmlElement);
                                         rook.htmlElement.addEventListener("mousedown", () => {

@@ -17,8 +17,8 @@ export class Game {
     this.whoIsStart = Math.random() < 0.5 ? 2 : 7;
   }
   createTools() {
-    const kingW = new King("w", "Wking", "./wK.png");
-    const kingB = new King("b", "Bking", "./bK.png");
+    const kingW = new King("W", "Wking", "./wK.png");
+    const kingB = new King("B", "Bking", "./bK.png");
     const QueenW = new Queen("W", "Wqueen", "./wQ.png");
     const QueenB = new Queen("B", "Bqueen", "./bQ.png");
     const rookW1 = new Rook("W", `Wrook1`, "./wR.png");
