@@ -26,6 +26,13 @@ export class Knight extends GameTool {
                         }
                     }
                 }
+            }
+            if (this.location.row - Number(div.id[0]) > 3 ||
+                this.location.col - Number(div.id[1]) > 3 ||
+                Number(div.id[0]) - this.location.row > 3 ||
+                Number(div.id[1]) - this.location.col > 3) {
+            }
+            else {
                 if (this.location.row - Number(div.id[0]) == 6 ||
                     this.location.row - Number(div.id[0]) == 2 ||
                     Number(div.id[0]) - this.location.row == 6 ||
