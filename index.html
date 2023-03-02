@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="ches.css" />
+    <script type="module" src="./js/script.js" defer></script>
+  </head>
+  <body>
+    <div id="chessboard"></div>
+
+    <script>
+      let eatTool;
+      let eatenTool;
+      let theWarZone;
+
+      function allowDrop(ev) {
+        ev.preventDefault();
+
+        if (ev.target.innerHTML === "") {
+        }
+      }
+
+      function drag(ev) {
+        eatTool = event.target;
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+      function drop(ev) {
+        ev.preventDefault();
+
+        if (ev.target.localName != "div" || ev.target.innerHTML != "") {
+          if (ev.target.localName === "div") {
+            eatenTool = ev.target.querySelector("img");
+            theWarZone = ev.target;
+          } else {
+            eatenTool = ev.target;
+            theWarZone = ev.target.parentElement;
+          }
+          if (eatTool.id[0] != eatenTool.id[0]) {
+            let data = ev.dataTransfer.getData("text");
+            eatenTool.remove();
+            theWarZone.appendChild(eatTool);
+            if (eatenTool.id[1] === "k") {
+              location.reload();
+            }
+          }
+        } else {
+          let data = ev.dataTransfer.getData("text");
+          ev.target.appendChild(eatTool);
+        }
+      }
+    </script>
+    <br />
+  </body>
+</html>
