@@ -1,4 +1,3 @@
-import { Rook } from "./rook.js";
 export class Skipping {
     constructor(tool) {
         this.chesBoard = document.querySelector("#chessboard");
@@ -163,60 +162,73 @@ export class Skipping {
         });
     }
     castling(div, king) {
-        var _a, _b, _c;
+        var _a;
+        // בדיקה שהמלך עדין לא זז
         if (king.orderOfMovements.length === 1) {
+            // הכוונה רק למשבצות שנמצאות באותה שורה
             if (this.forTool.location.row == Number(div.id[0])) {
+                // ### הצרחה קצרה ###
+                // הכוונה רק לשני המשבצות הספציפיות בהם המלך יכול לזוז
                 if (this.forTool.location.col == Number(div.id[1]) - 2) {
+                    // פתיחת המשבצות
                     div.setAttribute("ondrop", "drop(event)");
                     div.setAttribute("ondragover", "allowDrop(event)");
-                    if (!div.querySelector("img") ||
-                        ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != king.color) {
+                    // בדיקה שהמשבצת ריקה
+                    if (!div.querySelector("img")) {
+                        // שינוי צבע המשבצות
                         div.setAttribute("data-toggle", "canMove");
                     }
+                    // הוספת אירוע גרירה למלך
                     king.htmlElement.addEventListener("dragend", () => {
-                        var _a, _b, _c;
+                        var _a, _b;
+                        // בדיקה נוספת שמלך בתורו הראשון
                         if (king.orderOfMovements.length == 1) {
+                            // השמת משבצת המעבר(המשבצת בין המלך לצריח) בתוך משתנה
                             let tool = (_a = document
                                 .getElementById(`${king.location.row}7`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
+                            // בדיקה אם המשבצת מכילה כרגע מלך
                             if (tool.id[1] == "k") {
+                                // השמת מיקום הצריח הישן בתוך משתנה בכדי לפנות דרכו לצריח
                                 let rookOldLocation = document.getElementById(`${this.forTool.location.row}8`);
-                                (_b = rookOldLocation.querySelector("img")) === null || _b === void 0 ? void 0 : _b.remove();
-                                const rook = new Rook(king.color, `${king.color}rook1`, `./${king.color.toLowerCase()}R.png`);
-                                (_c = document
-                                    .getElementById(`${this.forTool.location.row}6`)) === null || _c === void 0 ? void 0 : _c.appendChild(rook.htmlElement);
-                                rook.htmlElement.addEventListener("mousedown", () => {
-                                    rook.Initialize();
-                                });
+                                let rookfor = rookOldLocation.querySelector("img");
+                                //  מחיקת הצריח מהמיקום הישן
+                                rookOldLocation.removeChild(rookfor);
+                                // השמת הצריח במקום החדש
+                                (_b = document
+                                    .getElementById(`${this.forTool.location.row}6`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
                             }
                         }
                     });
                 }
                 else {
+                    //  #### הצרחה ארוכה ####
+                    // הכוונה רק לשני המשבצות הספציפיות בהם המלך יכול לזוז
                     if (this.forTool.location.col == Number(div.id[1]) + 2) {
-                        if (((_b = document.getElementById(`${this.forTool.location.row}2`)) === null || _b === void 0 ? void 0 : _b.children.length) == 0) {
+                        // בדיקה ספציפית שהפרש זז ממקומו בכל שאר המקרים המלך לא יכול ממילא לזוז
+                        if (((_a = document.getElementById(`${this.forTool.location.row}2`)) === null || _a === void 0 ? void 0 : _a.children.length) == 0) {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
-                            if (!div.querySelector("img") ||
-                                ((_c = div.querySelector("img")) === null || _c === void 0 ? void 0 : _c.id[0]) != king.color) {
+                            if (!div.querySelector("img")) {
                                 div.setAttribute("data-toggle", "canMove");
-                                div.setAttribute("data-values", JSON.stringify([king]));
                             }
-                            king.htmlElement.addEventListener("dragend", (event) => {
-                                var _a, _b, _c;
+                            // הוספת אירוע גרירה למלך
+                            king.htmlElement.addEventListener("dragend", () => {
+                                var _a, _b;
+                                // בדיקה נוספת שמלך בתורו הראשון
                                 if (king.orderOfMovements.length == 1) {
-                                    console.log(1);
+                                    // השמת משבצת המעבר(המשבצת בין המלך לצריח) בתוך משתנה
                                     let tool = (_a = document
-                                        .getElementById(`${this.forTool.location.row}3`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
+                                        .getElementById(`${king.location.row}3`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
+                                    // בדיקה אם המשבצת מכילה כרגע מלך
                                     if (tool.id[1] == "k") {
+                                        // השמת מיקום הצריח הישן בתוך משתנה בכדי לפנות דרכו לצריח
                                         let rookOldLocation = document.getElementById(`${this.forTool.location.row}1`);
-                                        (_b = rookOldLocation.querySelector("img")) === null || _b === void 0 ? void 0 : _b.remove();
-                                        const rook = new Rook(king.color, `${king.color}rook2`, `./${king.color.toLowerCase()}R.png`);
-                                        (_c = document
-                                            .getElementById(`${this.forTool.location.row}4`)) === null || _c === void 0 ? void 0 : _c.appendChild(rook.htmlElement);
-                                        rook.htmlElement.addEventListener("mousedown", () => {
-                                            rook.Initialize();
-                                            console.log(rook.location);
-                                        });
+                                        let rookfor = rookOldLocation.querySelector("img");
+                                        //  מחיקת הצריח מהמיקום הישן
+                                        rookOldLocation.removeChild(rookfor);
+                                        // השמת הצריח במקום החדש
+                                        (_b = document
+                                            .getElementById(`${this.forTool.location.row}4`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
                                     }
                                 }
                             });

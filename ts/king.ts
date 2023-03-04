@@ -1,20 +1,26 @@
 import { GameTool } from "./tools.js";
 import { Skipping } from "./skipping.js";
 export class King extends GameTool {
-  opponentsTools: GameTool[];
+  enemies: GameTool[];
+  friendsToFight: GameTool[];
+
   constructor(
     color: string,
     type: string,
     img: string,
-    opponentsTools: GameTool[]
+    opponentsTools: GameTool[],
+    friendsToFight: GameTool[]
   ) {
     super(color, type, img);
     {
-      this.opponentsTools = opponentsTools;
+      this.enemies = opponentsTools;
+      this.friendsToFight = friendsToFight;
     }
   }
   setsOfMovs(): void {
     this.possibleSlots = [];
+    // this.friendsToFight = [];
+    // this.possibleSlots = [];
     let divs = this.chesBoard.querySelectorAll("div");
     divs.forEach((div) => {
       if (
@@ -31,22 +37,27 @@ export class King extends GameTool {
           div.setAttribute("ondragover", "allowDrop(event)");
           this.possibleSlots.push(Number(div.id));
 
-          if (
-            !div.querySelector("img") ||
-            div.querySelector("img")?.id[0] != this.type[0]
-          ) {
-            div.setAttribute("data-toggle", "canMove");
-          }
-          this.opponentsTools.forEach((tool) => {
+          // if (
+          //   !div.querySelector("img") ||
+          //   div.querySelector("img")?.id[0] != this.type[0]
+          // ) {
+          //   div.setAttribute("data-toggle", "canMove");
+          // }
+          this.enemies.forEach((tool) => {
             tool.possibleSlots.forEach((location) => {
               if (Number(div.id) == location) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+                // this.Initialize();
+                // this.setsOfMovs();
               }
             });
           });
+          // this.Initialize();
+          // this.setsOfMovs();
         }
+        this.htmlElement.removeAttribute("data-toggle");
       }
       let skip = new Skipping(this);
       skip.skipLimitStrat();

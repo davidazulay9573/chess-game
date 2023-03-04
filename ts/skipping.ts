@@ -185,84 +185,82 @@ export class Skipping {
     });
   }
   castling(div: HTMLElement, king: King) {
+    // בדיקה שהמלך עדין לא זז
     if (king.orderOfMovements.length === 1) {
+      // הכוונה רק למשבצות שנמצאות באותה שורה
       if (this.forTool.location.row == Number(div.id[0])) {
+        // ### הצרחה קצרה ###
+        // הכוונה רק לשני המשבצות הספציפיות בהם המלך יכול לזוז
         if (this.forTool.location.col == Number(div.id[1]) - 2) {
+          // פתיחת המשבצות
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
-          if (
-            !div.querySelector("img") ||
-            div.querySelector("img")?.id[0] != king.color
-          ) {
+          // בדיקה שהמשבצת ריקה
+          if (!div.querySelector("img")) {
+            // שינוי צבע המשבצות
             div.setAttribute("data-toggle", "canMove");
           }
-
+          // הוספת אירוע גרירה למלך
           king.htmlElement.addEventListener("dragend", () => {
+            // בדיקה נוספת שמלך בתורו הראשון
             if (king.orderOfMovements.length == 1) {
+              // השמת משבצת המעבר(המשבצת בין המלך לצריח) בתוך משתנה
               let tool = document
                 .getElementById(`${king.location.row}7`)
                 ?.querySelector("img") as HTMLElement;
+              // בדיקה אם המשבצת מכילה כרגע מלך
               if (tool.id[1] == "k") {
+                // השמת מיקום הצריח הישן בתוך משתנה בכדי לפנות דרכו לצריח
                 let rookOldLocation = document.getElementById(
                   `${this.forTool.location.row}8`
                 ) as HTMLElement;
-                rookOldLocation.querySelector("img")?.remove();
-                const rook = new Rook(
-                  king.color,
-                  `${king.color}rook1`,
-                  `./${king.color.toLowerCase()}R.png`
-                );
-
+                let rookfor = rookOldLocation.querySelector("img")!;
+                //  מחיקת הצריח מהמיקום הישן
+                rookOldLocation.removeChild(rookfor);
+                // השמת הצריח במקום החדש
                 document
                   .getElementById(`${this.forTool.location.row}6`)
-                  ?.appendChild(rook.htmlElement);
-                rook.htmlElement.addEventListener("mousedown", () => {
-                  rook.Initialize();
-                });
+                  ?.appendChild(rookfor);
               }
             }
           });
         } else {
+          //  #### הצרחה ארוכה ####
+          // הכוונה רק לשני המשבצות הספציפיות בהם המלך יכול לזוז
+
           if (this.forTool.location.col == Number(div.id[1]) + 2) {
+            // בדיקה ספציפית שהפרש זז ממקומו בכל שאר המקרים המלך לא יכול ממילא לזוז
             if (
               document.getElementById(`${this.forTool.location.row}2`)?.children
                 .length == 0
             ) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
-              if (
-                !div.querySelector("img") ||
-                div.querySelector("img")?.id[0] != king.color
-              ) {
+              if (!div.querySelector("img")) {
                 div.setAttribute("data-toggle", "canMove");
-                div.setAttribute("data-values", JSON.stringify([king]));
               }
 
-              king.htmlElement.addEventListener("dragend", (event) => {
+              // הוספת אירוע גרירה למלך
+              king.htmlElement.addEventListener("dragend", () => {
+                // בדיקה נוספת שמלך בתורו הראשון
                 if (king.orderOfMovements.length == 1) {
-                  console.log(1);
-
+                  // השמת משבצת המעבר(המשבצת בין המלך לצריח) בתוך משתנה
                   let tool = document
-                    .getElementById(`${this.forTool.location.row}3`)
+                    .getElementById(`${king.location.row}3`)
                     ?.querySelector("img") as HTMLElement;
+                  // בדיקה אם המשבצת מכילה כרגע מלך
                   if (tool.id[1] == "k") {
+                    // השמת מיקום הצריח הישן בתוך משתנה בכדי לפנות דרכו לצריח
                     let rookOldLocation = document.getElementById(
                       `${this.forTool.location.row}1`
                     ) as HTMLElement;
-                    rookOldLocation.querySelector("img")?.remove();
-                    const rook = new Rook(
-                      king.color,
-                      `${king.color}rook2`,
-                      `./${king.color.toLowerCase()}R.png`
-                    );
-
+                    let rookfor = rookOldLocation.querySelector("img")!;
+                    //  מחיקת הצריח מהמיקום הישן
+                    rookOldLocation.removeChild(rookfor);
+                    // השמת הצריח במקום החדש
                     document
                       .getElementById(`${this.forTool.location.row}4`)
-                      ?.appendChild(rook.htmlElement);
-                    rook.htmlElement.addEventListener("mousedown", () => {
-                      rook.Initialize();
-                      console.log(rook.location);
-                    });
+                      ?.appendChild(rookfor);
                   }
                 }
               });

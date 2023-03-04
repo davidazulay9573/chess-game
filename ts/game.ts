@@ -70,37 +70,44 @@ export class Game {
     this.black.push(rookB1, bishopB1, knightB1);
     this.black.push(rookB2, bishopB2, knightB2);
 
-    const kingW = new King("W", "Wking", "./wK.png", this.black);
+    const kingW = new King("W", "Wking", "./wK.png", this.black, this.white);
     this.white.push(QueenW, kingW);
 
-    const kingB = new King("B", "Bking", "./bK.png", this.white);
+    const kingB = new King("B", "Bking", "./bK.png", this.white, this.black);
     this.black.push(QueenB, kingB);
 
     document.getElementById("85")?.appendChild(kingW.htmlElement);
     document.getElementById("15")?.appendChild(kingB.htmlElement);
 
     this.white.forEach((tool) => {
-      tool.Initialize();
-      tool.setsOfMovs();
-      console.log(tool);
-
       if (tool.type[1] != "k") {
         tool.htmlElement.addEventListener("dragend", () => {
           tool.Initialize();
-          tool.Initialize();
           tool.setsOfMovs();
+          this.black.forEach((tool2) => {
+            tool2.Initialize();
+            tool2.setsOfMovs();
+          });
+          this.white.forEach((tool2) => {
+            tool2.Initialize();
+            tool2.setsOfMovs();
+          });
         });
       }
     });
     this.black.forEach((tool) => {
-      tool.Initialize();
-      tool.setsOfMovs();
-      console.log(tool);
-
       if (tool.type[1] != "k") {
         tool.htmlElement.addEventListener("dragend", () => {
           tool.Initialize();
           tool.setsOfMovs();
+          this.white.forEach((tool2) => {
+            tool2.Initialize();
+            tool2.setsOfMovs();
+          });
+          this.black.forEach((tool2) => {
+            tool2.Initialize();
+            tool2.setsOfMovs();
+          });
         });
       }
     });
