@@ -40,7 +40,6 @@ export class King extends GameTool {
             !div.querySelector("img") ||
             div.querySelector("img")?.id[0] != this.type[0]
           ) {
-            div.setAttribute("data-toggle", "canMove");
           } else {
           }
           this.enemies.forEach((tool) => {

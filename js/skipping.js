@@ -175,8 +175,6 @@ export class Skipping {
                     div.setAttribute("ondragover", "allowDrop(event)");
                     // בדיקה שהמשבצת ריקה
                     if (!div.querySelector("img")) {
-                        // שינוי צבע המשבצות
-                        div.setAttribute("data-toggle", "canMove");
                     }
                     // הוספת אירוע גרירה למלך
                     king.htmlElement.addEventListener("dragend", () => {
@@ -209,7 +207,6 @@ export class Skipping {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
                             if (!div.querySelector("img")) {
-                                div.setAttribute("data-toggle", "canMove");
                             }
                             // הוספת אירוע גרירה למלך
                             king.htmlElement.addEventListener("dragend", () => {

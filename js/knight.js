@@ -4,7 +4,7 @@ export class Knight extends GameTool {
         this.possibleSlots = [];
         let divs = this.chesBoard.querySelectorAll("div");
         divs.forEach((div) => {
-            var _a, _b, _c;
+            var _a, _b;
             if (this.location.row - Number(div.id[0]) > 3 ||
                 this.location.col - Number(div.id[1]) > 3 ||
                 Number(div.id[0]) - this.location.row > 3 ||
@@ -24,10 +24,6 @@ export class Knight extends GameTool {
                         this.possibleSlots.push(Number(div.id));
                         if (!div.querySelector("img") ||
                             ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.color) {
-                            div.setAttribute("data-toggle", "canMove");
-                            if (((_b = div.querySelector("img")) === null || _b === void 0 ? void 0 : _b.id[1]) == "k") {
-                                div.setAttribute("data-toggle", "shach");
-                            }
                         }
                     }
                 }
@@ -50,8 +46,7 @@ export class Knight extends GameTool {
                         div.setAttribute("ondragover", "allowDrop(event)");
                         this.possibleSlots.push(Number(div.id));
                         if (!div.querySelector("img") ||
-                            ((_c = div.querySelector("img")) === null || _c === void 0 ? void 0 : _c.id[0]) != this.color) {
-                            div.setAttribute("data-toggle", "canMove");
+                            ((_b = div.querySelector("img")) === null || _b === void 0 ? void 0 : _b.id[0]) != this.color) {
                         }
                     }
                 }

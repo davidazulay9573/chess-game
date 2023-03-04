@@ -32,11 +32,6 @@ export class Knight extends GameTool {
               !div.querySelector("img") ||
               div.querySelector("img")?.id[0] != this.color
             ) {
-              div.setAttribute("data-toggle", "canMove");
-
-              if (div.querySelector("img")?.id[1] == "k") {
-                div.setAttribute("data-toggle", "shach");
-              }
             }
           }
         }
@@ -68,7 +63,6 @@ export class Knight extends GameTool {
               !div.querySelector("img") ||
               div.querySelector("img")?.id[0] != this.color
             ) {
-              div.setAttribute("data-toggle", "canMove");
             }
           }
         }

@@ -24,7 +24,6 @@ export class King extends GameTool {
                     div.setAttribute("ondragover", "allowDrop(event)");
                     if (!div.querySelector("img") ||
                         ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.type[0]) {
-                        div.setAttribute("data-toggle", "canMove");
                     }
                     else {
                     }

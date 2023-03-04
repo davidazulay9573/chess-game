@@ -21,7 +21,6 @@ export class Pawn extends GameTool {
                             div.setAttribute("ondragover", "allowDrop(event)");
                             if (!div.querySelector("img") ||
                                 ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.color) {
-                                div.setAttribute("data-toggle", "canMove");
                             }
                         }
                     }
@@ -33,7 +32,6 @@ export class Pawn extends GameTool {
                         div.setAttribute("ondragover", "allowDrop(event)");
                         if (!div.querySelector("img") ||
                             ((_b = div.querySelector("img")) === null || _b === void 0 ? void 0 : _b.id[0]) != this.color) {
-                            div.setAttribute("data-toggle", "canMove");
                         }
                     }
                 }
@@ -46,7 +44,6 @@ export class Pawn extends GameTool {
                             div.setAttribute("ondragover", "allowDrop(event)");
                             if (!div.querySelector("img") ||
                                 ((_c = div.querySelector("img")) === null || _c === void 0 ? void 0 : _c.id[0]) != this.color) {
-                                div.setAttribute("data-toggle", "canMove");
                             }
                         }
                     }
@@ -61,7 +58,6 @@ export class Pawn extends GameTool {
                             div.setAttribute("ondragover", "allowDrop(event)");
                             if (!div.querySelector("img") ||
                                 ((_d = div.querySelector("img")) === null || _d === void 0 ? void 0 : _d.id[0]) != this.color) {
-                                div.setAttribute("data-toggle", "canMove");
                             }
                         }
                     }
@@ -73,7 +69,6 @@ export class Pawn extends GameTool {
                         div.setAttribute("ondragover", "allowDrop(event)");
                         if (!div.querySelector("img") ||
                             ((_e = div.querySelector("img")) === null || _e === void 0 ? void 0 : _e.id[0]) != this.color) {
-                            div.setAttribute("data-toggle", "canMove");
                         }
                     }
                 }
@@ -86,7 +81,6 @@ export class Pawn extends GameTool {
                             div.setAttribute("ondragover", "allowDrop(event)");
                             if (!div.querySelector("img") ||
                                 ((_f = div.querySelector("img")) === null || _f === void 0 ? void 0 : _f.id[0]) != this.color) {
-                                div.setAttribute("data-toggle", "canMove");
                             }
                         }
                     }
