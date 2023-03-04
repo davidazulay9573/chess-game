@@ -4,16 +4,17 @@ import { Queen } from "./queen.js";
 import { Knight } from "./knight.js";
 import { King } from "./king.js";
 import { Pawn } from "./pawn.js";
+import { Chessboard } from "./board.js";
 export class Game {
-    constructor() {
+    constructor(container) {
         this.black = [];
         this.white = [];
         this.whoIsStart = Math.random() < 0.5 ? 2 : 7;
+        this.container = container;
+        this.chesBoard = new Chessboard(container);
     }
     createTools() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
-        const kingW = new King("W", "Wking", "./wK.png");
-        const kingB = new King("B", "Bking", "./bK.png");
         const QueenW = new Queen("W", "Wqueen", "./wQ.png");
         const QueenB = new Queen("B", "Bqueen", "./bQ.png");
         const rookW1 = new Rook("W", `Wrook1`, "./wR.png");
@@ -39,35 +40,55 @@ export class Game {
             (_b = document.getElementById(`2${i}`)) === null || _b === void 0 ? void 0 : _b.appendChild(pawnB.htmlElement);
         }
         (_c = document.getElementById("84")) === null || _c === void 0 ? void 0 : _c.appendChild(QueenW.htmlElement);
-        (_d = document.getElementById("85")) === null || _d === void 0 ? void 0 : _d.appendChild(kingW.htmlElement);
-        (_e = document.getElementById("14")) === null || _e === void 0 ? void 0 : _e.appendChild(QueenB.htmlElement);
-        (_f = document.getElementById("15")) === null || _f === void 0 ? void 0 : _f.appendChild(kingB.htmlElement);
-        (_g = document.getElementById("88")) === null || _g === void 0 ? void 0 : _g.appendChild(rookW1.htmlElement);
-        (_h = document.getElementById("81")) === null || _h === void 0 ? void 0 : _h.appendChild(rookW2.htmlElement);
-        (_j = document.getElementById("18")) === null || _j === void 0 ? void 0 : _j.appendChild(rookB1.htmlElement);
-        (_k = document.getElementById("11")) === null || _k === void 0 ? void 0 : _k.appendChild(rookB2.htmlElement);
-        (_l = document.getElementById("87")) === null || _l === void 0 ? void 0 : _l.appendChild(knightW1.htmlElement);
-        (_m = document.getElementById("82")) === null || _m === void 0 ? void 0 : _m.appendChild(knightW2.htmlElement);
-        (_o = document.getElementById("17")) === null || _o === void 0 ? void 0 : _o.appendChild(knightB1.htmlElement);
-        (_p = document.getElementById("12")) === null || _p === void 0 ? void 0 : _p.appendChild(knightB2.htmlElement);
-        (_q = document.getElementById("83")) === null || _q === void 0 ? void 0 : _q.appendChild(bishopW1.htmlElement);
-        (_r = document.getElementById("86")) === null || _r === void 0 ? void 0 : _r.appendChild(bishopW2.htmlElement);
-        (_s = document.getElementById("13")) === null || _s === void 0 ? void 0 : _s.appendChild(bishopB1.htmlElement);
-        (_t = document.getElementById("16")) === null || _t === void 0 ? void 0 : _t.appendChild(bishopB2.htmlElement);
-        this.white.push(QueenW, kingW);
-        this.black.push(QueenB, kingB);
+        (_d = document.getElementById("14")) === null || _d === void 0 ? void 0 : _d.appendChild(QueenB.htmlElement);
+        (_e = document.getElementById("88")) === null || _e === void 0 ? void 0 : _e.appendChild(rookW1.htmlElement);
+        (_f = document.getElementById("81")) === null || _f === void 0 ? void 0 : _f.appendChild(rookW2.htmlElement);
+        (_g = document.getElementById("18")) === null || _g === void 0 ? void 0 : _g.appendChild(rookB1.htmlElement);
+        (_h = document.getElementById("11")) === null || _h === void 0 ? void 0 : _h.appendChild(rookB2.htmlElement);
+        (_j = document.getElementById("87")) === null || _j === void 0 ? void 0 : _j.appendChild(knightW1.htmlElement);
+        (_k = document.getElementById("82")) === null || _k === void 0 ? void 0 : _k.appendChild(knightW2.htmlElement);
+        (_l = document.getElementById("17")) === null || _l === void 0 ? void 0 : _l.appendChild(knightB1.htmlElement);
+        (_m = document.getElementById("12")) === null || _m === void 0 ? void 0 : _m.appendChild(knightB2.htmlElement);
+        (_o = document.getElementById("83")) === null || _o === void 0 ? void 0 : _o.appendChild(bishopW1.htmlElement);
+        (_p = document.getElementById("86")) === null || _p === void 0 ? void 0 : _p.appendChild(bishopW2.htmlElement);
+        (_q = document.getElementById("13")) === null || _q === void 0 ? void 0 : _q.appendChild(bishopB1.htmlElement);
+        (_r = document.getElementById("16")) === null || _r === void 0 ? void 0 : _r.appendChild(bishopB2.htmlElement);
         this.white.push(rookW1, bishopW1, knightW1);
         this.white.push(rookW2, bishopW2, knightW2);
         this.black.push(rookB1, bishopB1, knightB1);
         this.black.push(rookB2, bishopB2, knightB2);
+        const kingW = new King("W", "Wking", "./wK.png", this.black);
+        this.white.push(QueenW, kingW);
+        const kingB = new King("B", "Bking", "./bK.png", this.white);
+        this.black.push(QueenB, kingB);
+        (_s = document.getElementById("85")) === null || _s === void 0 ? void 0 : _s.appendChild(kingW.htmlElement);
+        (_t = document.getElementById("15")) === null || _t === void 0 ? void 0 : _t.appendChild(kingB.htmlElement);
+        this.white.forEach((tool) => {
+            if (tool.type[1] != "k") {
+                tool.htmlElement.addEventListener("dragend", () => {
+                    tool.Initialize();
+                    tool.setsOfMovs();
+                });
+            }
+        });
+        this.black.forEach((tool) => {
+            if (tool.type[1] != "k") {
+                tool.htmlElement.addEventListener("dragend", () => {
+                    tool.Initialize();
+                    tool.setsOfMovs();
+                });
+            }
+        });
         this.white.forEach((tool) => {
             tool.htmlElement.addEventListener("mousedown", () => {
                 tool.Initialize();
+                tool.setsOfMovs();
             });
         });
         this.black.forEach((tool) => {
             tool.htmlElement.addEventListener("mousedown", () => {
                 tool.Initialize();
+                tool.setsOfMovs();
             });
         });
     }

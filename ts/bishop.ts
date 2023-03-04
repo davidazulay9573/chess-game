@@ -3,6 +3,7 @@ import { GameTool } from "./tools.js";
 
 export class Bishop extends GameTool {
   setsOfMovs() {
+    this.possibleSlots = [];
     let divs = this.chesBoard.querySelectorAll("div");
     let filterDivs = Array.from(divs).filter((div) => {
       return (
@@ -20,8 +21,13 @@ export class Bishop extends GameTool {
         div.querySelector("img")?.id[0] != this.color
       ) {
         div.setAttribute("data-toggle", "canMove");
+        this.possibleSlots.push(Number(div.id));
+
+        if (div.querySelector("img")?.id[1] == "k") {
+          div.setAttribute("data-toggle", "shach");
+        }
       }
     });
-    new Skipping(this.location).skipLimitDiagonal();
+    new Skipping(this).skipLimitDiagonal();
   }
 }

@@ -6,15 +6,19 @@ export class GameTool {
   public chesBoard: HTMLElement;
   public location: { row: number; col: number };
   public orderOfMovements: { row: number; col: number }[];
+  public possibleSlots: number[];
   constructor(color: string, type: string, img: string) {
     this.color = color;
     this.type = type;
     this.img = img;
-    this.location = { row: 1, col: 1 };
     this.orderOfMovements = [];
-
+    this.possibleSlots = [];
     this.htmlElement = document.createElement("img");
     this.chesBoard = document.querySelector("#chessboard")!;
+    this.location = {
+      row: Number(this.htmlElement.id[0]),
+      col: Number(this.htmlElement.id[1]),
+    };
     this.renderHTML();
   }
   private renderHTML(): void {
@@ -23,6 +27,7 @@ export class GameTool {
     this.htmlElement.setAttribute("id", this.type);
     this.htmlElement.setAttribute("ondragstart", "drag(event)");
     this.htmlElement.setAttribute("grup", this.color);
+    this.htmlElement.setAttribute("data-values", JSON.stringify([]));
   }
   private setLocation() {
     let thisChessPiece = this.chesBoard.querySelector(
@@ -43,7 +48,10 @@ export class GameTool {
       }
     }
   }
-  public setsOfMovs() {}
+  public setsOfMovs() {
+    let divs = this.chesBoard.querySelectorAll("div");
+    // divs.forEach((div) => {});
+  }
   public Initialize() {
     let divs = this.chesBoard.querySelectorAll("div");
     divs.forEach((div) => {
@@ -53,6 +61,13 @@ export class GameTool {
     });
 
     this.setLocation();
-    this.setsOfMovs();
+  }
+  update() {
+    let stringsArr = this.htmlElement.getAttribute("data-values")!;
+    let objsArr = JSON.parse(stringsArr);
+
+    objsArr.pop();
+    objsArr.push(this);
+    this.htmlElement.setAttribute("data-values", JSON.stringify(objsArr));
   }
 }

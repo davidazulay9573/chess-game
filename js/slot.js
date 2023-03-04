@@ -2,14 +2,20 @@ export class Slot {
     constructor(row, col) {
         this.row = row;
         this.col = col;
-        this.element = document.createElement("div");
+        this.htmlElement = document.createElement("div");
+        this.toolsCanGetIn1Move = [];
         this.renderHTML();
     }
     renderHTML() {
-        this.element.className = "slot";
-        this.element.id = `${this.col}${this.row}`;
+        this.htmlElement.className = "slot";
+        this.htmlElement.id = `${this.col}${this.row}`;
         if ((this.row + this.col) % 2 != 0) {
-            this.element.classList.add("black");
+            this.htmlElement.classList.add("black");
+        }
+    }
+    whoIsAllowedIn() {
+        if (!this.htmlElement.getAttribute("data-values")) {
+            this.htmlElement.setAttribute("data-values", JSON.stringify([]));
         }
     }
 }

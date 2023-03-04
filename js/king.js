@@ -1,7 +1,14 @@
 import { GameTool } from "./tools.js";
 import { Skipping } from "./skipping.js";
 export class King extends GameTool {
+    constructor(color, type, img, opponentsTools) {
+        super(color, type, img);
+        {
+            this.opponentsTools = opponentsTools;
+        }
+    }
     setsOfMovs() {
+        this.possibleSlots = [];
         let divs = this.chesBoard.querySelectorAll("div");
         divs.forEach((div) => {
             var _a;
@@ -16,10 +23,20 @@ export class King extends GameTool {
                     if (!div.querySelector("img") ||
                         ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.type[0]) {
                         div.setAttribute("data-toggle", "canMove");
+                        this.possibleSlots.push(Number(div.id));
                     }
+                    this.opponentsTools.forEach((tool) => {
+                        tool.possibleSlots.forEach((location) => {
+                            if (Number(div.id) == location) {
+                                div.removeAttribute("ondrop");
+                                div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
+                            }
+                        });
+                    });
                 }
             }
-            let skip = new Skipping(this.location);
+            let skip = new Skipping(this);
             skip.skipLimitStrat();
             skip.castling(div, this);
         });

@@ -1,18 +1,25 @@
 export class Slot {
-  public element: HTMLDivElement;
+  public htmlElement: HTMLDivElement;
   public row: number;
   public col: number;
+  public toolsCanGetIn1Move: string[];
   constructor(row: number, col: number) {
     this.row = row;
     this.col = col;
-    this.element = document.createElement("div");
+    this.htmlElement = document.createElement("div");
+    this.toolsCanGetIn1Move = [];
     this.renderHTML();
   }
   private renderHTML(): void {
-    this.element.className = "slot";
-    this.element.id = `${this.col}${this.row}`;
+    this.htmlElement.className = "slot";
+    this.htmlElement.id = `${this.col}${this.row}`;
     if ((this.row + this.col) % 2 != 0) {
-      this.element.classList.add("black");
+      this.htmlElement.classList.add("black");
+    }
+  }
+  whoIsAllowedIn() {
+    if (!this.htmlElement.getAttribute("data-values")) {
+      this.htmlElement.setAttribute("data-values", JSON.stringify([]));
     }
   }
 }

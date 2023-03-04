@@ -1,59 +1,86 @@
 import { King } from "./king.js";
 import { Rook } from "./rook.js";
+import { GameTool } from "./tools";
 export class Skipping {
   private chesBoard: HTMLElement;
-  private location: { row: number; col: number };
-  constructor(location: { row: number; col: number }) {
+  forTool: GameTool;
+  constructor(tool: GameTool) {
     this.chesBoard = document.querySelector("#chessboard")!;
-    this.location = location;
+    this.forTool = tool;
   }
   skipLimitStrat() {
     let divs = this.chesBoard.querySelectorAll("div");
     let filterDivs = Array.from(divs).filter((div) => {
       return (
-        this.location.col == Number(div.id[1]) ||
-        this.location.row == Number(div.id[0])
+        this.forTool.location.col == Number(div.id[1]) ||
+        this.forTool.location.row == Number(div.id[0])
       );
     });
+
     filterDivs.forEach((div) => {
       let tool = div.querySelector("img")!;
       if (div.querySelector("img")) {
-        if (Number(tool.parentElement!.id[1]) == this.location.col) {
-          if (this.location.row > Number(tool.parentElement!.id[0])) {
+        if (Number(tool.parentElement!.id[1]) == this.forTool.location.col) {
+          if (this.forTool.location.row > Number(tool.parentElement!.id[0])) {
             filterDivs.forEach((div) => {
               if (Number(div.id[0]) < Number(tool.parentElement!.id[0])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
-          if (this.location.row < Number(tool.parentElement!.id[0])) {
+          if (this.forTool.location.row < Number(tool.parentElement!.id[0])) {
             filterDivs.forEach((div) => {
               if (Number(div.id[0]) > Number(tool.parentElement!.id[0])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
         }
-        if (Number(tool.parentElement!.id[0]) == this.location.row) {
-          if (this.location.col < Number(tool.parentElement!.id[1])) {
+        if (Number(tool.parentElement!.id[0]) == this.forTool.location.row) {
+          if (this.forTool.location.col < Number(tool.parentElement!.id[1])) {
             filterDivs.forEach((div) => {
               if (Number(div.id[1]) > Number(tool.parentElement!.id[1])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
-          if (this.location.col > Number(tool.parentElement!.id[1])) {
+          if (this.forTool.location.col > Number(tool.parentElement!.id[1])) {
             filterDivs.forEach((div) => {
               if (Number(div.id[1]) < Number(tool.parentElement!.id[1])) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
@@ -65,17 +92,17 @@ export class Skipping {
     let divs = this.chesBoard.querySelectorAll("div");
     let filterDivs = Array.from(divs).filter((div) => {
       return (
-        this.location.row - Number(div.id[0]) ==
-          this.location.col - Number(div.id[1]) ||
-        Number(div.id[0]) - this.location.row ==
-          this.location.col - Number(div.id[1])
+        this.forTool.location.row - Number(div.id[0]) ==
+          this.forTool.location.col - Number(div.id[1]) ||
+        Number(div.id[0]) - this.forTool.location.row ==
+          this.forTool.location.col - Number(div.id[1])
       );
     });
     filterDivs.forEach((div) => {
       let tool = div.querySelector("img")!;
       if (div.querySelector("img")) {
-        if (this.location.col < Number(tool.parentElement!.id[1])) {
-          if (this.location.row < Number(tool.parentElement!.id[0])) {
+        if (this.forTool.location.col < Number(tool.parentElement!.id[1])) {
+          if (this.forTool.location.row < Number(tool.parentElement!.id[0])) {
             filterDivs.forEach((div) => {
               if (
                 Number(div.id[1]) > Number(tool.parentElement!.id[1]) &&
@@ -84,10 +111,17 @@ export class Skipping {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
-          if (this.location.row > Number(tool.parentElement!.id[0])) {
+          if (this.forTool.location.row > Number(tool.parentElement!.id[0])) {
             filterDivs.forEach((div) => {
               if (
                 Number(div.id[1]) > Number(tool.parentElement!.id[1]) &&
@@ -96,12 +130,19 @@ export class Skipping {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
         }
-        if (this.location.col > Number(tool.parentElement!.id[1])) {
-          if (this.location.row > Number(tool.parentElement!.id[0])) {
+        if (this.forTool.location.col > Number(tool.parentElement!.id[1])) {
+          if (this.forTool.location.row > Number(tool.parentElement!.id[0])) {
             filterDivs.forEach((div) => {
               if (
                 Number(div.id[1]) < Number(tool.parentElement!.id[1]) &&
@@ -110,10 +151,17 @@ export class Skipping {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
-          if (this.location.row < Number(tool.parentElement!.id[0])) {
+          if (this.forTool.location.row < Number(tool.parentElement!.id[0])) {
             filterDivs.forEach((div) => {
               if (
                 Number(div.id[1]) < Number(tool.parentElement!.id[1]) &&
@@ -122,6 +170,13 @@ export class Skipping {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
+
+                this.forTool.possibleSlots.forEach((location) => {
+                  if (location == Number(div.id)) {
+                    let index = this.forTool.possibleSlots.indexOf(location);
+                    this.forTool.possibleSlots.splice(index, 1);
+                  }
+                });
               }
             });
           }
@@ -131,8 +186,8 @@ export class Skipping {
   }
   castling(div: HTMLElement, king: King) {
     if (king.orderOfMovements.length === 1) {
-      if (this.location.row == Number(div.id[0])) {
-        if (this.location.col == Number(div.id[1]) - 2) {
+      if (this.forTool.location.row == Number(div.id[0])) {
+        if (this.forTool.location.col == Number(div.id[1]) - 2) {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
           if (
@@ -149,7 +204,7 @@ export class Skipping {
                 ?.querySelector("img") as HTMLElement;
               if (tool.id[1] == "k") {
                 let rookOldLocation = document.getElementById(
-                  `${this.location.row}8`
+                  `${this.forTool.location.row}8`
                 ) as HTMLElement;
                 rookOldLocation.querySelector("img")?.remove();
                 const rook = new Rook(
@@ -159,7 +214,7 @@ export class Skipping {
                 );
 
                 document
-                  .getElementById(`${this.location.row}6`)
+                  .getElementById(`${this.forTool.location.row}6`)
                   ?.appendChild(rook.htmlElement);
                 rook.htmlElement.addEventListener("mousedown", () => {
                   rook.Initialize();
@@ -168,9 +223,9 @@ export class Skipping {
             }
           });
         } else {
-          if (this.location.col == Number(div.id[1]) + 2) {
+          if (this.forTool.location.col == Number(div.id[1]) + 2) {
             if (
-              document.getElementById(`${this.location.row}2`)?.children
+              document.getElementById(`${this.forTool.location.row}2`)?.children
                 .length == 0
             ) {
               div.setAttribute("ondrop", "drop(event)");
@@ -180,6 +235,7 @@ export class Skipping {
                 div.querySelector("img")?.id[0] != king.color
               ) {
                 div.setAttribute("data-toggle", "canMove");
+                div.setAttribute("data-values", JSON.stringify([king]));
               }
 
               king.htmlElement.addEventListener("dragend", (event) => {
@@ -187,11 +243,11 @@ export class Skipping {
                   console.log(1);
 
                   let tool = document
-                    .getElementById(`${this.location.row}3`)
+                    .getElementById(`${this.forTool.location.row}3`)
                     ?.querySelector("img") as HTMLElement;
                   if (tool.id[1] == "k") {
                     let rookOldLocation = document.getElementById(
-                      `${this.location.row}1`
+                      `${this.forTool.location.row}1`
                     ) as HTMLElement;
                     rookOldLocation.querySelector("img")?.remove();
                     const rook = new Rook(
@@ -201,7 +257,7 @@ export class Skipping {
                     );
 
                     document
-                      .getElementById(`${this.location.row}4`)
+                      .getElementById(`${this.forTool.location.row}4`)
                       ?.appendChild(rook.htmlElement);
                     rook.htmlElement.addEventListener("mousedown", () => {
                       rook.Initialize();

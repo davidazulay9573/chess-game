@@ -6,19 +6,22 @@ import { King } from "./king.js";
 import { Pawn } from "./pawn.js";
 import { GameTool } from "./tools.js";
 
+import { Chessboard } from "./board.js";
+import { Slot } from "./slot";
 export class Game {
   black: GameTool[];
   white: GameTool[];
   whoIsStart: number;
-
-  constructor() {
+  container: HTMLDivElement;
+  chesBoard: Chessboard;
+  constructor(container: HTMLDivElement) {
     this.black = [];
     this.white = [];
     this.whoIsStart = Math.random() < 0.5 ? 2 : 7;
+    this.container = container;
+    this.chesBoard = new Chessboard(container);
   }
   createTools() {
-    const kingW = new King("W", "Wking", "./wK.png");
-    const kingB = new King("B", "Bking", "./bK.png");
     const QueenW = new Queen("W", "Wqueen", "./wQ.png");
     const QueenB = new Queen("B", "Bqueen", "./bQ.png");
     const rookW1 = new Rook("W", `Wrook1`, "./wR.png");
@@ -39,6 +42,7 @@ export class Game {
       let pawnB = new Pawn("B", `Bpawn${i}`, "./bP.png");
       pawnB.startPoint = 2;
       pawnW.startPoint = 7;
+
       this.white.push(pawnW);
       this.black.push(pawnB);
 
@@ -46,9 +50,7 @@ export class Game {
       document.getElementById(`2${i}`)?.appendChild(pawnB.htmlElement);
     }
     document.getElementById("84")?.appendChild(QueenW.htmlElement);
-    document.getElementById("85")?.appendChild(kingW.htmlElement);
     document.getElementById("14")?.appendChild(QueenB.htmlElement);
-    document.getElementById("15")?.appendChild(kingB.htmlElement);
     document.getElementById("88")?.appendChild(rookW1.htmlElement);
     document.getElementById("81")?.appendChild(rookW2.htmlElement);
     document.getElementById("18")?.appendChild(rookB1.htmlElement);
@@ -62,22 +64,47 @@ export class Game {
     document.getElementById("13")?.appendChild(bishopB1.htmlElement);
     document.getElementById("16")?.appendChild(bishopB2.htmlElement);
 
-    this.white.push(QueenW, kingW);
-    this.black.push(QueenB, kingB);
     this.white.push(rookW1, bishopW1, knightW1);
     this.white.push(rookW2, bishopW2, knightW2);
 
     this.black.push(rookB1, bishopB1, knightB1);
     this.black.push(rookB2, bishopB2, knightB2);
 
+    const kingW = new King("W", "Wking", "./wK.png", this.black);
+    this.white.push(QueenW, kingW);
+
+    const kingB = new King("B", "Bking", "./bK.png", this.white);
+    this.black.push(QueenB, kingB);
+
+    document.getElementById("85")?.appendChild(kingW.htmlElement);
+    document.getElementById("15")?.appendChild(kingB.htmlElement);
+
+    this.white.forEach((tool) => {
+      if (tool.type[1] != "k") {
+        tool.htmlElement.addEventListener("dragend", () => {
+          tool.Initialize();
+          tool.setsOfMovs();
+        });
+      }
+    });
+    this.black.forEach((tool) => {
+      if (tool.type[1] != "k") {
+        tool.htmlElement.addEventListener("dragend", () => {
+          tool.Initialize();
+          tool.setsOfMovs();
+        });
+      }
+    });
     this.white.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
+        tool.setsOfMovs();
       });
     });
     this.black.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
+        tool.setsOfMovs();
       });
     });
   }

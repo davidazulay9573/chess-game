@@ -16,7 +16,9 @@
 .black {
   background-color: gray;
 }
-
+[data-toggle="shach"] {
+  background-color: rgba(165, 42, 42, 0.587);
+}
 img {
   width: 40px;
   height: 30px;

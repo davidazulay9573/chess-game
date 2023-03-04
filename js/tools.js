@@ -3,10 +3,14 @@ export class GameTool {
         this.color = color;
         this.type = type;
         this.img = img;
-        this.location = { row: 1, col: 1 };
         this.orderOfMovements = [];
+        this.possibleSlots = [];
         this.htmlElement = document.createElement("img");
         this.chesBoard = document.querySelector("#chessboard");
+        this.location = {
+            row: Number(this.htmlElement.id[0]),
+            col: Number(this.htmlElement.id[1]),
+        };
         this.renderHTML();
     }
     renderHTML() {
@@ -15,6 +19,7 @@ export class GameTool {
         this.htmlElement.setAttribute("id", this.type);
         this.htmlElement.setAttribute("ondragstart", "drag(event)");
         this.htmlElement.setAttribute("grup", this.color);
+        this.htmlElement.setAttribute("data-values", JSON.stringify([]));
     }
     setLocation() {
         let thisChessPiece = this.chesBoard.querySelector(`img#${this.htmlElement.id}`);
@@ -31,7 +36,10 @@ export class GameTool {
             }
         }
     }
-    setsOfMovs() { }
+    setsOfMovs() {
+        let divs = this.chesBoard.querySelectorAll("div");
+        // divs.forEach((div) => {});
+    }
     Initialize() {
         let divs = this.chesBoard.querySelectorAll("div");
         divs.forEach((div) => {
@@ -40,6 +48,12 @@ export class GameTool {
             div.removeAttribute("data-toggle");
         });
         this.setLocation();
-        this.setsOfMovs();
+    }
+    update() {
+        let stringsArr = this.htmlElement.getAttribute("data-values");
+        let objsArr = JSON.parse(stringsArr);
+        objsArr.pop();
+        objsArr.push(this);
+        this.htmlElement.setAttribute("data-values", JSON.stringify(objsArr));
     }
 }

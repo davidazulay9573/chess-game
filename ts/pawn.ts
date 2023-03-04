@@ -9,6 +9,7 @@ export class Pawn extends GameTool {
     }
   }
   setsOfMovs(): void {
+    this.possibleSlots = [];
     let divs = this.chesBoard.querySelectorAll("div");
     divs.forEach((div) => {
       if (this.startPoint == 2) {
@@ -49,6 +50,8 @@ export class Pawn extends GameTool {
           this.location.col == Number(div.id[1]) + 1
         ) {
           if (this.location.row == Number(div.id[0]) - 1) {
+            this.possibleSlots.push(Number(div.id));
+
             if (div.querySelector("img")) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
@@ -57,6 +60,11 @@ export class Pawn extends GameTool {
                 div.querySelector("img")?.id[0] != this.color
               ) {
                 div.setAttribute("data-toggle", "canMove");
+                console.log(this.possibleSlots);
+
+                if (div.querySelector("img")?.id[1] == "k") {
+                  div.setAttribute("data-toggle", "shach");
+                }
               }
             }
           }
@@ -100,6 +108,8 @@ export class Pawn extends GameTool {
           this.location.col == Number(div.id[1]) + 1
         ) {
           if (this.location.row == Number(div.id[0]) + 1) {
+            this.possibleSlots.push(Number(div.id));
+
             if (div.querySelector("img")) {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
@@ -108,12 +118,16 @@ export class Pawn extends GameTool {
                 div.querySelector("img")?.id[0] != this.color
               ) {
                 div.setAttribute("data-toggle", "canMove");
+
+                if (div.querySelector("img")?.id[1] == "k") {
+                  div.setAttribute("data-toggle", "shach");
+                }
               }
             }
           }
         }
       }
     });
-    new Skipping(this.location).skipLimitStrat();
+    new Skipping(this).skipLimitStrat();
   }
 }
