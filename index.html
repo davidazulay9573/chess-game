@@ -37,6 +37,8 @@
           if (eatTool.id[0] != eatenTool.id[0]) {
             let data = ev.dataTransfer.getData("text");
             eatenTool.remove();
+            console.log(eatenTool.id);
+
             theWarZone.appendChild(eatTool);
             if (eatenTool.id[1] === "k") {
               location.reload();
@@ -48,7 +50,5 @@
         }
       }
     </script>
-    <button id="bb">bb</button>
-    <br />
   </body>
 </html>

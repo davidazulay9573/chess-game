@@ -4,7 +4,7 @@ export class Knight extends GameTool {
         this.possibleSlots = [];
         let divs = this.chesBoard.querySelectorAll("div");
         divs.forEach((div) => {
-            var _a, _b, _c, _d;
+            var _a, _b, _c;
             if (this.location.row - Number(div.id[0]) > 3 ||
                 this.location.col - Number(div.id[1]) > 3 ||
                 Number(div.id[0]) - this.location.row > 3 ||
@@ -52,13 +52,13 @@ export class Knight extends GameTool {
                         if (!div.querySelector("img") ||
                             ((_c = div.querySelector("img")) === null || _c === void 0 ? void 0 : _c.id[0]) != this.color) {
                             div.setAttribute("data-toggle", "canMove");
-                            if (((_d = div.querySelector("img")) === null || _d === void 0 ? void 0 : _d.id[1]) == "k") {
-                                div.setAttribute("data-toggle", "shach");
-                            }
                         }
                     }
                 }
             }
+        });
+        this.possibleSlots = this.possibleSlots.filter((location) => {
+            return location != Number(this.htmlElement.parentElement.id);
         });
     }
 }

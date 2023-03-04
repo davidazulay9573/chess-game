@@ -13,21 +13,20 @@ export class Rook extends GameTool {
     });
 
     divsCanMove.forEach((div) => {
+      this.possibleSlots.push(Number(div.id));
       div.setAttribute("ondrop", "drop(event)");
       div.setAttribute("ondragover", "allowDrop(event)");
-      this.possibleSlots.push(Number(div.id));
-
       this.update();
       if (
         !div.querySelector("img") ||
         div.querySelector("img")?.id[0] != this.color
       ) {
         div.setAttribute("data-toggle", "canMove");
-        if (div.querySelector("img")?.id[1] == "k") {
-          div.setAttribute("data-toggle", "shach");
-        }
       }
     });
     new Skipping(this).skipLimitStrat();
+    this.possibleSlots = this.possibleSlots.filter((location) => {
+      return location != Number(this.htmlElement.parentElement!.id);
+    });
   }
 }

@@ -13,6 +13,7 @@ export class Bishop extends GameTool {
           this.location.col - Number(div.id[1])
       );
     });
+
     filterDivs.forEach((div) => {
       div.setAttribute("ondrop", "drop(event)");
       div.setAttribute("ondragover", "allowDrop(event)");
@@ -23,12 +24,12 @@ export class Bishop extends GameTool {
         div.querySelector("img")?.id[0] != this.color
       ) {
         div.setAttribute("data-toggle", "canMove");
-
-        if (div.querySelector("img")?.id[1] == "k") {
-          div.setAttribute("data-toggle", "shach");
-        }
       }
     });
+
     new Skipping(this).skipLimitDiagonal();
+    this.possibleSlots = this.possibleSlots.filter((location) => {
+      return location != Number(this.htmlElement.parentElement!.id);
+    });
   }
 }

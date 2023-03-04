@@ -19,8 +19,6 @@ export class King extends GameTool {
   }
   setsOfMovs(): void {
     this.possibleSlots = [];
-    // this.friendsToFight = [];
-    // this.possibleSlots = [];
     let divs = this.chesBoard.querySelectorAll("div");
     divs.forEach((div) => {
       if (
@@ -33,35 +31,50 @@ export class King extends GameTool {
           this.location.col == Number(div.id[1]) + 1 ||
           this.location.col == Number(div.id[1]) - 1
         ) {
-          div.setAttribute("ondrop", "drop(event)");
-          div.setAttribute("ondragover", "allowDrop(event)");
           this.possibleSlots.push(Number(div.id));
 
-          // if (
-          //   !div.querySelector("img") ||
-          //   div.querySelector("img")?.id[0] != this.type[0]
-          // ) {
-          //   div.setAttribute("data-toggle", "canMove");
-          // }
+          div.setAttribute("ondrop", "drop(event)");
+          div.setAttribute("ondragover", "allowDrop(event)");
+
+          if (
+            !div.querySelector("img") ||
+            div.querySelector("img")?.id[0] != this.type[0]
+          ) {
+            div.setAttribute("data-toggle", "canMove");
+          } else {
+          }
           this.enemies.forEach((tool) => {
             tool.possibleSlots.forEach((location) => {
               if (Number(div.id) == location) {
                 div.removeAttribute("ondrop");
                 div.removeAttribute("ondragover");
                 div.removeAttribute("data-toggle");
-                // this.Initialize();
-                // this.setsOfMovs();
               }
             });
           });
-          // this.Initialize();
-          // this.setsOfMovs();
         }
-        this.htmlElement.removeAttribute("data-toggle");
       }
+      this.enemies.forEach((tool) => {
+        if (!document.getElementById(tool.type)) {
+          tool.possibleSlots = [];
+          tool.location.row = -1;
+          tool.location.col = -1;
+        }
+      });
+
+      this.friendsToFight.forEach((tool) => {
+        if (!document.getElementById(tool.type)) {
+          tool.possibleSlots = [];
+          tool.location.row = -1;
+          tool.location.col = -1;
+        }
+      });
       let skip = new Skipping(this);
       skip.skipLimitStrat();
       skip.castling(div, this);
+      this.possibleSlots = this.possibleSlots.filter((location) => {
+        return location != Number(this.htmlElement.parentElement!.id);
+      });
     });
   }
 }

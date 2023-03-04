@@ -82,6 +82,7 @@ export class Game {
         this.black.forEach((tool) => {
             if (tool.type[1] != "k") {
                 tool.htmlElement.addEventListener("dragend", () => {
+                    tool.htmlElement.removeAttribute("data-toggle");
                     tool.Initialize();
                     tool.setsOfMovs();
                     this.white.forEach((tool2) => {
@@ -97,6 +98,7 @@ export class Game {
         });
         this.white.forEach((tool) => {
             tool.htmlElement.addEventListener("mousedown", () => {
+                tool.htmlElement.removeAttribute("data-toggle");
                 tool.Initialize();
                 tool.setsOfMovs();
             });

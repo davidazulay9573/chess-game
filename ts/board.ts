@@ -1,5 +1,8 @@
 import { Slot } from "./slot.js";
 export class Chessboard {
+  querySelectorAll(arg0: string) {
+    throw new Error("Method not implemented.");
+  }
   public slots: Slot[] = [];
   private container: HTMLDivElement;
   constructor(container: HTMLDivElement) {

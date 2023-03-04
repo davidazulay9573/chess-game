@@ -14,6 +14,7 @@ export class Game {
   whoIsStart: number;
   container: HTMLDivElement;
   chesBoard: Chessboard;
+
   constructor(container: HTMLDivElement) {
     this.black = [];
     this.white = [];
@@ -21,6 +22,7 @@ export class Game {
     this.container = container;
     this.chesBoard = new Chessboard(container);
   }
+
   createTools() {
     const QueenW = new Queen("W", "Wqueen", "./wQ.png");
     const QueenB = new Queen("B", "Bqueen", "./bQ.png");
@@ -98,6 +100,7 @@ export class Game {
     this.black.forEach((tool) => {
       if (tool.type[1] != "k") {
         tool.htmlElement.addEventListener("dragend", () => {
+          tool.htmlElement.removeAttribute("data-toggle");
           tool.Initialize();
           tool.setsOfMovs();
           this.white.forEach((tool2) => {
@@ -113,6 +116,8 @@ export class Game {
     });
     this.white.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
+        tool.htmlElement.removeAttribute("data-toggle");
+
         tool.Initialize();
         tool.setsOfMovs();
       });

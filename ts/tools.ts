@@ -48,10 +48,7 @@ export class GameTool {
       }
     }
   }
-  public setsOfMovs() {
-    let divs = this.chesBoard.querySelectorAll("div");
-    // divs.forEach((div) => {});
-  }
+  public setsOfMovs() {}
   public Initialize() {
     let divs = this.chesBoard.querySelectorAll("div");
     divs.forEach((div) => {

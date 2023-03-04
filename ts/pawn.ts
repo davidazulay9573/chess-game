@@ -60,11 +60,6 @@ export class Pawn extends GameTool {
                 div.querySelector("img")?.id[0] != this.color
               ) {
                 div.setAttribute("data-toggle", "canMove");
-                console.log(this.possibleSlots);
-
-                if (div.querySelector("img")?.id[1] == "k") {
-                  div.setAttribute("data-toggle", "shach");
-                }
               }
             }
           }
@@ -118,10 +113,6 @@ export class Pawn extends GameTool {
                 div.querySelector("img")?.id[0] != this.color
               ) {
                 div.setAttribute("data-toggle", "canMove");
-
-                if (div.querySelector("img")?.id[1] == "k") {
-                  div.setAttribute("data-toggle", "shach");
-                }
               }
             }
           }
