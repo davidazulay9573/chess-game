@@ -29,13 +29,13 @@ export class King extends GameTool {
         ) {
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
+          this.possibleSlots.push(Number(div.id));
 
           if (
             !div.querySelector("img") ||
             div.querySelector("img")?.id[0] != this.type[0]
           ) {
             div.setAttribute("data-toggle", "canMove");
-            this.possibleSlots.push(Number(div.id));
           }
           this.opponentsTools.forEach((tool) => {
             tool.possibleSlots.forEach((location) => {

@@ -16,12 +16,13 @@ export class Bishop extends GameTool {
     filterDivs.forEach((div) => {
       div.setAttribute("ondrop", "drop(event)");
       div.setAttribute("ondragover", "allowDrop(event)");
+      this.possibleSlots.push(Number(div.id));
+
       if (
         !div.querySelector("img") ||
         div.querySelector("img")?.id[0] != this.color
       ) {
         div.setAttribute("data-toggle", "canMove");
-        this.possibleSlots.push(Number(div.id));
 
         if (div.querySelector("img")?.id[1] == "k") {
           div.setAttribute("data-toggle", "shach");

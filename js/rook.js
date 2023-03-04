@@ -12,10 +12,10 @@ export class Rook extends GameTool {
             var _a, _b;
             div.setAttribute("ondrop", "drop(event)");
             div.setAttribute("ondragover", "allowDrop(event)");
+            this.possibleSlots.push(Number(div.id));
             this.update();
             if (!div.querySelector("img") ||
                 ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.color) {
-                this.possibleSlots.push(Number(div.id));
                 div.setAttribute("data-toggle", "canMove");
                 if (((_b = div.querySelector("img")) === null || _b === void 0 ? void 0 : _b.id[1]) == "k") {
                     div.setAttribute("data-toggle", "shach");

@@ -21,10 +21,10 @@ export class Knight extends GameTool {
                         Number(div.id[1]) - this.location.col == 2) {
                         div.setAttribute("ondrop", "drop(event)");
                         div.setAttribute("ondragover", "allowDrop(event)");
+                        this.possibleSlots.push(Number(div.id));
                         if (!div.querySelector("img") ||
                             ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.color) {
                             div.setAttribute("data-toggle", "canMove");
-                            this.possibleSlots.push(Number(div.id));
                             if (((_b = div.querySelector("img")) === null || _b === void 0 ? void 0 : _b.id[1]) == "k") {
                                 div.setAttribute("data-toggle", "shach");
                             }
@@ -48,10 +48,10 @@ export class Knight extends GameTool {
                         Number(div.id[1]) - this.location.col == 1) {
                         div.setAttribute("ondrop", "drop(event)");
                         div.setAttribute("ondragover", "allowDrop(event)");
+                        this.possibleSlots.push(Number(div.id));
                         if (!div.querySelector("img") ||
                             ((_c = div.querySelector("img")) === null || _c === void 0 ? void 0 : _c.id[0]) != this.color) {
                             div.setAttribute("data-toggle", "canMove");
-                            this.possibleSlots.push(Number(div.id));
                             if (((_d = div.querySelector("img")) === null || _d === void 0 ? void 0 : _d.id[1]) == "k") {
                                 div.setAttribute("data-toggle", "shach");
                             }
