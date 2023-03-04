@@ -80,14 +80,23 @@ export class Game {
     document.getElementById("15")?.appendChild(kingB.htmlElement);
 
     this.white.forEach((tool) => {
+      tool.Initialize();
+      tool.setsOfMovs();
+      console.log(tool);
+
       if (tool.type[1] != "k") {
         tool.htmlElement.addEventListener("dragend", () => {
+          tool.Initialize();
           tool.Initialize();
           tool.setsOfMovs();
         });
       }
     });
     this.black.forEach((tool) => {
+      tool.Initialize();
+      tool.setsOfMovs();
+      console.log(tool);
+
       if (tool.type[1] != "k") {
         tool.htmlElement.addEventListener("dragend", () => {
           tool.Initialize();

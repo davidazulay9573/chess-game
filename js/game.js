@@ -64,14 +64,21 @@ export class Game {
         (_s = document.getElementById("85")) === null || _s === void 0 ? void 0 : _s.appendChild(kingW.htmlElement);
         (_t = document.getElementById("15")) === null || _t === void 0 ? void 0 : _t.appendChild(kingB.htmlElement);
         this.white.forEach((tool) => {
+            tool.Initialize();
+            tool.setsOfMovs();
+            console.log(tool);
             if (tool.type[1] != "k") {
                 tool.htmlElement.addEventListener("dragend", () => {
+                    tool.Initialize();
                     tool.Initialize();
                     tool.setsOfMovs();
                 });
             }
         });
         this.black.forEach((tool) => {
+            tool.Initialize();
+            tool.setsOfMovs();
+            console.log(tool);
             if (tool.type[1] != "k") {
                 tool.htmlElement.addEventListener("dragend", () => {
                     tool.Initialize();
