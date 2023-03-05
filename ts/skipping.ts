@@ -223,7 +223,6 @@ export class Skipping {
               }
             }
             king.setsOfMovs();
-
             king.Initialize();
           });
         } else {
@@ -266,7 +265,6 @@ export class Skipping {
                   }
                 }
                 king.setsOfMovs();
-
                 king.Initialize();
               });
             }

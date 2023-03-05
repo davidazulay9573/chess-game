@@ -103,11 +103,12 @@ export class Game {
           tool.Initialize();
           tool.setsOfMovs();
           this.white.forEach((tool2) => {
-            tool2.Initialize();
             tool2.setsOfMovs();
+            tool2.Initialize();
           });
           this.black.forEach((tool2) => {
             tool2.setsOfMovs();
+            tool2.Initialize();
           });
         });
       }
