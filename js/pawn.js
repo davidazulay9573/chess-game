@@ -1,9 +1,11 @@
+import { Queen } from "./queen.js";
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
 export class Pawn extends GameTool {
-    constructor(color, type, img) {
+    constructor(color, type, img, friendsToFight) {
         super(color, type, img);
         {
+            this.friendsToFight = friendsToFight;
             this.startPoint;
         }
     }
@@ -13,6 +15,23 @@ export class Pawn extends GameTool {
         divs.forEach((div) => {
             var _a, _b, _c, _d, _e, _f;
             if (this.startPoint == 2) {
+                if (this.location.row == 8) {
+                    let divForNewQueen = this.htmlElement.parentElement;
+                    // this.htmlElement.remove();
+                    let newQueen = new Queen(this.color, `nq${this.type}`, `./${this.color.toLowerCase()}Q.png`);
+                    divForNewQueen === null || divForNewQueen === void 0 ? void 0 : divForNewQueen.appendChild(newQueen.htmlElement);
+                    newQueen.Initialize();
+                    newQueen.setsOfMovs();
+                    this.friendsToFight.push(newQueen);
+                    newQueen.htmlElement.addEventListener("dragend", () => {
+                        newQueen.setsOfMovs();
+                        newQueen.Initialize();
+                    });
+                    newQueen.htmlElement.addEventListener("mousedown", () => {
+                        newQueen.Initialize();
+                        newQueen.setsOfMovs();
+                    });
+                }
                 if (this.location.row == 2) {
                     if (this.location.row == Number(div.id[0]) - 2 &&
                         this.location.col == Number(div.id[1])) {
@@ -53,6 +72,23 @@ export class Pawn extends GameTool {
                 }
             }
             if (this.startPoint == 7) {
+                if (this.location.row == 1) {
+                    let divForNewQueen = this.htmlElement.parentElement;
+                    this.htmlElement.remove();
+                    let newQueen = new Queen(this.color, `nq${this.type}`, `./${this.color.toLowerCase()}Q.png`);
+                    divForNewQueen === null || divForNewQueen === void 0 ? void 0 : divForNewQueen.appendChild(newQueen.htmlElement);
+                    newQueen.Initialize();
+                    newQueen.setsOfMovs();
+                    this.friendsToFight.push(newQueen);
+                    newQueen.htmlElement.addEventListener("dragend", () => {
+                        newQueen.setsOfMovs();
+                        newQueen.Initialize();
+                    });
+                    newQueen.htmlElement.addEventListener("mousedown", () => {
+                        newQueen.Initialize();
+                        newQueen.setsOfMovs();
+                    });
+                }
                 if (this.location.row == 7) {
                     if (this.location.row == Number(div.id[0]) + 2 &&
                         this.location.col == Number(div.id[1])) {
@@ -95,4 +131,7 @@ export class Pawn extends GameTool {
         });
         new Skipping(this).skipLimitStrat();
     }
+}
+function toLowerCase(color) {
+    throw new Error("Function not implemented.");
 }

@@ -22,7 +22,13 @@ export class Game {
     this.container = container;
     this.chesBoard = new Chessboard(container);
   }
-
+  public addNewTool(tool: GameTool) {
+    if (tool.color == "W") {
+      this.white.push(tool);
+    } else {
+      this.black.push(tool);
+    }
+  }
   createTools() {
     const QueenW = new Queen("W", "Wqueen", "./wQ.png");
     const QueenB = new Queen("B", "Bqueen", "./bQ.png");
@@ -40,8 +46,8 @@ export class Game {
     const knightB2 = new Knight("B", `Bnight2`, "./bN.png");
 
     for (let i = 1; i <= 8; i++) {
-      let pawnW = new Pawn("W", `Wpawn${i}`, "./wP.png");
-      let pawnB = new Pawn("B", `Bpawn${i}`, "./bP.png");
+      let pawnW = new Pawn("W", `Wpawn${i}`, "./wP.png", this.white);
+      let pawnB = new Pawn("B", `Bpawn${i}`, "./bP.png", this.black);
       pawnB.startPoint = 2;
       pawnW.startPoint = 7;
 
