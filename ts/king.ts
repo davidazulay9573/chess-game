@@ -40,7 +40,7 @@ export class King extends GameTool {
             !div.querySelector("img") ||
             div.querySelector("img")?.id[0] != this.type[0]
           ) {
-          } else {
+            div.setAttribute("data-toggle", "canMove");
           }
           this.enemies.forEach((tool) => {
             tool.possibleSlots.forEach((location) => {
@@ -71,6 +71,7 @@ export class King extends GameTool {
       let skip = new Skipping(this);
       skip.skipLimitStrat();
       skip.castling(div, this);
+
       this.possibleSlots = this.possibleSlots.filter((location) => {
         return location != Number(this.htmlElement.parentElement!.id);
       });

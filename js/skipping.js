@@ -173,8 +173,8 @@ export class Skipping {
                     // פתיחת המשבצות
                     div.setAttribute("ondrop", "drop(event)");
                     div.setAttribute("ondragover", "allowDrop(event)");
-                    // בדיקה שהמשבצת ריקה
                     if (!div.querySelector("img")) {
+                        div.setAttribute("data-toggle", "canMove");
                     }
                     // הוספת אירוע גרירה למלך
                     king.htmlElement.addEventListener("dragend", () => {
@@ -196,6 +196,8 @@ export class Skipping {
                                     .getElementById(`${this.forTool.location.row}6`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
                             }
                         }
+                        king.setsOfMovs();
+                        king.Initialize();
                     });
                 }
                 else {
@@ -207,6 +209,7 @@ export class Skipping {
                             div.setAttribute("ondrop", "drop(event)");
                             div.setAttribute("ondragover", "allowDrop(event)");
                             if (!div.querySelector("img")) {
+                                div.setAttribute("data-toggle", "canMove");
                             }
                             // הוספת אירוע גרירה למלך
                             king.htmlElement.addEventListener("dragend", () => {
@@ -228,6 +231,8 @@ export class Skipping {
                                             .getElementById(`${this.forTool.location.row}4`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
                                     }
                                 }
+                                king.setsOfMovs();
+                                king.Initialize();
                             });
                         }
                     }

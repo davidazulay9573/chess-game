@@ -195,8 +195,9 @@ export class Skipping {
           // פתיחת המשבצות
           div.setAttribute("ondrop", "drop(event)");
           div.setAttribute("ondragover", "allowDrop(event)");
-          // בדיקה שהמשבצת ריקה
+
           if (!div.querySelector("img")) {
+            div.setAttribute("data-toggle", "canMove");
           }
           // הוספת אירוע גרירה למלך
           king.htmlElement.addEventListener("dragend", () => {
@@ -221,6 +222,9 @@ export class Skipping {
                   ?.appendChild(rookfor);
               }
             }
+            king.setsOfMovs();
+
+            king.Initialize();
           });
         } else {
           //  #### הצרחה ארוכה ####
@@ -235,6 +239,7 @@ export class Skipping {
               div.setAttribute("ondrop", "drop(event)");
               div.setAttribute("ondragover", "allowDrop(event)");
               if (!div.querySelector("img")) {
+                div.setAttribute("data-toggle", "canMove");
               }
 
               // הוספת אירוע גרירה למלך
@@ -260,6 +265,9 @@ export class Skipping {
                       ?.appendChild(rookfor);
                   }
                 }
+                king.setsOfMovs();
+
+                king.Initialize();
               });
             }
           }

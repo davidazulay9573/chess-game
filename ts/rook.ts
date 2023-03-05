@@ -21,6 +21,7 @@ export class Rook extends GameTool {
         !div.querySelector("img") ||
         div.querySelector("img")?.id[0] != this.color
       ) {
+        div.setAttribute("data-toggle", "canMove");
       }
     });
     new Skipping(this).skipLimitStrat();
