@@ -21,30 +21,30 @@ export class Pawn extends GameTool {
   setsOfMovs(): void {
     this.possibleSlots = [];
     let divs = this.chesBoard.querySelectorAll("div");
-    divs.forEach((div) => {
-      if (this.startPoint == 2) {
-        if (this.location.row == 8) {
-          let divForNewQueen = this.htmlElement.parentElement;
-          // this.htmlElement.remove();
-          let newQueen = new Queen(
-            this.color,
-            `nq${this.type}`,
-            `./${this.color.toLowerCase()}Q.png`
-          );
-          divForNewQueen?.appendChild(newQueen.htmlElement);
+
+    if (this.startPoint == 2) {
+      if (this.location.row == 8) {
+        let divForNewQueen = this.htmlElement.parentElement;
+        this.htmlElement.remove();
+        const newQueen = new Queen(
+          this.color,
+          `nq${this.type}`,
+          `./${this.color.toLowerCase()}Q.png`
+        );
+        divForNewQueen?.appendChild(newQueen.htmlElement);
+        newQueen.Initialize();
+        newQueen.setsOfMovs();
+        this.friendsToFight.push(newQueen);
+        newQueen.htmlElement.addEventListener("dragend", () => {
+          newQueen.setsOfMovs();
+          newQueen.Initialize();
+        });
+        newQueen.htmlElement.addEventListener("mousedown", () => {
           newQueen.Initialize();
           newQueen.setsOfMovs();
-          this.friendsToFight.push(newQueen);
-          newQueen.htmlElement.addEventListener("dragend", () => {
-            newQueen.setsOfMovs();
-            newQueen.Initialize();
-          });
-          newQueen.htmlElement.addEventListener("mousedown", () => {
-            newQueen.Initialize();
-            newQueen.setsOfMovs();
-          });
-        }
-
+        });
+      }
+      divs.forEach((div) => {
         if (this.location.row == 2) {
           if (
             this.location.row == Number(div.id[0]) - 2 &&
@@ -96,32 +96,34 @@ export class Pawn extends GameTool {
             }
           }
         }
-      }
-      if (this.startPoint == 7) {
-        if (this.location.row == 1) {
-          let divForNewQueen = this.htmlElement.parentElement;
-          this.htmlElement.remove();
-          let newQueen = new Queen(
-            this.color,
-            `nq${this.type}`,
-            `./${this.color.toLowerCase()}Q.png`
-          );
+      });
+    }
+    if (this.startPoint == 7) {
+      if (this.location.row == 1) {
+        let divForNewQueen = this.htmlElement.parentElement;
+        this.htmlElement.remove();
+        let newQueen = new Queen(
+          this.color,
+          `nq${this.type}`,
+          `./${this.color.toLowerCase()}Q.png`
+        );
 
-          divForNewQueen?.appendChild(newQueen.htmlElement);
+        divForNewQueen?.appendChild(newQueen.htmlElement);
 
+        newQueen.Initialize();
+        newQueen.setsOfMovs();
+        this.friendsToFight.push(newQueen);
+
+        newQueen.htmlElement.addEventListener("dragend", () => {
+          newQueen.setsOfMovs();
+          newQueen.Initialize();
+        });
+        newQueen.htmlElement.addEventListener("mousedown", () => {
           newQueen.Initialize();
           newQueen.setsOfMovs();
-          this.friendsToFight.push(newQueen);
-
-          newQueen.htmlElement.addEventListener("dragend", () => {
-            newQueen.setsOfMovs();
-            newQueen.Initialize();
-          });
-          newQueen.htmlElement.addEventListener("mousedown", () => {
-            newQueen.Initialize();
-            newQueen.setsOfMovs();
-          });
-        }
+        });
+      }
+      divs.forEach((div) => {
         if (this.location.row == 7) {
           if (
             this.location.row == Number(div.id[0]) + 2 &&
@@ -173,8 +175,9 @@ export class Pawn extends GameTool {
             }
           }
         }
-      }
-    });
+      });
+    }
+
     new Skipping(this).skipLimitStrat();
   }
 }
