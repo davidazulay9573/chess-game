@@ -46,11 +46,5 @@ export class GameTool {
         });
         this.setLocation();
     }
-    update() {
-        // let stringsArr = this.htmlElement.getAttribute("data-values")!;
-        // let objsArr = JSON.parse(stringsArr);
-        // objsArr.pop();
-        // objsArr.push(this);
-        // this.htmlElement.setAttribute("data-values", JSON.stringify(objsArr));
-    }
+    update() { }
 }
