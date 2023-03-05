@@ -26,15 +26,6 @@ export class King extends GameTool {
                         ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.type[0]) {
                         div.setAttribute("data-toggle", "canMove");
                     }
-                    this.enemies.forEach((tool) => {
-                        tool.possibleSlots.forEach((location) => {
-                            if (Number(div.id) == location) {
-                                div.removeAttribute("ondrop");
-                                div.removeAttribute("ondragover");
-                                div.removeAttribute("data-toggle");
-                            }
-                        });
-                    });
                 }
             }
             this.enemies.forEach((tool) => {
@@ -54,6 +45,15 @@ export class King extends GameTool {
             let skip = new Skipping(this);
             skip.skipLimitStrat();
             skip.castling(div, this);
+            this.enemies.forEach((tool) => {
+                tool.possibleSlots.forEach((location) => {
+                    if (Number(div.id) == location) {
+                        div.removeAttribute("ondrop");
+                        div.removeAttribute("ondragover");
+                        div.removeAttribute("data-toggle");
+                    }
+                });
+            });
             this.possibleSlots = this.possibleSlots.filter((location) => {
                 return location != Number(this.htmlElement.parentElement.id);
             });
