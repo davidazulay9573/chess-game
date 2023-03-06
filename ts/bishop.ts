@@ -26,6 +26,8 @@ export class Bishop extends GameTool {
         div.setAttribute("data-toggle", "canMove");
       }
     });
+    let skip = new Skipping(this);
+    skip.skipLimitDiagonal();
     this.checkIfMovingAllowed();
 
     this.possibleSlots = this.possibleSlots.filter((location) => {
