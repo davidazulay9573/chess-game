@@ -8,6 +8,7 @@ export class Slot {
     this.col = col;
     this.htmlElement = document.createElement("div");
     this.toolsCanGetIn1Move = [];
+
     this.renderHTML();
   }
   private renderHTML(): void {
@@ -15,11 +16,6 @@ export class Slot {
     this.htmlElement.id = `${this.col}${this.row}`;
     if ((this.row + this.col) % 2 != 0) {
       this.htmlElement.classList.add("black");
-    }
-  }
-  whoIsAllowedIn() {
-    if (!this.htmlElement.getAttribute("data-values")) {
-      this.htmlElement.setAttribute("data-values", JSON.stringify([]));
     }
   }
 }

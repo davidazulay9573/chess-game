@@ -13,15 +13,15 @@ export class Rook extends GameTool {
             this.possibleSlots.push(Number(div.id));
             div.setAttribute("ondrop", "drop(event)");
             div.setAttribute("ondragover", "allowDrop(event)");
-            this.update();
             if (!div.querySelector("img") ||
                 ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.color) {
                 div.setAttribute("data-toggle", "canMove");
             }
         });
         new Skipping(this).skipLimitStrat();
+        this.checkIfMovingAllowed();
         this.possibleSlots = this.possibleSlots.filter((location) => {
-            return location != Number(this.htmlElement.parentElement.id);
+            return location != Number(`${this.location.row}${this.location.col}`);
         });
     }
 }

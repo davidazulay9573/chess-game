@@ -16,7 +16,6 @@ export class Rook extends GameTool {
       this.possibleSlots.push(Number(div.id));
       div.setAttribute("ondrop", "drop(event)");
       div.setAttribute("ondragover", "allowDrop(event)");
-      this.update();
       if (
         !div.querySelector("img") ||
         div.querySelector("img")?.id[0] != this.color
@@ -25,8 +24,10 @@ export class Rook extends GameTool {
       }
     });
     new Skipping(this).skipLimitStrat();
+    this.checkIfMovingAllowed();
+
     this.possibleSlots = this.possibleSlots.filter((location) => {
-      return location != Number(this.htmlElement.parentElement!.id);
+      return location != Number(`${this.location.row}${this.location.col}`);
     });
   }
 }

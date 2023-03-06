@@ -1,5 +1,6 @@
 import { GameTool } from "./tools.js";
 import { Skipping } from "./skipping.js";
+import { game } from "./script.js";
 export class King extends GameTool {
     constructor(color, type, img, opponentsTools, friendsToFight) {
         super(color, type, img);
@@ -44,18 +45,33 @@ export class King extends GameTool {
             });
             let skip = new Skipping(this);
             skip.skipLimitStrat();
-            skip.castling(div, this);
-            this.enemies.forEach((tool) => {
-                tool.possibleSlots.forEach((location) => {
-                    if (Number(div.id) == location) {
-                        div.removeAttribute("ondrop");
-                        div.removeAttribute("ondragover");
-                        div.removeAttribute("data-toggle");
-                    }
+            if (this.color == "W") {
+                game.black.forEach((tool) => {
+                    tool.possibleSlots.forEach((location) => {
+                        if (Number(div.id) == location) {
+                            div.removeAttribute("ondrop");
+                            div.removeAttribute("ondragover");
+                            div.removeAttribute("data-toggle");
+                        }
+                    });
                 });
-            });
+            }
+            if (this.color == "B") {
+                game.white.forEach((tool) => {
+                    tool.possibleSlots.forEach((location) => {
+                        if (Number(div.id) == location) {
+                            div.removeAttribute("ondrop");
+                            div.removeAttribute("ondragover");
+                            div.removeAttribute("data-toggle");
+                        }
+                    });
+                });
+            }
+            if (this.orderOfMovements.length == 1) {
+                skip.castling(div, this);
+            }
             this.possibleSlots = this.possibleSlots.filter((location) => {
-                return location != Number(this.htmlElement.parentElement.id);
+                return location != Number(`${this.location.row}${this.location.col}`);
             });
         });
     }

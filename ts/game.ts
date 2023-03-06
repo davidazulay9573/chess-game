@@ -14,7 +14,6 @@ export class Game {
   whoIsStart: number;
   container: HTMLDivElement;
   chesBoard: Chessboard;
-
   constructor(container: HTMLDivElement) {
     this.black = [];
     this.white = [];
@@ -22,13 +21,7 @@ export class Game {
     this.container = container;
     this.chesBoard = new Chessboard(container);
   }
-  public addNewTool(tool: GameTool) {
-    if (tool.color == "W") {
-      this.white.push(tool);
-    } else {
-      this.black.push(tool);
-    }
-  }
+
   createTools() {
     const QueenW = new Queen("W", "Wqueen", "./wQ.png");
     const QueenB = new Queen("B", "Bqueen", "./bQ.png");
@@ -111,18 +104,18 @@ export class Game {
           this.white.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
+            tool2.checkIfMovingAllowed();
           });
           this.black.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
+            tool2.checkIfMovingAllowed();
           });
         });
       }
     });
     this.white.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
-        tool.htmlElement.removeAttribute("data-toggle");
-
         tool.Initialize();
         tool.setsOfMovs();
       });

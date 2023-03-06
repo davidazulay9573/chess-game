@@ -13,9 +13,4 @@ export class Slot {
             this.htmlElement.classList.add("black");
         }
     }
-    whoIsAllowedIn() {
-        if (!this.htmlElement.getAttribute("data-values")) {
-            this.htmlElement.setAttribute("data-values", JSON.stringify([]));
-        }
-    }
 }

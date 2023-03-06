@@ -1,5 +1,4 @@
 import { King } from "./king.js";
-import { Rook } from "./rook.js";
 import { GameTool } from "./tools";
 export class Skipping {
   private chesBoard: HTMLElement;

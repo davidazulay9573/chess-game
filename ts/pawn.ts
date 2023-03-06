@@ -1,6 +1,7 @@
 import { Queen } from "./queen.js";
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
+import { game } from "./script.js";
 export class Pawn extends GameTool {
   friendsToFight: GameTool[];
   public startPoint: number | undefined;
@@ -24,24 +25,37 @@ export class Pawn extends GameTool {
 
     if (this.startPoint == 2) {
       if (this.location.row == 8) {
-        let divForNewQueen = this.htmlElement.parentElement;
+        let divForNewQueen = this.htmlElement.parentElement!;
         this.htmlElement.remove();
-        const newQueen = new Queen(
+        const newQueen2 = new Queen(
           this.color,
-          `nq${this.type}`,
+          `Bnq${this.type}`,
           `./${this.color.toLowerCase()}Q.png`
         );
-        divForNewQueen?.appendChild(newQueen.htmlElement);
-        newQueen.Initialize();
-        newQueen.setsOfMovs();
-        this.friendsToFight.push(newQueen);
-        newQueen.htmlElement.addEventListener("dragend", () => {
-          newQueen.setsOfMovs();
-          newQueen.Initialize();
+        divForNewQueen.appendChild(newQueen2.htmlElement);
+        divForNewQueen.appendChild(newQueen2.htmlElement);
+        game.black.push(newQueen2);
+
+        newQueen2.Initialize();
+        newQueen2.setsOfMovs();
+
+        newQueen2.htmlElement.addEventListener("mousedown", () => {
+          newQueen2.Initialize();
+          newQueen2.setsOfMovs();
         });
-        newQueen.htmlElement.addEventListener("mousedown", () => {
-          newQueen.Initialize();
-          newQueen.setsOfMovs();
+        newQueen2.htmlElement.addEventListener("dragend", () => {
+          newQueen2.Initialize();
+          newQueen2.setsOfMovs();
+          game.white.forEach((tool2) => {
+            tool2.setsOfMovs();
+            tool2.Initialize();
+            tool2.checkIfMovingAllowed();
+          });
+          game.black.forEach((tool2) => {
+            tool2.setsOfMovs();
+            tool2.Initialize();
+            tool2.checkIfMovingAllowed();
+          });
         });
       }
       divs.forEach((div) => {
@@ -100,27 +114,37 @@ export class Pawn extends GameTool {
     }
     if (this.startPoint == 7) {
       if (this.location.row == 1) {
-        let divForNewQueen = this.htmlElement.parentElement;
+        let divForNewQueen = this.htmlElement.parentElement!;
         this.htmlElement.remove();
-        let newQueen = new Queen(
+        const newQueen2 = new Queen(
           this.color,
-          `nq${this.type}`,
+          `Wnq${this.type}`,
           `./${this.color.toLowerCase()}Q.png`
         );
+        divForNewQueen.appendChild(newQueen2.htmlElement);
 
-        divForNewQueen?.appendChild(newQueen.htmlElement);
+        game.white.push(newQueen2);
 
-        newQueen.Initialize();
-        newQueen.setsOfMovs();
-        this.friendsToFight.push(newQueen);
+        newQueen2.Initialize();
+        newQueen2.setsOfMovs();
 
-        newQueen.htmlElement.addEventListener("dragend", () => {
-          newQueen.setsOfMovs();
-          newQueen.Initialize();
+        newQueen2.htmlElement.addEventListener("mousedown", () => {
+          newQueen2.Initialize();
+          newQueen2.setsOfMovs();
         });
-        newQueen.htmlElement.addEventListener("mousedown", () => {
-          newQueen.Initialize();
-          newQueen.setsOfMovs();
+        newQueen2.htmlElement.addEventListener("dragend", () => {
+          newQueen2.Initialize();
+          newQueen2.setsOfMovs();
+          game.white.forEach((tool2) => {
+            tool2.setsOfMovs();
+            tool2.Initialize();
+            tool2.checkIfMovingAllowed();
+          });
+          game.black.forEach((tool2) => {
+            tool2.setsOfMovs();
+            tool2.Initialize();
+            tool2.checkIfMovingAllowed();
+          });
         });
       }
       divs.forEach((div) => {
@@ -177,10 +201,7 @@ export class Pawn extends GameTool {
         }
       });
     }
-
+    this.checkIfMovingAllowed();
     new Skipping(this).skipLimitStrat();
   }
-}
-function toLowerCase(color: string) {
-  throw new Error("Function not implemented.");
 }

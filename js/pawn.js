@@ -1,6 +1,7 @@
 import { Queen } from "./queen.js";
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
+import { game } from "./script.js";
 export class Pawn extends GameTool {
     constructor(color, type, img, friendsToFight) {
         super(color, type, img);
@@ -16,18 +17,29 @@ export class Pawn extends GameTool {
             if (this.location.row == 8) {
                 let divForNewQueen = this.htmlElement.parentElement;
                 this.htmlElement.remove();
-                const newQueen = new Queen(this.color, `nq${this.type}`, `./${this.color.toLowerCase()}Q.png`);
-                divForNewQueen === null || divForNewQueen === void 0 ? void 0 : divForNewQueen.appendChild(newQueen.htmlElement);
-                newQueen.Initialize();
-                newQueen.setsOfMovs();
-                this.friendsToFight.push(newQueen);
-                newQueen.htmlElement.addEventListener("dragend", () => {
-                    newQueen.setsOfMovs();
-                    newQueen.Initialize();
+                const newQueen2 = new Queen(this.color, `Bnq${this.type}`, `./${this.color.toLowerCase()}Q.png`);
+                divForNewQueen.appendChild(newQueen2.htmlElement);
+                divForNewQueen.appendChild(newQueen2.htmlElement);
+                game.black.push(newQueen2);
+                newQueen2.Initialize();
+                newQueen2.setsOfMovs();
+                newQueen2.htmlElement.addEventListener("mousedown", () => {
+                    newQueen2.Initialize();
+                    newQueen2.setsOfMovs();
                 });
-                newQueen.htmlElement.addEventListener("mousedown", () => {
-                    newQueen.Initialize();
-                    newQueen.setsOfMovs();
+                newQueen2.htmlElement.addEventListener("dragend", () => {
+                    newQueen2.Initialize();
+                    newQueen2.setsOfMovs();
+                    game.white.forEach((tool2) => {
+                        tool2.setsOfMovs();
+                        tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
+                    });
+                    game.black.forEach((tool2) => {
+                        tool2.setsOfMovs();
+                        tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
+                    });
                 });
             }
             divs.forEach((div) => {
@@ -76,18 +88,28 @@ export class Pawn extends GameTool {
             if (this.location.row == 1) {
                 let divForNewQueen = this.htmlElement.parentElement;
                 this.htmlElement.remove();
-                let newQueen = new Queen(this.color, `nq${this.type}`, `./${this.color.toLowerCase()}Q.png`);
-                divForNewQueen === null || divForNewQueen === void 0 ? void 0 : divForNewQueen.appendChild(newQueen.htmlElement);
-                newQueen.Initialize();
-                newQueen.setsOfMovs();
-                this.friendsToFight.push(newQueen);
-                newQueen.htmlElement.addEventListener("dragend", () => {
-                    newQueen.setsOfMovs();
-                    newQueen.Initialize();
+                const newQueen2 = new Queen(this.color, `Wnq${this.type}`, `./${this.color.toLowerCase()}Q.png`);
+                divForNewQueen.appendChild(newQueen2.htmlElement);
+                game.white.push(newQueen2);
+                newQueen2.Initialize();
+                newQueen2.setsOfMovs();
+                newQueen2.htmlElement.addEventListener("mousedown", () => {
+                    newQueen2.Initialize();
+                    newQueen2.setsOfMovs();
                 });
-                newQueen.htmlElement.addEventListener("mousedown", () => {
-                    newQueen.Initialize();
-                    newQueen.setsOfMovs();
+                newQueen2.htmlElement.addEventListener("dragend", () => {
+                    newQueen2.Initialize();
+                    newQueen2.setsOfMovs();
+                    game.white.forEach((tool2) => {
+                        tool2.setsOfMovs();
+                        tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
+                    });
+                    game.black.forEach((tool2) => {
+                        tool2.setsOfMovs();
+                        tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
+                    });
                 });
             }
             divs.forEach((div) => {
@@ -132,9 +154,7 @@ export class Pawn extends GameTool {
                 }
             });
         }
+        this.checkIfMovingAllowed();
         new Skipping(this).skipLimitStrat();
     }
-}
-function toLowerCase(color) {
-    throw new Error("Function not implemented.");
 }

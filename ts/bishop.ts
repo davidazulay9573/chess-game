@@ -26,10 +26,10 @@ export class Bishop extends GameTool {
         div.setAttribute("data-toggle", "canMove");
       }
     });
+    this.checkIfMovingAllowed();
 
-    new Skipping(this).skipLimitDiagonal();
     this.possibleSlots = this.possibleSlots.filter((location) => {
-      return location != Number(this.htmlElement.parentElement!.id);
+      return location != Number(`${this.location.row}${this.location.col}`);
     });
   }
 }

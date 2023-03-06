@@ -1,4 +1,3 @@
-import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
 export class Bishop extends GameTool {
     setsOfMovs() {
@@ -20,9 +19,9 @@ export class Bishop extends GameTool {
                 div.setAttribute("data-toggle", "canMove");
             }
         });
-        new Skipping(this).skipLimitDiagonal();
+        this.checkIfMovingAllowed();
         this.possibleSlots = this.possibleSlots.filter((location) => {
-            return location != Number(this.htmlElement.parentElement.id);
+            return location != Number(`${this.location.row}${this.location.col}`);
         });
     }
 }

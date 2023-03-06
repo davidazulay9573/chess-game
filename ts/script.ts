@@ -3,6 +3,6 @@ import { Game } from "./game.js";
 
 const container = document.getElementById("chessboard") as HTMLDivElement;
 
-const game = new Game(container);
+export const game = new Game(container);
 game.createTools();
 // game.check();

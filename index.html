@@ -6,17 +6,15 @@
   </head>
   <body>
     <div id="chessboard"></div>
-
+    <div id="eatenTools"></div>
     <script>
       let eatTool;
       let eatenTool;
       let theWarZone;
+      let Queue = "B";
 
       function allowDrop(ev) {
         ev.preventDefault();
-
-        if (ev.target.innerHTML === "") {
-        }
       }
 
       function drag(ev) {
@@ -35,17 +33,33 @@
             theWarZone = ev.target.parentElement;
           }
           if (eatTool.id[0] != eatenTool.id[0]) {
-            let data = ev.dataTransfer.getData("text");
-            eatenTool.remove();
+            if (eatTool.id[0] != Queue) {
+              if (Queue == "W") {
+                Queue = "B";
+              } else {
+                Queue = "W";
+              }
+              let data = ev.dataTransfer.getData("text");
+              theWarZone.removeChild(eatenTool);
 
-            theWarZone.appendChild(eatTool);
-            if (eatenTool.id[1] === "k") {
-              location.reload();
+              // eatenTool.remove();
+
+              theWarZone.appendChild(eatTool);
+              if (eatenTool.id[1] === "k") {
+                location.reload();
+              }
             }
           }
         } else {
-          let data = ev.dataTransfer.getData("text");
-          ev.target.appendChild(eatTool);
+          if (eatTool.id[0] != Queue) {
+            if (Queue == "W") {
+              Queue = "B";
+            } else {
+              Queue = "W";
+            }
+            let data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(eatTool);
+          }
         }
       }
     </script>

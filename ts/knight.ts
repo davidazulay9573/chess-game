@@ -70,8 +70,11 @@ export class Knight extends GameTool {
         }
       }
     });
+
     this.possibleSlots = this.possibleSlots.filter((location) => {
-      return location != Number(this.htmlElement.parentElement!.id);
+      return location != Number(`${this.location.row}${this.location.col}`);
     });
+
+    this.checkIfMovingAllowed();
   }
 }

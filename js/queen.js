@@ -22,11 +22,15 @@ export class Queen extends GameTool {
                 div.setAttribute("data-toggle", "canMove");
             }
         });
+        this.possibleSlots = this.possibleSlots.filter((location) => {
+            return location != Number(`${this.location.row}${this.location.col}`);
+        });
+        this.checkIfMovingAllowed();
         let skip = new Skipping(this);
         skip.skipLimitStrat();
         skip.skipLimitDiagonal();
         this.possibleSlots = this.possibleSlots.filter((location) => {
-            return location != Number(this.htmlElement.parentElement.id);
+            return location != Number(`${this.location.row}${this.location.col}`);
         });
     }
 }

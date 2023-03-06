@@ -13,14 +13,6 @@ export class Game {
         this.container = container;
         this.chesBoard = new Chessboard(container);
     }
-    addNewTool(tool) {
-        if (tool.color == "W") {
-            this.white.push(tool);
-        }
-        else {
-            this.black.push(tool);
-        }
-    }
     createTools() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
         const QueenW = new Queen("W", "Wqueen", "./wQ.png");
@@ -95,17 +87,18 @@ export class Game {
                     this.white.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
                     });
                     this.black.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
                     });
                 });
             }
         });
         this.white.forEach((tool) => {
             tool.htmlElement.addEventListener("mousedown", () => {
-                tool.htmlElement.removeAttribute("data-toggle");
                 tool.Initialize();
                 tool.setsOfMovs();
             });
