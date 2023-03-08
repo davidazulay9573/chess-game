@@ -253,7 +253,13 @@ export function diagonalDetention(
                   blacktool.location.row < enemyTool.location.row &&
                   blacktool.location.row > king.location.row
                 ) {
-                  tool.setsOfMovs();
+                  if (enemyTool.color == blacktool.color) {
+                    if (blacktool.type[1] != "q" && blacktool.type[1] != "b") {
+                      tool.setsOfMovs();
+                    }
+                  } else {
+                    tool.setsOfMovs();
+                  }
                 }
               }
             });
@@ -266,7 +272,13 @@ export function diagonalDetention(
                   whitetool.location.row < enemyTool.location.row &&
                   whitetool.location.row > king.location.row
                 ) {
-                  tool.setsOfMovs();
+                  if (enemyTool.color == whitetool.color) {
+                    if (whitetool.type[1] != "q" && whitetool.type[1] != "b") {
+                      tool.setsOfMovs();
+                    }
+                  } else {
+                    tool.setsOfMovs();
+                  }
                 }
               }
             });
@@ -294,7 +306,13 @@ export function diagonalDetention(
                   blacktool.location.row > enemyTool.location.row &&
                   blacktool.location.row < king.location.row
                 ) {
-                  tool.setsOfMovs();
+                  if (enemyTool.color == blacktool.color) {
+                    if (blacktool.type[1] != "q" && blacktool.type[1] != "b") {
+                      tool.setsOfMovs();
+                    }
+                  } else {
+                    tool.setsOfMovs();
+                  }
                 }
               }
             });
@@ -307,7 +325,13 @@ export function diagonalDetention(
                   whitetool.location.row > enemyTool.location.row &&
                   whitetool.location.row < king.location.row
                 ) {
-                  tool.setsOfMovs();
+                  if (enemyTool.color == whitetool.color) {
+                    if (whitetool.type[1] != "q" && whitetool.type[1] != "b") {
+                      tool.setsOfMovs();
+                    }
+                  } else {
+                    tool.setsOfMovs();
+                  }
                 }
               }
             });
@@ -345,7 +369,13 @@ export function diagonalDetention(
                   blacktool.location.row < enemyTool.location.row &&
                   blacktool.location.row > king.location.row
                 ) {
-                  tool.setsOfMovs();
+                  if (enemyTool.color == blacktool.color) {
+                    if (blacktool.type[1] != "q" && blacktool.type[1] != "b") {
+                      tool.setsOfMovs();
+                    }
+                  } else {
+                    tool.setsOfMovs();
+                  }
                 }
               }
             });
@@ -358,7 +388,13 @@ export function diagonalDetention(
                   whitetool.location.row < enemyTool.location.row &&
                   whitetool.location.row > king.location.row
                 ) {
-                  tool.setsOfMovs();
+                  if (enemyTool.color == whitetool.color) {
+                    if (whitetool.type[1] != "q" && whitetool.type[1] != "b") {
+                      tool.setsOfMovs();
+                    }
+                  } else {
+                    tool.setsOfMovs();
+                  }
                 }
               }
             });
@@ -385,7 +421,16 @@ export function diagonalDetention(
                     blacktool.location.row > enemyTool.location.row &&
                     blacktool.location.row < king.location.row
                   ) {
-                    tool.setsOfMovs();
+                    if (enemyTool.color == blacktool.color) {
+                      if (
+                        blacktool.type[1] != "q" &&
+                        blacktool.type[1] != "b"
+                      ) {
+                        tool.setsOfMovs();
+                      }
+                    } else {
+                      tool.setsOfMovs();
+                    }
                   }
                 }
               });
@@ -398,7 +443,16 @@ export function diagonalDetention(
                     whitetool.location.row > enemyTool.location.row &&
                     whitetool.location.row < king.location.row
                   ) {
-                    tool.setsOfMovs();
+                    if (enemyTool.color == whitetool.color) {
+                      if (
+                        whitetool.type[1] != "q" &&
+                        whitetool.type[1] != "b"
+                      ) {
+                        tool.setsOfMovs();
+                      }
+                    } else {
+                      tool.setsOfMovs();
+                    }
                   }
                 }
               });

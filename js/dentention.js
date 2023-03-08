@@ -209,7 +209,14 @@ export function diagonalDetention(tool, king, enemies) {
                                 blacktool.location.col - king.location.col) {
                                 if (blacktool.location.row < enemyTool.location.row &&
                                     blacktool.location.row > king.location.row) {
-                                    tool.setsOfMovs();
+                                    if (enemyTool.color == blacktool.color) {
+                                        if (blacktool.type[1] != "q" && blacktool.type[1] != "b") {
+                                            tool.setsOfMovs();
+                                        }
+                                    }
+                                    else {
+                                        tool.setsOfMovs();
+                                    }
                                 }
                             }
                         });
@@ -218,7 +225,14 @@ export function diagonalDetention(tool, king, enemies) {
                                 whitetool.location.col - king.location.col) {
                                 if (whitetool.location.row < enemyTool.location.row &&
                                     whitetool.location.row > king.location.row) {
-                                    tool.setsOfMovs();
+                                    if (enemyTool.color == whitetool.color) {
+                                        if (whitetool.type[1] != "q" && whitetool.type[1] != "b") {
+                                            tool.setsOfMovs();
+                                        }
+                                    }
+                                    else {
+                                        tool.setsOfMovs();
+                                    }
                                 }
                             }
                         });
@@ -238,7 +252,14 @@ export function diagonalDetention(tool, king, enemies) {
                                 blacktool.location.col - king.location.col) {
                                 if (blacktool.location.row > enemyTool.location.row &&
                                     blacktool.location.row < king.location.row) {
-                                    tool.setsOfMovs();
+                                    if (enemyTool.color == blacktool.color) {
+                                        if (blacktool.type[1] != "q" && blacktool.type[1] != "b") {
+                                            tool.setsOfMovs();
+                                        }
+                                    }
+                                    else {
+                                        tool.setsOfMovs();
+                                    }
                                 }
                             }
                         });
@@ -247,7 +268,14 @@ export function diagonalDetention(tool, king, enemies) {
                                 whitetool.location.col - king.location.col) {
                                 if (whitetool.location.row > enemyTool.location.row &&
                                     whitetool.location.row < king.location.row) {
-                                    tool.setsOfMovs();
+                                    if (enemyTool.color == whitetool.color) {
+                                        if (whitetool.type[1] != "q" && whitetool.type[1] != "b") {
+                                            tool.setsOfMovs();
+                                        }
+                                    }
+                                    else {
+                                        tool.setsOfMovs();
+                                    }
                                 }
                             }
                         });
@@ -273,7 +301,14 @@ export function diagonalDetention(tool, king, enemies) {
                                 blacktool.location.col - king.location.col) {
                                 if (blacktool.location.row < enemyTool.location.row &&
                                     blacktool.location.row > king.location.row) {
-                                    tool.setsOfMovs();
+                                    if (enemyTool.color == blacktool.color) {
+                                        if (blacktool.type[1] != "q" && blacktool.type[1] != "b") {
+                                            tool.setsOfMovs();
+                                        }
+                                    }
+                                    else {
+                                        tool.setsOfMovs();
+                                    }
                                 }
                             }
                         });
@@ -282,7 +317,14 @@ export function diagonalDetention(tool, king, enemies) {
                                 whitetool.location.col - king.location.col) {
                                 if (whitetool.location.row < enemyTool.location.row &&
                                     whitetool.location.row > king.location.row) {
-                                    tool.setsOfMovs();
+                                    if (enemyTool.color == whitetool.color) {
+                                        if (whitetool.type[1] != "q" && whitetool.type[1] != "b") {
+                                            tool.setsOfMovs();
+                                        }
+                                    }
+                                    else {
+                                        tool.setsOfMovs();
+                                    }
                                 }
                             }
                         });
@@ -301,7 +343,15 @@ export function diagonalDetention(tool, king, enemies) {
                                     blacktool.location.col - king.location.col) {
                                     if (blacktool.location.row > enemyTool.location.row &&
                                         blacktool.location.row < king.location.row) {
-                                        tool.setsOfMovs();
+                                        if (enemyTool.color == blacktool.color) {
+                                            if (blacktool.type[1] != "q" &&
+                                                blacktool.type[1] != "b") {
+                                                tool.setsOfMovs();
+                                            }
+                                        }
+                                        else {
+                                            tool.setsOfMovs();
+                                        }
                                     }
                                 }
                             });
@@ -310,7 +360,15 @@ export function diagonalDetention(tool, king, enemies) {
                                     whitetool.location.col - king.location.col) {
                                     if (whitetool.location.row > enemyTool.location.row &&
                                         whitetool.location.row < king.location.row) {
-                                        tool.setsOfMovs();
+                                        if (enemyTool.color == whitetool.color) {
+                                            if (whitetool.type[1] != "q" &&
+                                                whitetool.type[1] != "b") {
+                                                tool.setsOfMovs();
+                                            }
+                                        }
+                                        else {
+                                            tool.setsOfMovs();
+                                        }
                                     }
                                 }
                             });
