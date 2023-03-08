@@ -1,5 +1,6 @@
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
+import { openSlots } from "./script.js";
 
 export class Queen extends GameTool {
   public setsOfMovs(): void {
@@ -19,15 +20,7 @@ export class Queen extends GameTool {
     divsCanMove.forEach((div) => {
       this.possibleSlots.push(Number(div.id));
 
-      div.setAttribute("ondrop", "drop(event)");
-      div.setAttribute("ondragover", "allowDrop(event)");
-
-      if (
-        !div.querySelector("img") ||
-        div.querySelector("img")?.id[0] != this.color
-      ) {
-        div.setAttribute("data-toggle", "canMove");
-      }
+      openSlots(div, this.color);
     });
 
     this.checkIfMovingAllowed();

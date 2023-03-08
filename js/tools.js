@@ -1,4 +1,5 @@
 import { game } from "./script.js";
+import { checkMovingAllowed } from "./script.js";
 export class GameTool {
     constructor(color, type, img) {
         this.color = color;
@@ -49,52 +50,10 @@ export class GameTool {
     }
     checkIfMovingAllowed() {
         if (this.color == "W") {
-            let KingPossibleSlots = game.white.filter((tool) => {
-                return tool.type == "Wking";
-            })[0];
-            game.black.forEach((blackTool) => {
-                if (blackTool.possibleSlots.includes(Number(KingPossibleSlots.htmlElement.parentElement.id))) {
-                    let divs = this.chesBoard.querySelectorAll("div");
-                    divs.forEach((div) => {
-                        if (Number(blackTool.htmlElement.parentElement.id) == Number(div.id)) {
-                        }
-                        else {
-                            if (KingPossibleSlots.possibleSlots.includes(Number(div.id)) &&
-                                blackTool.possibleSlots.includes(Number(div.id))) {
-                            }
-                            else {
-                                div.removeAttribute("ondrop");
-                                div.removeAttribute("ondragover");
-                                div.removeAttribute("data-toggle");
-                            }
-                        }
-                    });
-                }
-            });
+            checkMovingAllowed(this, game.black, game.white);
         }
         if (this.color == "B") {
-            let KingPossibleSlots = game.black.filter((tool) => {
-                return tool.type == "Bking";
-            })[0];
-            game.white.forEach((whiteTool) => {
-                if (whiteTool.possibleSlots.includes(Number(KingPossibleSlots.htmlElement.parentElement.id))) {
-                    let divs = this.chesBoard.querySelectorAll("div");
-                    divs.forEach((div) => {
-                        if (Number(whiteTool.htmlElement.parentElement.id) == Number(div.id)) {
-                        }
-                        else {
-                            if (KingPossibleSlots.possibleSlots.includes(Number(div.id)) &&
-                                whiteTool.possibleSlots.includes(Number(div.id))) {
-                            }
-                            else {
-                                div.removeAttribute("ondrop");
-                                div.removeAttribute("ondragover");
-                                div.removeAttribute("data-toggle");
-                            }
-                        }
-                    });
-                }
-            });
+            checkMovingAllowed(this, game.white, game.black);
         }
     }
 }

@@ -1,4 +1,5 @@
 import { GameTool } from "./tools.js";
+import { changeToKueen, openSlots } from "./script.js";
 
 export class Knight extends GameTool {
   setsOfMovs(): void {
@@ -24,16 +25,9 @@ export class Knight extends GameTool {
             Number(div.id[1]) - this.location.col == 6 ||
             Number(div.id[1]) - this.location.col == 2
           ) {
-            div.setAttribute("ondrop", "drop(event)");
-            div.setAttribute("ondragover", "allowDrop(event)");
             this.possibleSlots.push(Number(div.id));
 
-            if (
-              !div.querySelector("img") ||
-              div.querySelector("img")?.id[0] != this.color
-            ) {
-              div.setAttribute("data-toggle", "canMove");
-            }
+            openSlots(div, this.color);
           }
         }
       }
@@ -56,16 +50,8 @@ export class Knight extends GameTool {
             Number(div.id[1]) - this.location.col == 7 ||
             Number(div.id[1]) - this.location.col == 1
           ) {
-            div.setAttribute("ondrop", "drop(event)");
-            div.setAttribute("ondragover", "allowDrop(event)");
             this.possibleSlots.push(Number(div.id));
-
-            if (
-              !div.querySelector("img") ||
-              div.querySelector("img")?.id[0] != this.color
-            ) {
-              div.setAttribute("data-toggle", "canMove");
-            }
+            openSlots(div, this.color);
           }
         }
       }

@@ -1,3 +1,4 @@
+import { openSlots } from "./script.js";
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
 
@@ -15,16 +16,9 @@ export class Bishop extends GameTool {
     });
 
     filterDivs.forEach((div) => {
-      div.setAttribute("ondrop", "drop(event)");
-      div.setAttribute("ondragover", "allowDrop(event)");
       this.possibleSlots.push(Number(div.id));
 
-      if (
-        !div.querySelector("img") ||
-        div.querySelector("img")?.id[0] != this.color
-      ) {
-        div.setAttribute("data-toggle", "canMove");
-      }
+      openSlots(div, this.color);
     });
     let skip = new Skipping(this);
     skip.skipLimitDiagonal();

@@ -5,6 +5,7 @@ import { Knight } from "./knight.js";
 import { King } from "./king.js";
 import { Pawn } from "./pawn.js";
 import { Chessboard } from "./board.js";
+import { diagonalDetention, stratDetention } from "./dentention.js";
 export class Game {
     constructor(container) {
         this.black = [];
@@ -101,12 +102,18 @@ export class Game {
             tool.htmlElement.addEventListener("mousedown", () => {
                 tool.Initialize();
                 tool.setsOfMovs();
+                tool.htmlElement.setAttribute("ondragstart", "drag(event)");
+                stratDetention(tool, kingW, this.black);
+                diagonalDetention(tool, kingW, this.black);
             });
         });
         this.black.forEach((tool) => {
             tool.htmlElement.addEventListener("mousedown", () => {
                 tool.Initialize();
                 tool.setsOfMovs();
+                tool.htmlElement.setAttribute("ondragstart", "drag(event)");
+                stratDetention(tool, kingB, this.white);
+                diagonalDetention(tool, kingB, this.white);
             });
         });
     }

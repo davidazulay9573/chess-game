@@ -1,9 +1,9 @@
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
+import { openSlots, game } from "./script.js";
 export class Rook extends GameTool {
   setsOfMovs(): void {
     this.possibleSlots = [];
-
     let divs = this.chesBoard.querySelectorAll("div");
     let divsCanMove = Array.from(divs).filter((div) => {
       return (
@@ -14,18 +14,14 @@ export class Rook extends GameTool {
 
     divsCanMove.forEach((div) => {
       this.possibleSlots.push(Number(div.id));
-      div.setAttribute("ondrop", "drop(event)");
-      div.setAttribute("ondragover", "allowDrop(event)");
-      if (
-        !div.querySelector("img") ||
-        div.querySelector("img")?.id[0] != this.color
-      ) {
-        div.setAttribute("data-toggle", "canMove");
-      }
+      let myKing = game.white.filter((tool) => {
+        return tool.type[1] == "k";
+      })[0];
+
+      openSlots(div, this.color);
     });
     new Skipping(this).skipLimitStrat();
     this.checkIfMovingAllowed();
-
     this.possibleSlots = this.possibleSlots.filter((location) => {
       return location != Number(`${this.location.row}${this.location.col}`);
     });

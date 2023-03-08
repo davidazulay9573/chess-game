@@ -1,10 +1,10 @@
 import { GameTool } from "./tools.js";
+import { openSlots } from "./script.js";
 export class Knight extends GameTool {
     setsOfMovs() {
         this.possibleSlots = [];
         let divs = this.chesBoard.querySelectorAll("div");
         divs.forEach((div) => {
-            var _a, _b;
             if (this.location.row - Number(div.id[0]) > 3 ||
                 this.location.col - Number(div.id[1]) > 3 ||
                 Number(div.id[0]) - this.location.row > 3 ||
@@ -19,13 +19,8 @@ export class Knight extends GameTool {
                         this.location.col - Number(div.id[1]) == 2 ||
                         Number(div.id[1]) - this.location.col == 6 ||
                         Number(div.id[1]) - this.location.col == 2) {
-                        div.setAttribute("ondrop", "drop(event)");
-                        div.setAttribute("ondragover", "allowDrop(event)");
                         this.possibleSlots.push(Number(div.id));
-                        if (!div.querySelector("img") ||
-                            ((_a = div.querySelector("img")) === null || _a === void 0 ? void 0 : _a.id[0]) != this.color) {
-                            div.setAttribute("data-toggle", "canMove");
-                        }
+                        openSlots(div, this.color);
                     }
                 }
             }
@@ -43,13 +38,8 @@ export class Knight extends GameTool {
                         this.location.col - Number(div.id[1]) == 1 ||
                         Number(div.id[1]) - this.location.col == 7 ||
                         Number(div.id[1]) - this.location.col == 1) {
-                        div.setAttribute("ondrop", "drop(event)");
-                        div.setAttribute("ondragover", "allowDrop(event)");
                         this.possibleSlots.push(Number(div.id));
-                        if (!div.querySelector("img") ||
-                            ((_b = div.querySelector("img")) === null || _b === void 0 ? void 0 : _b.id[0]) != this.color) {
-                            div.setAttribute("data-toggle", "canMove");
-                        }
+                        openSlots(div, this.color);
                     }
                 }
             }

@@ -8,6 +8,7 @@ import { GameTool } from "./tools.js";
 
 import { Chessboard } from "./board.js";
 import { Slot } from "./slot";
+import { diagonalDetention, stratDetention } from "./dentention.js";
 export class Game {
   black: GameTool[];
   white: GameTool[];
@@ -118,12 +119,20 @@ export class Game {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
         tool.setsOfMovs();
+        tool.htmlElement.setAttribute("ondragstart", "drag(event)");
+
+        stratDetention(tool, kingW, this.black);
+        diagonalDetention(tool, kingW, this.black);
       });
     });
     this.black.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
         tool.setsOfMovs();
+        tool.htmlElement.setAttribute("ondragstart", "drag(event)");
+
+        stratDetention(tool, kingB, this.white);
+        diagonalDetention(tool, kingB, this.white);
       });
     });
   }
