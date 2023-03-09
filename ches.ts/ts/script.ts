@@ -35,6 +35,11 @@ export function closSlots(slotPR: HTMLElement, toolPR: GameTool) {
   });
 }
 
+export function onlyClosSlots(slotPR: HTMLElement, toolPR: GameTool) {
+  slotPR.removeAttribute("ondrop");
+  slotPR.removeAttribute("ondragover");
+  slotPR.removeAttribute("data-toggle");
+}
 export function checkMovingAllowed(
   toolPR: GameTool,
   enemies: GameTool[],
@@ -44,22 +49,67 @@ export function checkMovingAllowed(
     return tool.type[1] == "k";
   })[0];
 
-  enemies.forEach((tool) => {
+  enemies.forEach((enemyTool) => {
     if (
-      tool.possibleSlots.includes(Number(myKing.htmlElement.parentElement!.id))
+      enemyTool.possibleSlots.includes(
+        Number(myKing.htmlElement.parentElement!.id)
+      )
     ) {
       let divs = toolPR.chesBoard.querySelectorAll("div");
       divs.forEach((div) => {
-        if (Number(tool.htmlElement.parentElement!.id) == Number(div.id)) {
+        if (Number(enemyTool.htmlElement.parentElement!.id) == Number(div.id)) {
         } else {
+          div.removeAttribute("ondrop");
+          div.removeAttribute("ondragover");
+          div.removeAttribute("data-toggle");
+
           if (
-            myKing.possibleSlots.includes(Number(div.id)) &&
-            tool.possibleSlots.includes(Number(div.id))
+            enemyTool.possibleSlots.includes(Number(div.id)) &&
+            toolPR.possibleSlots.includes(Number(div.id))
           ) {
-          } else {
-            div.removeAttribute("ondrop");
-            div.removeAttribute("ondragover");
-            div.removeAttribute("data-toggle");
+            if (enemyTool.location.col == myKing.location.col) {
+              if (Number(div.id[1]) == myKing.location.col) {
+                if (enemyTool.location.row > myKing.location.row) {
+                  if (enemyTool.location.row > Number(div.id[0])) {
+                    openSlots(div, toolPR.color);
+                  }
+                }
+                if (enemyTool.location.row < myKing.location.row) {
+                  if (enemyTool.location.row < Number(div.id[0])) {
+                    openSlots(div, toolPR.color);
+                  }
+                }
+              }
+            }
+            if (enemyTool.location.row == myKing.location.row) {
+              if (Number(div.id[0]) == myKing.location.row) {
+                if (enemyTool.location.col > myKing.location.col) {
+                  if (enemyTool.location.col > Number(div.id[1])) {
+                    openSlots(div, toolPR.color);
+                  }
+                }
+                if (enemyTool.location.col < myKing.location.col) {
+                  if (enemyTool.location.col < Number(div.id[1])) {
+                    openSlots(div, toolPR.color);
+                  }
+                }
+              }
+            }
+            if (
+              enemyTool.location.col - myKing.location.col ==
+                enemyTool.location.row - myKing.location.row ||
+              myKing.location.col - enemyTool.location.col ==
+                enemyTool.location.row - myKing.location.row
+            ) {
+              if (
+                Number(div.id[1]) - myKing.location.col ==
+                  Number(div.id[0]) - myKing.location.row ||
+                myKing.location.col - Number(div.id[1]) ==
+                  Number(div.id[0]) - myKing.location.row
+              ) {
+                openSlots(div, toolPR.color);
+              }
+            }
           }
         }
       });

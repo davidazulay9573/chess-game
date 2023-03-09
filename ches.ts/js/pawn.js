@@ -21,6 +21,7 @@ export class Pawn extends GameTool {
                     if (this.location.row == Number(div.id[0]) - 2 &&
                         this.location.col == Number(div.id[1])) {
                         if (!div.querySelector("img")) {
+                            this.possibleSlots.push(Number(div.id));
                             openSlots(div, this.color);
                         }
                     }
@@ -28,6 +29,7 @@ export class Pawn extends GameTool {
                 if (this.location.col == Number(div.id[1]) &&
                     this.location.row == Number(div.id[0]) - 1) {
                     if (!div.querySelector("img")) {
+                        this.possibleSlots.push(Number(div.id));
                         openSlots(div, this.color);
                     }
                 }
@@ -51,6 +53,7 @@ export class Pawn extends GameTool {
                     if (this.location.row == Number(div.id[0]) + 2 &&
                         this.location.col == Number(div.id[1])) {
                         if (!div.querySelector("img")) {
+                            this.possibleSlots.push(Number(div.id));
                             openSlots(div, this.color);
                         }
                     }
@@ -58,6 +61,7 @@ export class Pawn extends GameTool {
                 if (this.location.col == Number(div.id[1]) &&
                     this.location.row == Number(div.id[0]) + 1) {
                     if (!div.querySelector("img")) {
+                        this.possibleSlots.push(Number(div.id));
                         openSlots(div, this.color);
                     }
                 }
