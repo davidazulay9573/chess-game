@@ -48,6 +48,15 @@ export class King extends GameTool {
             if (this.color == "W") {
                 game.black.forEach((tool) => {
                     tool.possibleSlots.forEach((location) => {
+                        if (tool.type[1] != 'p') {
+                            if (Number(div.id) == location) {
+                                div.removeAttribute("ondrop");
+                                div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
+                            }
+                        }
+                    });
+                    tool.posibleToEat.forEach((location) => {
                         if (Number(div.id) == location) {
                             div.removeAttribute("ondrop");
                             div.removeAttribute("ondragover");
@@ -59,6 +68,15 @@ export class King extends GameTool {
             if (this.color == "B") {
                 game.white.forEach((tool) => {
                     tool.possibleSlots.forEach((location) => {
+                        if (tool.type[1] != "p") {
+                            if (Number(div.id) == location) {
+                                div.removeAttribute("ondrop");
+                                div.removeAttribute("ondragover");
+                                div.removeAttribute("data-toggle");
+                            }
+                        }
+                    });
+                    tool.posibleToEat.forEach((location) => {
                         if (Number(div.id) == location) {
                             div.removeAttribute("ondrop");
                             div.removeAttribute("ondragover");
@@ -67,9 +85,7 @@ export class King extends GameTool {
                     });
                 });
             }
-            if (this.orderOfMovements.length == 1) {
-                skip.castling(div, this);
-            }
+            skip.castling(div, this);
             this.possibleSlots = this.possibleSlots.filter((location) => {
                 return location != Number(`${this.location.row}${this.location.col}`);
             });

@@ -10,12 +10,14 @@ export class GameTool {
   public location: { row: number; col: number };
   public orderOfMovements: { row: number; col: number }[];
   public possibleSlots: number[];
+  posibleToEat:number[];
   constructor(color: string, type: string, img: string) {
     this.color = color;
     this.type = type;
     this.img = img;
     this.orderOfMovements = [];
     this.possibleSlots = [];
+    this.posibleToEat = [];
     this.htmlElement = document.createElement("img");
     this.chesBoard = document.querySelector("#chessboard")!;
     this.location = {
@@ -32,7 +34,7 @@ export class GameTool {
     this.htmlElement.setAttribute("grup", this.color);
     this.htmlElement.setAttribute("data-values", JSON.stringify([]));
   }
-  private setLocation() {
+  public setLocation() {
     let thisChessPiece = this.chesBoard.querySelector(
       `img#${this.htmlElement.id}`
     );

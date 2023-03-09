@@ -13,6 +13,8 @@ export class Game {
         this.whoIsStart = Math.random() < 0.5 ? 2 : 7;
         this.container = container;
         this.chesBoard = new Chessboard(container);
+        this.stste = "w";
+        this.stepsList = [];
     }
     createTools() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
@@ -69,6 +71,8 @@ export class Game {
                 tool.htmlElement.addEventListener("dragend", () => {
                     tool.Initialize();
                     tool.setsOfMovs();
+                    this.stste = "b";
+                    this.stepsList.push(tool);
                     this.black.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
@@ -85,6 +89,8 @@ export class Game {
                 tool.htmlElement.addEventListener("dragend", () => {
                     tool.Initialize();
                     tool.setsOfMovs();
+                    this.stste = "w";
+                    this.stepsList.push(tool);
                     this.white.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
@@ -114,6 +120,7 @@ export class Game {
                 tool.htmlElement.setAttribute("ondragstart", "drag(event)");
                 stratDetention(tool, kingB, this.white);
                 diagonalDetention(tool, kingB, this.white);
+                // diagonalDetention(tool, kingB, this.white);
             });
         });
     }

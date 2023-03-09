@@ -7,6 +7,7 @@ export class GameTool {
         this.img = img;
         this.orderOfMovements = [];
         this.possibleSlots = [];
+        this.posibleToEat = [];
         this.htmlElement = document.createElement("img");
         this.chesBoard = document.querySelector("#chessboard");
         this.location = {

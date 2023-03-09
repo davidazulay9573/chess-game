@@ -7,7 +7,6 @@ import { Pawn } from "./pawn.js";
 import { GameTool } from "./tools.js";
 
 import { Chessboard } from "./board.js";
-import { Slot } from "./slot";
 import { diagonalDetention, stratDetention } from "./dentention.js";
 export class Game {
   black: GameTool[];
@@ -15,12 +14,16 @@ export class Game {
   whoIsStart: number;
   container: HTMLDivElement;
   chesBoard: Chessboard;
+  stste: string;
+  stepsList :GameTool[];
   constructor(container: HTMLDivElement) {
     this.black = [];
     this.white = [];
     this.whoIsStart = Math.random() < 0.5 ? 2 : 7;
     this.container = container;
     this.chesBoard = new Chessboard(container);
+    this.stste = "w";
+    this.stepsList = [];
   }
 
   createTools() {
@@ -86,6 +89,9 @@ export class Game {
         tool.htmlElement.addEventListener("dragend", () => {
           tool.Initialize();
           tool.setsOfMovs();
+          this.stste = "b";
+          this.stepsList.push(tool);
+     
           this.black.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
@@ -102,6 +108,9 @@ export class Game {
         tool.htmlElement.addEventListener("dragend", () => {
           tool.Initialize();
           tool.setsOfMovs();
+          this.stste = "w";
+       
+          this.stepsList.push(tool);
           this.white.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
@@ -132,7 +141,10 @@ export class Game {
         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
 
         stratDetention(tool, kingB, this.white);
+
         diagonalDetention(tool, kingB, this.white);
+
+        // diagonalDetention(tool, kingB, this.white);
       });
     });
   }

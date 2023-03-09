@@ -90,6 +90,7 @@ export function checkMovingAllowed(
                 }
                 if (enemyTool.location.col < myKing.location.col) {
                   if (enemyTool.location.col < Number(div.id[1])) {
+                    
                     openSlots(div, toolPR.color);
                   }
                 }
@@ -107,7 +108,10 @@ export function checkMovingAllowed(
                 myKing.location.col - Number(div.id[1]) ==
                   Number(div.id[0]) - myKing.location.row
               ) {
+               
                 openSlots(div, toolPR.color);
+                     
+                    
               }
             }
           }

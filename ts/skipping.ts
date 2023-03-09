@@ -188,26 +188,32 @@ export class Skipping {
     });
   }
   castling(div: HTMLElement, king: King) {
-    if (king.orderOfMovements.length === 1) {
+    if (king.orderOfMovements.length == 1 && this.forTool.orderOfMovements.length == 1) {
       if (this.forTool.location.row == Number(div.id[0])) {
         if (this.forTool.location.col == Number(div.id[1]) - 2) {
-          openSlots(div, king.color);
+           
+           if (this.forTool.orderOfMovements.length == 1) {
+             openSlots(div, king.color);
+           }
           king.htmlElement.addEventListener("dragend", () => {
-            if (king.orderOfMovements.length == 1) {
-              let tool = document
-                .getElementById(`${king.location.row}7`)
-                ?.querySelector("img") as HTMLElement;
-              if (tool.id[1] == "k") {
-                let rookOldLocation = document.getElementById(
-                  `${this.forTool.location.row}8`
-                ) as HTMLElement;
-                let rookfor = rookOldLocation.querySelector("img")!;
-                rookOldLocation.removeChild(rookfor);
-                document
-                  .getElementById(`${this.forTool.location.row}6`)
-                  ?.appendChild(rookfor);
-              }
-            }
+                if (
+                  king.orderOfMovements.length == 1 &&
+                  this.forTool.orderOfMovements.length == 1
+                ) {
+                  let tool = document
+                    .getElementById(`${king.location.row}7`)
+                    ?.querySelector("img") as HTMLElement;
+                  if (tool.id[1] == "k") {
+                    let rookOldLocation = document.getElementById(
+                      `${this.forTool.location.row}8`
+                    ) as HTMLElement;
+                    let rookfor = rookOldLocation.querySelector("img")!;
+                    rookOldLocation.removeChild(rookfor);
+                    document
+                      .getElementById(`${this.forTool.location.row}6`)
+                      ?.appendChild(rookfor);
+                  }
+                }
             king.setsOfMovs();
             king.Initialize();
           });
@@ -217,23 +223,29 @@ export class Skipping {
               document.getElementById(`${this.forTool.location.row}2`)?.children
                 .length == 0
             ) {
-              openSlots(div, king.color);
+               if (this.forTool.orderOfMovements.length == 1) {
+                openSlots(div, king.color);
+                 
+               }
               king.htmlElement.addEventListener("dragend", () => {
-                if (king.orderOfMovements.length == 1) {
-                  let tool = document
-                    .getElementById(`${king.location.row}3`)
-                    ?.querySelector("img") as HTMLElement;
-                  if (tool.id[1] == "k") {
-                    let rookOldLocation = document.getElementById(
-                      `${this.forTool.location.row}1`
-                    ) as HTMLElement;
-                    let rookfor = rookOldLocation.querySelector("img")!;
-                    rookOldLocation.removeChild(rookfor);
-                    document
-                      .getElementById(`${this.forTool.location.row}4`)
-                      ?.appendChild(rookfor);
+                  if (
+                    king.orderOfMovements.length == 1 &&
+                    this.forTool.orderOfMovements.length == 1
+                  ) {
+                    let tool = document
+                      .getElementById(`${king.location.row}3`)
+                      ?.querySelector("img") as HTMLElement;
+                    if (tool.id[1] == "k") {
+                      let rookOldLocation = document.getElementById(
+                        `${this.forTool.location.row}1`
+                      ) as HTMLElement;
+                      let rookfor = rookOldLocation.querySelector("img")!;
+                      rookOldLocation.removeChild(rookfor);
+                      document
+                        .getElementById(`${this.forTool.location.row}4`)
+                        ?.appendChild(rookfor);
+                    }
                   }
-                }
                 king.setsOfMovs();
                 king.Initialize();
               });
@@ -241,6 +253,7 @@ export class Skipping {
           }
         }
       }
+    
     }
   }
 }

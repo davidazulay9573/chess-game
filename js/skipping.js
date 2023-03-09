@@ -148,13 +148,16 @@ export class Skipping {
     }
     castling(div, king) {
         var _a;
-        if (king.orderOfMovements.length === 1) {
+        if (king.orderOfMovements.length == 1 && this.forTool.orderOfMovements.length == 1) {
             if (this.forTool.location.row == Number(div.id[0])) {
                 if (this.forTool.location.col == Number(div.id[1]) - 2) {
-                    openSlots(div, king.color);
+                    if (this.forTool.orderOfMovements.length == 1) {
+                        openSlots(div, king.color);
+                    }
                     king.htmlElement.addEventListener("dragend", () => {
                         var _a, _b;
-                        if (king.orderOfMovements.length == 1) {
+                        if (king.orderOfMovements.length == 1 &&
+                            this.forTool.orderOfMovements.length == 1) {
                             let tool = (_a = document
                                 .getElementById(`${king.location.row}7`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
                             if (tool.id[1] == "k") {
@@ -172,10 +175,13 @@ export class Skipping {
                 else {
                     if (this.forTool.location.col == Number(div.id[1]) + 2) {
                         if (((_a = document.getElementById(`${this.forTool.location.row}2`)) === null || _a === void 0 ? void 0 : _a.children.length) == 0) {
-                            openSlots(div, king.color);
+                            if (this.forTool.orderOfMovements.length == 1) {
+                                openSlots(div, king.color);
+                            }
                             king.htmlElement.addEventListener("dragend", () => {
                                 var _a, _b;
-                                if (king.orderOfMovements.length == 1) {
+                                if (king.orderOfMovements.length == 1 &&
+                                    this.forTool.orderOfMovements.length == 1) {
                                     let tool = (_a = document
                                         .getElementById(`${king.location.row}3`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
                                     if (tool.id[1] == "k") {
