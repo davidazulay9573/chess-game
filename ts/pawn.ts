@@ -86,9 +86,7 @@ export class Pawn extends GameTool {
                             pawn.htmlElement.remove();
                           }
                         });
-                      } else {
-                        closSlots(divSpashelMov!, this);
-                      }
+                      } 
                     }
                   }
                 }
@@ -150,7 +148,10 @@ export class Pawn extends GameTool {
                     let id = this.location.row - 1 + div.id[1];
                     let divSpashelMov = document.getElementById(id)!;
                     if (Number(id[1]) == pawn.location.col) {
+                      
+                      
                       if (game.stepsList[game.stepsList.length - 1] == pawn) {
+                      
                         openSlots(divSpashelMov!, this.color);
                         this.htmlElement.addEventListener("dragend", () => {
                           if (
@@ -160,9 +161,7 @@ export class Pawn extends GameTool {
                             pawn.htmlElement.remove();
                           }
                         });
-                      } else {
-                        closSlots(divSpashelMov!, this);
-                      }
+                      } 
                     }
                   }
                 }

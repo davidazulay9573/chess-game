@@ -109,7 +109,16 @@ export function checkMovingAllowed(
                   Number(div.id[0]) - myKing.location.row
               ) {
                
-                openSlots(div, toolPR.color);
+                   if (enemyTool.location.row > myKing.location.row) {
+                     if (enemyTool.location.row > Number(div.id[0])) {
+                       openSlots(div, toolPR.color);
+                     }
+                   }
+                   if (enemyTool.location.row < myKing.location.row) {
+                     if (enemyTool.location.row < Number(div.id[0])) {
+                       openSlots(div, toolPR.color);
+                     }
+                   }
                      
                     
               }

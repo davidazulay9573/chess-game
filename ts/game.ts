@@ -91,6 +91,7 @@ export class Game {
           tool.setsOfMovs();
           this.stste = "b";
           this.stepsList.push(tool);
+          
      
           this.black.forEach((tool2) => {
             tool2.setsOfMovs();
@@ -102,6 +103,8 @@ export class Game {
           });
         });
       }
+       
+       
     });
     this.black.forEach((tool) => {
       if (tool.type[1] != "k") {
@@ -109,8 +112,8 @@ export class Game {
           tool.Initialize();
           tool.setsOfMovs();
           this.stste = "w";
-       
-          this.stepsList.push(tool);
+        this.stepsList.push(tool);
+           
           this.white.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
@@ -123,11 +126,16 @@ export class Game {
           });
         });
       }
+     
+
     });
+    
     this.white.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
         tool.setsOfMovs();
+        
+
         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
 
         stratDetention(tool, kingW, this.black);
@@ -138,6 +146,8 @@ export class Game {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
         tool.setsOfMovs();
+        
+
         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
 
         stratDetention(tool, kingB, this.white);

@@ -1,6 +1,6 @@
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
-import { game, changeToKueen, openSlots, closSlots } from "./script.js";
+import { game, changeToKueen, openSlots } from "./script.js";
 export class Pawn extends GameTool {
     constructor(color, type, img, friendsToFight) {
         super(color, type, img);
@@ -62,9 +62,6 @@ export class Pawn extends GameTool {
                                                     }
                                                 });
                                             }
-                                            else {
-                                                closSlots(divSpashelMov, this);
-                                            }
                                         }
                                     }
                                 }
@@ -123,9 +120,6 @@ export class Pawn extends GameTool {
                                                         pawn.htmlElement.remove();
                                                     }
                                                 });
-                                            }
-                                            else {
-                                                closSlots(divSpashelMov, this);
                                             }
                                         }
                                     }
