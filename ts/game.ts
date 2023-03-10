@@ -4,7 +4,7 @@ import { Queen } from "./queen.js";
 import { Knight } from "./knight.js";
 import { King } from "./king.js";
 import { Pawn } from "./pawn.js";
-import { GameTool } from "./tools.js";
+import { GameTool } from "./tools.js"
 
 import { Chessboard } from "./board.js";
 import { diagonalDetention, stratDetention } from "./dentention.js";
@@ -85,76 +85,72 @@ export class Game {
     document.getElementById("15")?.appendChild(kingB.htmlElement);
 
     this.white.forEach((tool) => {
-      if (tool.type[1] != "k") {
-        tool.htmlElement.addEventListener("dragend", () => {
-          tool.Initialize();
-          tool.setsOfMovs();
-          this.stste = "b";
-          this.stepsList.push(tool);
-          
-     
-          this.black.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-          });
-          this.white.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-          });
-        });
-      }
-       
-       
+       if (tool.type[1] != "k") {    
+       tool.htmlElement.addEventListener("dragend", () => {
+        console.log(tool.orderOfMovements);
+
+           tool.Initialize();
+           tool.setsOfMovs();
+           this.stste = "b";
+           this.stepsList.push(tool);
+
+           this.black.forEach((tool2) => {
+             tool2.setsOfMovs();
+             tool2.Initialize();
+           });
+           this.white.forEach((tool2) => {
+             tool2.setsOfMovs();
+             tool2.Initialize();
+           });
+         });
+       }
     });
     this.black.forEach((tool) => {
       if (tool.type[1] != "k") {
         tool.htmlElement.addEventListener("dragend", () => {
+        console.log(tool.orderOfMovements);
+
           tool.Initialize();
           tool.setsOfMovs();
           this.stste = "w";
-        this.stepsList.push(tool);
-           
+          this.stepsList.push(tool);
+
           this.white.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
             tool2.checkIfMovingAllowed();
+            stratDetention(tool, kingW, this.black);
+            diagonalDetention(tool, kingW, this.black);
           });
           this.black.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
             tool2.checkIfMovingAllowed();
+            stratDetention(tool, kingW, this.white);
+            diagonalDetention(tool, kingW, this.white);
           });
         });
       }
-     
-
     });
     
     this.white.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
         tool.setsOfMovs();
-        
-
         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
-
         stratDetention(tool, kingW, this.black);
         diagonalDetention(tool, kingW, this.black);
+        
       });
     });
     this.black.forEach((tool) => {
       tool.htmlElement.addEventListener("mousedown", () => {
         tool.Initialize();
         tool.setsOfMovs();
-        
-
         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
-
         stratDetention(tool, kingB, this.white);
-
         diagonalDetention(tool, kingB, this.white);
 
-        // diagonalDetention(tool, kingB, this.white);
       });
     });
   }

@@ -39,35 +39,41 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
                 if (Number(enemyTool.htmlElement.parentElement.id) == Number(div.id)) {
                 }
                 else {
-                    div.removeAttribute("ondrop");
-                    div.removeAttribute("ondragover");
-                    div.removeAttribute("data-toggle");
+                    onlyClosSlots(div, toolPR);
                     if (enemyTool.possibleSlots.includes(Number(div.id)) &&
                         toolPR.possibleSlots.includes(Number(div.id))) {
                         if (enemyTool.location.col == myKing.location.col) {
                             if (Number(div.id[1]) == myKing.location.col) {
-                                if (enemyTool.location.row > myKing.location.row) {
-                                    if (enemyTool.location.row > Number(div.id[0])) {
-                                        openSlots(div, toolPR.color);
+                                if (myKing.location.row < enemyTool.location.row) {
+                                    if (Number(div.id[0]) < enemyTool.location.row) {
+                                        if (Number(div.id[0]) > myKing.location.row) {
+                                            openSlots(div, toolPR.color);
+                                        }
                                     }
                                 }
-                                if (enemyTool.location.row < myKing.location.row) {
-                                    if (enemyTool.location.row < Number(div.id[0])) {
-                                        openSlots(div, toolPR.color);
+                                if (myKing.location.row > enemyTool.location.row) {
+                                    if (Number(div.id[0]) > enemyTool.location.row) {
+                                        if (Number(div.id[0]) < myKing.location.row) {
+                                            openSlots(div, toolPR.color);
+                                        }
                                     }
                                 }
                             }
                         }
                         if (enemyTool.location.row == myKing.location.row) {
                             if (Number(div.id[0]) == myKing.location.row) {
-                                if (enemyTool.location.col > myKing.location.col) {
-                                    if (enemyTool.location.col > Number(div.id[1])) {
-                                        openSlots(div, toolPR.color);
+                                if (myKing.location.col < enemyTool.location.col) {
+                                    if (Number(div.id[1]) < enemyTool.location.col) {
+                                        if (Number(div.id[1]) > myKing.location.col) {
+                                            openSlots(div, toolPR.color);
+                                        }
                                     }
                                 }
-                                if (enemyTool.location.col < myKing.location.col) {
-                                    if (enemyTool.location.col < Number(div.id[1])) {
-                                        openSlots(div, toolPR.color);
+                                if (myKing.location.col > enemyTool.location.col) {
+                                    if (Number(div.id[1]) > enemyTool.location.col) {
+                                        if (Number(div.id[1]) < myKing.location.col) {
+                                            openSlots(div, toolPR.color);
+                                        }
                                     }
                                 }
                             }
@@ -80,14 +86,16 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
                                 Number(div.id[0]) - myKing.location.row ||
                                 myKing.location.col - Number(div.id[1]) ==
                                     Number(div.id[0]) - myKing.location.row) {
-                                if (enemyTool.location.row > myKing.location.row) {
-                                    if (enemyTool.location.row > Number(div.id[0])) {
-                                        openSlots(div, toolPR.color);
+                                if (myKing.location.col < enemyTool.location.col) {
+                                    if (Number(div.id[1]) < enemyTool.location.col) {
+                                        if (Number(div.id[1]) > myKing.location.col)
+                                            openSlots(div, toolPR.color);
                                     }
                                 }
-                                if (enemyTool.location.row < myKing.location.row) {
-                                    if (enemyTool.location.row < Number(div.id[0])) {
-                                        openSlots(div, toolPR.color);
+                                if (myKing.location.col > enemyTool.location.col) {
+                                    if (Number(div.id[1]) > enemyTool.location.col) {
+                                        if (Number(div.id[1]) < myKing.location.col)
+                                            openSlots(div, toolPR.color);
                                     }
                                 }
                             }

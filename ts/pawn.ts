@@ -1,8 +1,8 @@
 import { Queen } from "./queen.js";
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
-
 import { game, changeToKueen, openSlots, onlyClosSlots, closSlots } from "./script.js";
+import { skipLimitStrat } from "./skipLimitStrate.js";
 export class Pawn extends GameTool {
   
   friendsToFight: GameTool[];
@@ -56,7 +56,7 @@ export class Pawn extends GameTool {
           this.location.col == Number(div.id[1]) + 1
         ) {
           if (this.location.row == Number(div.id[0]) - 1) {
-            this.posibleToEat.push(Number(div.id));
+            this.possibleSlots.push(Number(div.id));
             if (div.querySelector("img")) {
               openSlots(div, this.color);
             }
@@ -128,7 +128,8 @@ export class Pawn extends GameTool {
           this.location.col == Number(div.id[1]) + 1
         ) {
           if (this.location.row == Number(div.id[0]) + 1) {
-            this.posibleToEat.push(Number(div.id));
+            this.possibleSlots.push(Number(div.id));
+
             if (div.querySelector("img")) {
               openSlots(div, this.color);
             }
@@ -172,6 +173,6 @@ export class Pawn extends GameTool {
       });
     }
     this.checkIfMovingAllowed();
-    new Skipping(this).skipLimitStrat();
+    skipLimitStrat(this);
   }
 }

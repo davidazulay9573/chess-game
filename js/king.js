@@ -44,17 +44,16 @@ export class King extends GameTool {
                 }
             });
             let skip = new Skipping(this);
-            skip.skipLimitStrat();
             if (this.color == "W") {
                 game.black.forEach((tool) => {
                     tool.possibleSlots.forEach((location) => {
-                        if (tool.type[1] != 'p') {
-                            if (Number(div.id) == location) {
-                                div.removeAttribute("ondrop");
-                                div.removeAttribute("ondragover");
-                                div.removeAttribute("data-toggle");
-                            }
+                        // if(tool.type[1] != 'p'){
+                        if (Number(div.id) == location) {
+                            div.removeAttribute("ondrop");
+                            div.removeAttribute("ondragover");
+                            div.removeAttribute("data-toggle");
                         }
+                        // }
                     });
                     tool.posibleToEat.forEach((location) => {
                         if (Number(div.id) == location) {
@@ -68,13 +67,13 @@ export class King extends GameTool {
             if (this.color == "B") {
                 game.white.forEach((tool) => {
                     tool.possibleSlots.forEach((location) => {
-                        if (tool.type[1] != "p") {
-                            if (Number(div.id) == location) {
-                                div.removeAttribute("ondrop");
-                                div.removeAttribute("ondragover");
-                                div.removeAttribute("data-toggle");
-                            }
+                        //  if (tool.type[1] != "p") {
+                        if (Number(div.id) == location) {
+                            div.removeAttribute("ondrop");
+                            div.removeAttribute("ondragover");
+                            div.removeAttribute("data-toggle");
                         }
+                        //  }
                     });
                     tool.posibleToEat.forEach((location) => {
                         if (Number(div.id) == location) {

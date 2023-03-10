@@ -1,5 +1,5 @@
 import { openSlots } from "./script.js";
-import { Skipping } from "./skipping.js";
+import { skipLimitDiagonal } from "./skipLimitDiagonal.js";
 import { GameTool } from "./tools.js";
 export class Bishop extends GameTool {
     setsOfMovs() {
@@ -15,8 +15,7 @@ export class Bishop extends GameTool {
             this.possibleSlots.push(Number(div.id));
             openSlots(div, this.color);
         });
-        let skip = new Skipping(this);
-        skip.skipLimitDiagonal();
+        skipLimitDiagonal(this);
         this.checkIfMovingAllowed();
         this.possibleSlots = this.possibleSlots.filter((location) => {
             return location != Number(`${this.location.row}${this.location.col}`);

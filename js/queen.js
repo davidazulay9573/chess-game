@@ -1,6 +1,7 @@
-import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
 import { openSlots } from "./script.js";
+import { skipLimitStrat } from "./skipLimitStrate.js";
+import { skipLimitDiagonal } from "./skipLimitDiagonal.js";
 export class Queen extends GameTool {
     setsOfMovs() {
         this.possibleSlots = [];
@@ -18,9 +19,8 @@ export class Queen extends GameTool {
             openSlots(div, this.color);
         });
         this.checkIfMovingAllowed();
-        let skip = new Skipping(this);
-        skip.skipLimitStrat();
-        skip.skipLimitDiagonal();
+        skipLimitStrat(this);
+        skipLimitDiagonal(this);
         this.possibleSlots = this.possibleSlots.filter((location) => {
             return location != Number(`${this.location.row}${this.location.col}`);
         });

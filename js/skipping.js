@@ -4,74 +4,6 @@ export class Skipping {
         this.chesBoard = document.querySelector("#chessboard");
         this.forTool = tool;
     }
-    skipLimitStrat() {
-        let divs = this.chesBoard.querySelectorAll("div");
-        let filterDivs = Array.from(divs).filter((div) => {
-            return (this.forTool.location.col == Number(div.id[1]) ||
-                this.forTool.location.row == Number(div.id[0]));
-        });
-        filterDivs.forEach((div) => {
-            let imgTool = div.querySelector("img");
-            if (imgTool) {
-                if (Number(imgTool.parentElement.id[1]) == this.forTool.location.col) {
-                    if (this.forTool.location.row > Number(imgTool.parentElement.id[0])) {
-                        filterDivs.forEach((div) => {
-                            if (Number(div.id[0]) < Number(imgTool.parentElement.id[0])) {
-                                if (imgTool.id[1] == "k" &&
-                                    imgTool.id[0] != this.forTool.color) {
-                                    onlyClosSlots(div, this.forTool);
-                                }
-                                else {
-                                    closSlots(div, this.forTool);
-                                }
-                            }
-                        });
-                    }
-                    if (this.forTool.location.row < Number(imgTool.parentElement.id[0])) {
-                        filterDivs.forEach((div) => {
-                            if (Number(div.id[0]) > Number(imgTool.parentElement.id[0])) {
-                                if (imgTool.id[1] == "k" &&
-                                    imgTool.id[0] != this.forTool.color) {
-                                    onlyClosSlots(div, this.forTool);
-                                }
-                                else {
-                                    closSlots(div, this.forTool);
-                                }
-                            }
-                        });
-                    }
-                }
-                if (Number(imgTool.parentElement.id[0]) == this.forTool.location.row) {
-                    if (this.forTool.location.col < Number(imgTool.parentElement.id[1])) {
-                        filterDivs.forEach((div) => {
-                            if (Number(div.id[1]) > Number(imgTool.parentElement.id[1])) {
-                                if (imgTool.id[1] == "k" &&
-                                    imgTool.id[0] != this.forTool.color) {
-                                    onlyClosSlots(div, this.forTool);
-                                }
-                                else {
-                                    closSlots(div, this.forTool);
-                                }
-                            }
-                        });
-                    }
-                    if (this.forTool.location.col > Number(imgTool.parentElement.id[1])) {
-                        filterDivs.forEach((div) => {
-                            if (Number(div.id[1]) < Number(imgTool.parentElement.id[1])) {
-                                if (imgTool.id[1] == "k" &&
-                                    imgTool.id[0] != this.forTool.color) {
-                                    onlyClosSlots(div, this.forTool);
-                                }
-                                else {
-                                    closSlots(div, this.forTool);
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    }
     skipLimitDiagonal() {
         let divs = this.chesBoard.querySelectorAll("div");
         let filterDivs = Array.from(divs).filter((div) => {
@@ -148,7 +80,7 @@ export class Skipping {
     }
     castling(div, king) {
         var _a;
-        if (king.orderOfMovements.length == 1 && this.forTool.orderOfMovements.length == 1) {
+        if (king.orderOfMovements.length == 1) {
             if (this.forTool.location.row == Number(div.id[0])) {
                 if (this.forTool.location.col == Number(div.id[1]) - 2) {
                     if (this.forTool.orderOfMovements.length == 1) {
@@ -156,8 +88,7 @@ export class Skipping {
                     }
                     king.htmlElement.addEventListener("dragend", () => {
                         var _a, _b;
-                        if (king.orderOfMovements.length == 1 &&
-                            this.forTool.orderOfMovements.length == 1) {
+                        if (this.forTool.orderOfMovements.length == 1) {
                             let tool = (_a = document
                                 .getElementById(`${king.location.row}7`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
                             if (tool.id[1] == "k") {

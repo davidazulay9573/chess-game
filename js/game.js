@@ -69,6 +69,7 @@ export class Game {
         this.white.forEach((tool) => {
             if (tool.type[1] != "k") {
                 tool.htmlElement.addEventListener("dragend", () => {
+                    console.log(tool.orderOfMovements);
                     tool.Initialize();
                     tool.setsOfMovs();
                     this.stste = "b";
@@ -87,6 +88,7 @@ export class Game {
         this.black.forEach((tool) => {
             if (tool.type[1] != "k") {
                 tool.htmlElement.addEventListener("dragend", () => {
+                    console.log(tool.orderOfMovements);
                     tool.Initialize();
                     tool.setsOfMovs();
                     this.stste = "w";
@@ -95,11 +97,15 @@ export class Game {
                         tool2.setsOfMovs();
                         tool2.Initialize();
                         tool2.checkIfMovingAllowed();
+                        stratDetention(tool, kingW, this.black);
+                        diagonalDetention(tool, kingW, this.black);
                     });
                     this.black.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
                         tool2.checkIfMovingAllowed();
+                        stratDetention(tool, kingW, this.white);
+                        diagonalDetention(tool, kingW, this.white);
                     });
                 });
             }
@@ -120,7 +126,6 @@ export class Game {
                 tool.htmlElement.setAttribute("ondragstart", "drag(event)");
                 stratDetention(tool, kingB, this.white);
                 diagonalDetention(tool, kingB, this.white);
-                // diagonalDetention(tool, kingB, this.white);
             });
         });
     }

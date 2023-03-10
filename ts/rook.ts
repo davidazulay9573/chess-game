@@ -1,6 +1,7 @@
 import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
 import { openSlots, game } from "./script.js";
+import { skipLimitStrat } from "./skipLimitStrate.js";
 export class Rook extends GameTool {
   setsOfMovs(): void {
     this.possibleSlots = [];
@@ -20,7 +21,7 @@ export class Rook extends GameTool {
 
       openSlots(div, this.color);
     });
-    new Skipping(this).skipLimitStrat();
+    skipLimitStrat(this);
     this.checkIfMovingAllowed();
     this.possibleSlots = this.possibleSlots.filter((location) => {
       return location != Number(`${this.location.row}${this.location.col}`);
