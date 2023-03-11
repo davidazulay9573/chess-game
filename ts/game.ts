@@ -8,6 +8,7 @@ import { GameTool } from "./game_tools/tools.js";
 
 import { Chessboard } from "./ches_bord/board.js";
 import { diagonalDetention, stratDetention } from "./rules/dentention.js";
+import { castling } from "./actions/castling.js";
 export class Game {
   black: GameTool[];
   white: GameTool[];
@@ -83,22 +84,31 @@ export class Game {
 
     document.getElementById("85")?.appendChild(kingW.htmlElement);
     document.getElementById("15")?.appendChild(kingB.htmlElement);
-
+  
+    
     this.white.forEach((tool) => {
        if (tool.type[1] != "k") {    
+      
        tool.htmlElement.addEventListener("dragend", () => {
            tool.Initialize();
            tool.setsOfMovs();
            this.stste = "b";
            this.stepsList.push(tool);
-
+            tool.checkIfMovingAllowed();
+           
            this.black.forEach((tool2) => {
              tool2.setsOfMovs();
              tool2.Initialize();
+            tool2.checkIfMovingAllowed();
+            //  stratDetention(tool, kingW, this.black);
+            //  diagonalDetention(tool, kingW, this.black);
+
            });
            this.white.forEach((tool2) => {
              tool2.setsOfMovs();
              tool2.Initialize();
+            tool2.checkIfMovingAllowed();
+
            });
          });
        }
@@ -110,13 +120,17 @@ export class Game {
           tool.setsOfMovs();
           this.stste = "w";
           this.stepsList.push(tool);
-
+          tool.checkIfMovingAllowed();
+            
+            
+           
+           kingW.setsOfMovs()
           this.white.forEach((tool2) => {
             tool2.setsOfMovs();
             tool2.Initialize();
             tool2.checkIfMovingAllowed();
-            stratDetention(tool, kingW, this.black);
-            diagonalDetention(tool, kingW, this.black);
+            // stratDetention(tool, kingW, this.black);
+            // diagonalDetention(tool, kingW, this.black);
           });
           this.black.forEach((tool2) => {
             tool2.setsOfMovs();
@@ -148,5 +162,6 @@ export class Game {
 
       });
     });
+   
   }
 }

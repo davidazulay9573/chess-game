@@ -10,6 +10,7 @@ export class King extends GameTool {
         }
     }
     setsOfMovs() {
+        console.log(this.enemies);
         this.possibleSlots = [];
         let divs = this.chesBoard.querySelectorAll("div");
         divs.forEach((div) => {
@@ -43,7 +44,9 @@ export class King extends GameTool {
                     tool.location.col = -1;
                 }
             });
-            castling(div, this);
+            if (this.orderOfMovements.length == 1) {
+                castling(div, this);
+            }
             if (this.color == "W") {
                 game.black.forEach((tool) => {
                     if (tool.type[1] != "p") {

@@ -73,13 +73,18 @@ export class Game {
                     tool.setsOfMovs();
                     this.stste = "b";
                     this.stepsList.push(tool);
+                    tool.checkIfMovingAllowed();
                     this.black.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
+                        //  stratDetention(tool, kingW, this.black);
+                        //  diagonalDetention(tool, kingW, this.black);
                     });
                     this.white.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
+                        tool2.checkIfMovingAllowed();
                     });
                 });
             }
@@ -91,12 +96,14 @@ export class Game {
                     tool.setsOfMovs();
                     this.stste = "w";
                     this.stepsList.push(tool);
+                    tool.checkIfMovingAllowed();
+                    kingW.setsOfMovs();
                     this.white.forEach((tool2) => {
                         tool2.setsOfMovs();
                         tool2.Initialize();
                         tool2.checkIfMovingAllowed();
-                        stratDetention(tool, kingW, this.black);
-                        diagonalDetention(tool, kingW, this.black);
+                        // stratDetention(tool, kingW, this.black);
+                        // diagonalDetention(tool, kingW, this.black);
                     });
                     this.black.forEach((tool2) => {
                         tool2.setsOfMovs();
