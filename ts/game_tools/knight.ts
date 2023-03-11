@@ -1,5 +1,6 @@
+import { openSlots } from "../script.js";
 import { GameTool } from "./tools.js";
-import { changeToKueen, openSlots } from "./script.js";
+
 
 export class Knight extends GameTool {
   setsOfMovs(): void {

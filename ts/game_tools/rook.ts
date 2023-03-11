@@ -1,7 +1,6 @@
-import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
-import { openSlots, game } from "./script.js";
-import { skipLimitStrat } from "./skipLimitStrate.js";
+import { openSlots} from "../script.js";
+import { skipLimitStrat } from "../rules/skipLimitStrate.js";
 export class Rook extends GameTool {
   setsOfMovs(): void {
     this.possibleSlots = [];
@@ -15,10 +14,6 @@ export class Rook extends GameTool {
 
     divsCanMove.forEach((div) => {
       this.possibleSlots.push(Number(div.id));
-      let myKing = game.white.filter((tool) => {
-        return tool.type[1] == "k";
-      })[0];
-
       openSlots(div, this.color);
     });
     skipLimitStrat(this);

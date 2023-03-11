@@ -1,5 +1,5 @@
-import { game } from "./script.js";
-import { checkMovingAllowed } from "./script.js";
+import { game } from "../script.js";
+import { checkMovingAllowed } from "../script.js";
 export class GameTool {
   public type: string;
   private img: string;

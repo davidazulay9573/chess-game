@@ -1,8 +1,7 @@
-import { Queen } from "./queen.js";
-import { Skipping } from "./skipping.js";
 import { GameTool } from "./tools.js";
-import { game, changeToKueen, openSlots, onlyClosSlots, closSlots } from "./script.js";
-import { skipLimitStrat } from "./skipLimitStrate.js";
+import { game, openSlots } from "../script.js";
+import { skipLimitStrat } from "../rules/skipLimitStrate.js";
+import  {changeToKueen} from '../actions/changeToQueen.js'
 export class Pawn extends GameTool {
   
   friendsToFight: GameTool[];
@@ -24,6 +23,7 @@ export class Pawn extends GameTool {
 
   setsOfMovs(): void {
     this.possibleSlots = [];
+    this.posibleToEat = [];
     let divs = this.chesBoard.querySelectorAll("div");
 
     if (this.startPoint == 2) {

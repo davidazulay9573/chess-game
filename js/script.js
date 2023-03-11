@@ -1,5 +1,4 @@
 import { Game } from "./game.js";
-import { Queen } from "./queen.js";
 const container = document.getElementById("chessboard");
 export const game = new Game(container);
 game.createTools();
@@ -33,7 +32,8 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
         return tool.type[1] == "k";
     })[0];
     enemies.forEach((enemyTool) => {
-        if (enemyTool.possibleSlots.includes(Number(myKing.htmlElement.parentElement.id))) {
+        if (enemyTool.possibleSlots.includes(Number(myKing.htmlElement.parentElement.id)) ||
+            enemyTool.posibleToEat.includes(Number(myKing.htmlElement.parentElement.id))) {
             let divs = toolPR.chesBoard.querySelectorAll("div");
             divs.forEach((div) => {
                 if (Number(enemyTool.htmlElement.parentElement.id) == Number(div.id)) {
@@ -104,38 +104,5 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
                 }
             });
         }
-    });
-}
-export function changeToKueen(pawnPR) {
-    let divForNewQueen = pawnPR.htmlElement.parentElement;
-    pawnPR.htmlElement.remove();
-    const newQueen2 = new Queen(pawnPR.color, `${pawnPR.color}nq${pawnPR.type}`, `./${pawnPR.color.toLowerCase()}Q.png`);
-    divForNewQueen.appendChild(newQueen2.htmlElement);
-    divForNewQueen.appendChild(newQueen2.htmlElement);
-    if (pawnPR.color == "W") {
-        game.white.push(newQueen2);
-    }
-    if (pawnPR.color == "B") {
-        game.black.push(newQueen2);
-    }
-    newQueen2.Initialize();
-    newQueen2.setsOfMovs();
-    newQueen2.htmlElement.addEventListener("mousedown", () => {
-        newQueen2.Initialize();
-        newQueen2.setsOfMovs();
-    });
-    newQueen2.htmlElement.addEventListener("dragend", () => {
-        newQueen2.Initialize();
-        newQueen2.setsOfMovs();
-        game.white.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-            tool2.checkIfMovingAllowed();
-        });
-        game.black.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-            tool2.checkIfMovingAllowed();
-        });
     });
 }

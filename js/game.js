@@ -1,11 +1,11 @@
-import { Rook } from "./rook.js";
-import { Bishop } from "./bishop.js";
-import { Queen } from "./queen.js";
-import { Knight } from "./knight.js";
-import { King } from "./king.js";
-import { Pawn } from "./pawn.js";
-import { Chessboard } from "./board.js";
-import { diagonalDetention, stratDetention } from "./dentention.js";
+import { Rook } from "./game_tools/rook.js";
+import { Bishop } from "./game_tools/bishop.js";
+import { Queen } from "./game_tools/queen.js";
+import { Knight } from "./game_tools/knight.js";
+import { King } from "./game_tools/king.js";
+import { Pawn } from "./game_tools/pawn.js";
+import { Chessboard } from "./ches_bord/board.js";
+import { diagonalDetention, stratDetention } from "./rules/dentention.js";
 export class Game {
     constructor(container) {
         this.black = [];
@@ -69,7 +69,6 @@ export class Game {
         this.white.forEach((tool) => {
             if (tool.type[1] != "k") {
                 tool.htmlElement.addEventListener("dragend", () => {
-                    console.log(tool.orderOfMovements);
                     tool.Initialize();
                     tool.setsOfMovs();
                     this.stste = "b";
@@ -88,7 +87,6 @@ export class Game {
         this.black.forEach((tool) => {
             if (tool.type[1] != "k") {
                 tool.htmlElement.addEventListener("dragend", () => {
-                    console.log(tool.orderOfMovements);
                     tool.Initialize();
                     tool.setsOfMovs();
                     this.stste = "w";
@@ -104,8 +102,6 @@ export class Game {
                         tool2.setsOfMovs();
                         tool2.Initialize();
                         tool2.checkIfMovingAllowed();
-                        stratDetention(tool, kingW, this.white);
-                        diagonalDetention(tool, kingW, this.white);
                     });
                 });
             }

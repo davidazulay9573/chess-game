@@ -1,4 +1,4 @@
-import { closSlots, game } from "./script.js";
+import { closSlots, game } from "../script.js";
 export function stratDetention(tool, king, enemies) {
     let divs = tool.chesBoard.querySelectorAll("div");
     let filterBlack = game.black.filter((toolb) => {

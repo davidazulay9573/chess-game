@@ -1,6 +1,6 @@
 import { GameTool } from "./tools.js";
-import { Skipping } from "./skipping.js";
-import { game, onlyClosSlots } from "./script.js";
+import { game, onlyClosSlots } from "../script.js";
+import { castling } from "../actions/castling.js";
 export class King extends GameTool {
   enemies: GameTool[];
   friendsToFight: GameTool[];
@@ -60,8 +60,7 @@ export class King extends GameTool {
           tool.location.col = -1;
         }
       });
-      let skip = new Skipping(this);
-
+        castling(div, this);
       if (this.color == "W") {
            game.black.forEach((tool) => {
            if (tool.type[1] != "p") {
@@ -75,13 +74,9 @@ export class King extends GameTool {
                if (Number(div.id) == location) {
                  onlyClosSlots(div, this);
                }
-             });
+            });
            }
-         
-          
         });
-      
-      
       }
       if (this.color == "B") {
         game.white.forEach((tool) => {
@@ -103,7 +98,6 @@ export class King extends GameTool {
         });
       }
       
-        skip.castling(div, this);
      
 
       this.possibleSlots = this.possibleSlots.filter((location) => {

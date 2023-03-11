@@ -1,17 +1,13 @@
-import { Skipping } from "./skipping.js";
+import { openSlots } from "../script.js";
+import { skipLimitDiagonal } from "../rules/skipLimitDiagonal.js";
 import { GameTool } from "./tools.js";
-import { openSlots } from "./script.js";
-import { skipLimitStrat } from "./skipLimitStrate.js";
-import { skipLimitDiagonal } from "./skipLimitDiagonal.js";
 
-export class Queen extends GameTool {
-  public setsOfMovs(): void {
+export class Bishop extends GameTool {
+  setsOfMovs() {
     this.possibleSlots = [];
     let divs = this.chesBoard.querySelectorAll("div");
-    let divsCanMove = Array.from(divs).filter((div) => {
+    let filterDivs = Array.from(divs).filter((div) => {
       return (
-        this.location.row == Number(div.id[0]) ||
-        this.location.col == Number(div.id[1]) ||
         this.location.row - Number(div.id[0]) ==
           this.location.col - Number(div.id[1]) ||
         Number(div.id[0]) - this.location.row ==
@@ -19,15 +15,13 @@ export class Queen extends GameTool {
       );
     });
 
-    divsCanMove.forEach((div) => {
+    filterDivs.forEach((div) => {
       this.possibleSlots.push(Number(div.id));
 
       openSlots(div, this.color);
     });
-
-    this.checkIfMovingAllowed();
-    skipLimitStrat(this);
     skipLimitDiagonal(this);
+    this.checkIfMovingAllowed();
 
     this.possibleSlots = this.possibleSlots.filter((location) => {
       return location != Number(`${this.location.row}${this.location.col}`);

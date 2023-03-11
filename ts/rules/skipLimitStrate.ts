@@ -1,5 +1,5 @@
-import { closSlots, onlyClosSlots } from "./script.js";
-import { GameTool } from "./tools.js";
+import { closSlots, onlyClosSlots } from "../script.js";
+import { GameTool } from "../game_tools/tools.js";
 
 export function skipLimitStrat(tool:GameTool) {
     let divs = document.getElementById("chessboard")!.querySelectorAll("div");

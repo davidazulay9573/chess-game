@@ -1,5 +1,5 @@
-import { closSlots, game } from "./script.js";
-import { GameTool } from "./tools.js";
+import { closSlots, game } from "../script.js";
+import { GameTool } from "../game_tools/tools.js";
 
 export function stratDetention(
   tool: GameTool,

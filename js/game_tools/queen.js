@@ -1,7 +1,7 @@
 import { GameTool } from "./tools.js";
-import { openSlots } from "./script.js";
-import { skipLimitStrat } from "./skipLimitStrate.js";
-import { skipLimitDiagonal } from "./skipLimitDiagonal.js";
+import { openSlots } from "../script.js";
+import { skipLimitStrat } from "../rules/skipLimitStrate.js";
+import { skipLimitDiagonal } from "../rules/skipLimitDiagonal.js";
 export class Queen extends GameTool {
     setsOfMovs() {
         this.possibleSlots = [];

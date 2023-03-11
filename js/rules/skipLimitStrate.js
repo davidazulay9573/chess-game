@@ -1,4 +1,4 @@
-import { closSlots, onlyClosSlots } from "./script.js";
+import { closSlots, onlyClosSlots } from "../script.js";
 export function skipLimitStrat(tool) {
     let divs = document.getElementById("chessboard").querySelectorAll("div");
     let filterDivs = Array.from(divs).filter((div) => {
