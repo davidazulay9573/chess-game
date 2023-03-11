@@ -20,8 +20,7 @@ export class King extends GameTool {
     }
   }
   setsOfMovs(): void {
-      console.log(this.enemies);
-
+  
     this.possibleSlots = [];
     let divs = this.chesBoard.querySelectorAll("div");
     divs.forEach((div) => {

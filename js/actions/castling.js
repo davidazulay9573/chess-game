@@ -10,12 +10,16 @@ export function castling(div, king) {
                 var _a, _b;
                 let tool = (_a = document
                     .getElementById(`${king.location.row}7`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
-                if (tool.id[1] == "k") {
-                    let rookOldLocation = document.getElementById(`${king.location.row}8`);
-                    let rookfor = rookOldLocation.querySelector("img");
-                    rookOldLocation.removeChild(rookfor);
-                    (_b = document
-                        .getElementById(`${king.location.row}6`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
+                if (tool) {
+                    if (tool.id[1] == "k") {
+                        let rookOldLocation = document.getElementById(`${king.location.row}8`);
+                        let rookfor = rookOldLocation.querySelector("img");
+                        if (rookfor) {
+                            rookOldLocation.removeChild(rookfor);
+                            (_b = document
+                                .getElementById(`${king.location.row}6`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
+                        }
+                    }
                 }
                 king.setsOfMovs();
                 king.Initialize();
@@ -47,12 +51,16 @@ export function castling(div, king) {
                         var _a, _b;
                         let tool = (_a = document
                             .getElementById(`${king.location.row}3`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
-                        if (tool.id[1] == "k") {
-                            let rookOldLocation = document.getElementById(`${king.location.row}1`);
-                            let rookfor = rookOldLocation.querySelector("img");
-                            rookOldLocation.removeChild(rookfor);
-                            (_b = document
-                                .getElementById(`${king.location.row}4`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
+                        if (tool) {
+                            if (tool.id[1] == "k") {
+                                let rookOldLocation = document.getElementById(`${king.location.row}1`);
+                                let rookfor = rookOldLocation.querySelector("img");
+                                if (rookfor) {
+                                    rookOldLocation.removeChild(rookfor);
+                                    (_b = document
+                                        .getElementById(`${king.location.row}4`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
+                                }
+                            }
                         }
                         king.setsOfMovs();
                         king.Initialize();
