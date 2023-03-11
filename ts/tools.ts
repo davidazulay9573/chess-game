@@ -1,4 +1,3 @@
-import { King } from "./king";
 import { game } from "./script.js";
 import { checkMovingAllowed } from "./script.js";
 export class GameTool {
@@ -10,7 +9,7 @@ export class GameTool {
   public location: { row: number; col: number };
   public orderOfMovements: { row: number; col: number }[];
   public possibleSlots: number[];
-  posibleToEat:number[];
+  public posibleToEat:number[];
   constructor(color: string, type: string, img: string) {
     this.color = color;
     this.type = type;

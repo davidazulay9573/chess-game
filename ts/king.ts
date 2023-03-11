@@ -1,6 +1,6 @@
 import { GameTool } from "./tools.js";
 import { Skipping } from "./skipping.js";
-import { game } from "./script.js";
+import { game, onlyClosSlots } from "./script.js";
 export class King extends GameTool {
   enemies: GameTool[];
   friendsToFight: GameTool[];
@@ -63,46 +63,43 @@ export class King extends GameTool {
       let skip = new Skipping(this);
 
       if (this.color == "W") {
-        game.black.forEach((tool) => {
-          tool.possibleSlots.forEach((location) => {
-            // if(tool.type[1] != 'p'){
-                 if (Number(div.id) == location) {
-                   div.removeAttribute("ondrop");
-                   div.removeAttribute("ondragover");
-                   div.removeAttribute("data-toggle");
-                 }
-            // }
-            
-          });
-             tool.posibleToEat.forEach((location) => {
-              
-                 if (Number(div.id) == location) {
-                   div.removeAttribute("ondrop");
-                   div.removeAttribute("ondragover");
-                   div.removeAttribute("data-toggle");
-                 }
-               
+           game.black.forEach((tool) => {
+           if (tool.type[1] != "p") {
+             tool.possibleSlots.forEach((location) => {
+               if (Number(div.id) == location) {
+                 onlyClosSlots(div, this);
+               }
              });
+           } else {
+             tool.posibleToEat.forEach((location) => {
+               if (Number(div.id) == location) {
+                 onlyClosSlots(div, this);
+               }
+             });
+           }
+         
+          
         });
+      
+      
       }
       if (this.color == "B") {
         game.white.forEach((tool) => {
-          tool.possibleSlots.forEach((location) => {
-          //  if (tool.type[1] != "p") {
-             if (Number(div.id) == location) {
-               div.removeAttribute("ondrop");
-               div.removeAttribute("ondragover");
-               div.removeAttribute("data-toggle");
-             }
-          //  }
-          });
-           tool.posibleToEat.forEach((location) => {
-             if (Number(div.id) == location) {
-               div.removeAttribute("ondrop");
-               div.removeAttribute("ondragover");
-               div.removeAttribute("data-toggle");
-             }
-           });
+           if (tool.type[1] != "p") {
+             tool.possibleSlots.forEach((location) => {
+               if (Number(div.id) == location) {
+                 onlyClosSlots(div, this);
+               }
+             });
+           } else {
+             tool.posibleToEat.forEach((location) => {
+               if (Number(div.id) == location) {
+                 onlyClosSlots(div, this);
+               }
+             });
+           }
+         
+          
         });
       }
       

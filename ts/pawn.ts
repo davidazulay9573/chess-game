@@ -56,7 +56,8 @@ export class Pawn extends GameTool {
           this.location.col == Number(div.id[1]) + 1
         ) {
           if (this.location.row == Number(div.id[0]) - 1) {
-            this.possibleSlots.push(Number(div.id));
+            this.posibleToEat.push(Number(div.id));
+            
             if (div.querySelector("img")) {
               openSlots(div, this.color);
             }
@@ -128,7 +129,7 @@ export class Pawn extends GameTool {
           this.location.col == Number(div.id[1]) + 1
         ) {
           if (this.location.row == Number(div.id[0]) + 1) {
-            this.possibleSlots.push(Number(div.id));
+            this.posibleToEat.push(Number(div.id));
 
             if (div.querySelector("img")) {
               openSlots(div, this.color);

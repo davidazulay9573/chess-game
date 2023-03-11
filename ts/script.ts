@@ -51,8 +51,7 @@ export function checkMovingAllowed(
 
   enemies.forEach((enemyTool) => {
     if (
-      enemyTool.possibleSlots.includes(
-        Number(myKing.htmlElement.parentElement!.id)
+      enemyTool.possibleSlots.includes( Number(myKing.htmlElement.parentElement!.id) 
       )
     ) {
       let divs = toolPR.chesBoard.querySelectorAll("div");

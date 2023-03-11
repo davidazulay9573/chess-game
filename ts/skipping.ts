@@ -1,6 +1,7 @@
 import { King } from "./king.js";
 import { GameTool } from "./tools";
-import { openSlots, closSlots, onlyClosSlots } from "./script.js";
+import { openSlots, closSlots, onlyClosSlots, game } from "./script.js";
+import { diagonalDetention, stratDetention } from "./dentention";
 export class Skipping {
   private chesBoard: HTMLElement;
   forTool: GameTool;
@@ -134,6 +135,23 @@ export class Skipping {
                 }
             king.setsOfMovs();
             king.Initialize();
+              // game.stste = "w";
+              game.stepsList.push(king);
+
+              game.white.forEach((tool2) => {
+                tool2.setsOfMovs();
+                tool2.Initialize();
+                tool2.checkIfMovingAllowed();
+                // stratDetention(, king, this.black);
+                // diagonalDetention(tool, king, this.black);
+              });
+              game.black.forEach((tool2) => {
+                tool2.setsOfMovs();
+                tool2.Initialize();
+                tool2.checkIfMovingAllowed();
+                // stratDetention(tool, kingW, this.white);
+                // diagonalDetention(tool, kingW, this.white);
+              });
           });
         } else {
           if (this.forTool.location.col == Number(div.id[1]) + 2) {
@@ -166,6 +184,25 @@ export class Skipping {
                   }
                 king.setsOfMovs();
                 king.Initialize();
+                 king.setsOfMovs();
+                 king.Initialize();
+                 // game.stste = "w";
+                 game.stepsList.push(king);
+
+                 game.white.forEach((tool2) => {
+                   tool2.setsOfMovs();
+                   tool2.Initialize();
+                   tool2.checkIfMovingAllowed();
+                   // stratDetention(, king, this.black);
+                   // diagonalDetention(tool, king, this.black);
+                 });
+                 game.black.forEach((tool2) => {
+                   tool2.setsOfMovs();
+                   tool2.Initialize();
+                   tool2.checkIfMovingAllowed();
+                   // stratDetention(tool, kingW, this.white);
+                   // diagonalDetention(tool, kingW, this.white);
+                 });
               });
             }
           }
