@@ -45,29 +45,25 @@ export function castling(div, king) {
                     }
                     king.htmlElement.addEventListener("dragend", () => {
                         var _a, _b;
-                        if (king.orderOfMovements.length == 1 &&
-                            king.orderOfMovements.length == 1) {
-                            let tool = (_a = document
-                                .getElementById(`${king.location.row}3`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
-                            if (tool.id[1] == "k") {
-                                let rookOldLocation = document.getElementById(`${king.location.row}1`);
-                                let rookfor = rookOldLocation.querySelector("img");
-                                rookOldLocation.removeChild(rookfor);
-                                (_b = document
-                                    .getElementById(`${king.location.row}4`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
-                            }
+                        let tool = (_a = document
+                            .getElementById(`${king.location.row}3`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
+                        if (tool.id[1] == "k") {
+                            let rookOldLocation = document.getElementById(`${king.location.row}1`);
+                            let rookfor = rookOldLocation.querySelector("img");
+                            rookOldLocation.removeChild(rookfor);
+                            (_b = document
+                                .getElementById(`${king.location.row}4`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
                         }
-                        king.Initialize();
                         king.setsOfMovs();
-                        king.checkIfMovingAllowed();
+                        king.Initialize();
                         // game.stste = "w";
                         game.stepsList.push(king);
                         game.white.forEach((tool2) => {
                             tool2.setsOfMovs();
                             tool2.Initialize();
                             tool2.checkIfMovingAllowed();
-                            //  stratDetention(, king, this.black);
-                            //  diagonalDetention(tool, king, this.black);
+                            // stratDetention(, king, this.black);
+                            // diagonalDetention(tool, king, this.black);
                         });
                         game.black.forEach((tool2) => {
                             tool2.setsOfMovs();
