@@ -1,11 +1,6 @@
+import { GameTool } from "../game_tools/tools";
 import { closSlots, game } from "../script.js";
-import { GameTool } from "../game_tools/tools.js";
-
-export function stratDetention(
-  tool: GameTool,
-  king: GameTool,
-  enemies: GameTool[]
-) {
+export function stratDetention(tool:GameTool, king:GameTool, enemies:GameTool[]) {
   let divs = tool.chesBoard.querySelectorAll("div");
   let filterBlack = game.black.filter((toolb) => {
     return toolb != tool;
@@ -168,7 +163,6 @@ export function stratDetention(
               closSlots(div, tool);
             }
           });
-
           filterBlack.forEach((blacktool) => {
             if (blacktool.location.col == king.location.col) {
               if (
@@ -206,7 +200,6 @@ export function stratDetention(
     }
   });
 }
-
 export function diagonalDetention(
   tool: GameTool,
   king: GameTool,

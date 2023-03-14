@@ -8,7 +8,6 @@ export function castling(div: HTMLElement, king: GameTool) {
            
            if (king.orderOfMovements.length == 1) {
              openSlots(div, king.color);
-        
            }
           king.htmlElement.addEventListener("dragend", () => {
               
@@ -32,23 +31,17 @@ export function castling(div: HTMLElement, king: GameTool) {
                     }    
             king.setsOfMovs();
             king.Initialize();
-              // game.stste = "w";
               game.stepsList.push(king);
 
               game.white.forEach((tool2) => {
                 tool2.setsOfMovs();
                 tool2.Initialize();
                 tool2.checkIfMovingAllowed();
-                // stratDetention(, king, this.black);
-                // diagonalDetention(tool, king, this.black);
               });
               game.black.forEach((tool2) => {
                 tool2.setsOfMovs();
                 tool2.Initialize();
-
                 tool2.checkIfMovingAllowed();
-                // stratDetention(tool, kingW, this.white);
-                // diagonalDetention(tool, kingW, this.white);
               });
           });
         } else {
@@ -59,7 +52,6 @@ export function castling(div: HTMLElement, king: GameTool) {
             ) {
                if (king.orderOfMovements.length == 1) {
                 openSlots(div, king.color);
-                 
                }
              king.htmlElement.addEventListener("dragend", () => {
                let tool = document
@@ -78,29 +70,24 @@ export function castling(div: HTMLElement, king: GameTool) {
                                ?.appendChild(rookfor);
                        }
                     
-                     }   
+                    }   
                  }
-  
-
                king.setsOfMovs();
                king.Initialize();
-               // game.stste = "w";
                game.stepsList.push(king);
 
                game.white.forEach((tool2) => {
                  tool2.setsOfMovs();
                  tool2.Initialize();
                  tool2.checkIfMovingAllowed();
-                 // stratDetention(, king, this.black);
-                 // diagonalDetention(tool, king, this.black);
+               
                });
                game.black.forEach((tool2) => {
                  tool2.setsOfMovs();
                  tool2.Initialize();
 
                  tool2.checkIfMovingAllowed();
-                 // stratDetention(tool, kingW, this.white);
-                 // diagonalDetention(tool, kingW, this.white);
+                
                });
              });
             }

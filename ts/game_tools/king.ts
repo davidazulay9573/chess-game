@@ -64,7 +64,6 @@ export class King extends GameTool {
       });
       if(this.orderOfMovements.length == 1){
       castling(div, this);
-
       }
 
       if (this.color == "W") {

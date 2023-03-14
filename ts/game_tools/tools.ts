@@ -1,5 +1,5 @@
 import { game } from "../script.js";
-import { checkMovingAllowed } from "../script.js";
+import { checkMovingAllowed } from "../rules/checkMovingAllowed.js";
 export class GameTool {
   public type: string;
   private img: string;
@@ -70,5 +70,7 @@ export class GameTool {
     if (this.color == "B") {
       checkMovingAllowed(this, game.white, game.black);
     }
+    
   }
+  
 }

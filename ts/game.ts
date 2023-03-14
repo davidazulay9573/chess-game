@@ -159,7 +159,6 @@ export class Game {
         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
         stratDetention(tool, kingB, this.white);
         diagonalDetention(tool, kingB, this.white);
-
       });
     });
    

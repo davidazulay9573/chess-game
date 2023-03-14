@@ -23,21 +23,16 @@ export function castling(div, king) {
                 }
                 king.setsOfMovs();
                 king.Initialize();
-                // game.stste = "w";
                 game.stepsList.push(king);
                 game.white.forEach((tool2) => {
                     tool2.setsOfMovs();
                     tool2.Initialize();
                     tool2.checkIfMovingAllowed();
-                    // stratDetention(, king, this.black);
-                    // diagonalDetention(tool, king, this.black);
                 });
                 game.black.forEach((tool2) => {
                     tool2.setsOfMovs();
                     tool2.Initialize();
                     tool2.checkIfMovingAllowed();
-                    // stratDetention(tool, kingW, this.white);
-                    // diagonalDetention(tool, kingW, this.white);
                 });
             });
         }
@@ -64,21 +59,16 @@ export function castling(div, king) {
                         }
                         king.setsOfMovs();
                         king.Initialize();
-                        // game.stste = "w";
                         game.stepsList.push(king);
                         game.white.forEach((tool2) => {
                             tool2.setsOfMovs();
                             tool2.Initialize();
                             tool2.checkIfMovingAllowed();
-                            // stratDetention(, king, this.black);
-                            // diagonalDetention(tool, king, this.black);
                         });
                         game.black.forEach((tool2) => {
                             tool2.setsOfMovs();
                             tool2.Initialize();
                             tool2.checkIfMovingAllowed();
-                            // stratDetention(tool, kingW, this.white);
-                            // diagonalDetention(tool, kingW, this.white);
                         });
                     });
                 }
