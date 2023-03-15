@@ -7,7 +7,7 @@ export class GameTool {
   public htmlElement: HTMLImageElement;
   public chesBoard: HTMLElement;
   public location: { row: number; col: number };
-  public orderOfMovements: { row: number; col: number }[];
+  public orderOfMovements: ({ row: number; col: number } | string) [];
   public possibleSlots: number[];
   public posibleToEat:number[];
   constructor(color: string, type: string, img: string) {

@@ -11,6 +11,8 @@ export function castling(div: HTMLElement, king: GameTool) {
            }
           king.htmlElement.addEventListener("dragend", () => {
               
+           if (king.orderOfMovements.length == 1) {
+
                   let tool = document
                     .getElementById(`${king.location.row}7`)
                     ?.querySelector("img") as HTMLElement;
@@ -25,10 +27,11 @@ export function castling(div: HTMLElement, king: GameTool) {
                                 document
                                   .getElementById(`${king.location.row}6`)
                                   ?.appendChild(rookfor);
-                           }
+                            }
                          
                          }
-                    }    
+                    }  
+                  }  
             king.setsOfMovs();
             king.Initialize();
               game.stepsList.push(king);
@@ -54,6 +57,8 @@ export function castling(div: HTMLElement, king: GameTool) {
                 openSlots(div, king.color);
                }
              king.htmlElement.addEventListener("dragend", () => {
+               if (king.orderOfMovements.length == 1) {
+
                let tool = document
                  .getElementById(`${king.location.row}3`)
                  ?.querySelector("img") as HTMLElement;
@@ -69,13 +74,12 @@ export function castling(div: HTMLElement, king: GameTool) {
                                .getElementById(`${king.location.row}4`)
                                ?.appendChild(rookfor);
                        }
-                    
+                      }
                     }   
                  }
                king.setsOfMovs();
                king.Initialize();
                game.stepsList.push(king);
-
                game.white.forEach((tool2) => {
                  tool2.setsOfMovs();
                  tool2.Initialize();
