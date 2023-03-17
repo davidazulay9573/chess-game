@@ -66,6 +66,7 @@ export class King extends GameTool {
        if (this.orderOfMovements.length == 1) {
          castling(div, this);
        }
+       
       if (this.color == "W") {
         game.black.forEach((tool) => {
         
@@ -103,7 +104,6 @@ export class King extends GameTool {
         });
       }
      
-
       this.possibleSlots = this.possibleSlots.filter((location) => {
         return location != Number(`${this.location.row}${this.location.col}`);
       });

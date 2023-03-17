@@ -22,20 +22,24 @@ export function checkMovingAllowed(
       let divs = toolPR.chesBoard.querySelectorAll("div");
       divs.forEach((div) => {
         if (Number(enemyTool.htmlElement.parentElement!.id) == Number(div.id)) {
+          
         } else {
           onlyClosSlots(div, toolPR);
-          if (
-            enemyTool.possibleSlots.includes(Number(div.id)) &&
-            toolPR.possibleSlots.includes(Number(div.id))
-          ) {
-            checkByStrateByCol(toolPR, enemyTool, myKing, div);
-            checkByStrateByRow(toolPR, enemyTool, myKing, div);
-            checkByDiagonal(toolPR, enemyTool, myKing, div);
-          }
+
+            if (
+              enemyTool.possibleSlots.includes(Number(div.id)) &&
+              toolPR.possibleSlots.includes(Number(div.id))
+            ) {
+              checkByStrateByCol(toolPR, enemyTool, myKing, div);
+              checkByStrateByRow(toolPR, enemyTool, myKing, div);
+              checkByDiagonal(toolPR, enemyTool, myKing, div);
+            }
+            return false
         }
       });
     }
   });
+  return true
 }
 function checkByStrateByCol(
   toolPR: GameTool,
