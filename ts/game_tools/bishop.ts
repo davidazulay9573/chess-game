@@ -22,7 +22,7 @@ export class Bishop extends GameTool {
     });
     skipLimitDiagonal(this);
     this.checkIfMovingAllowed();
-
+    
     this.possibleSlots = this.possibleSlots.filter((location) => {
       return location != Number(`${this.location.row}${this.location.col}`);
     });

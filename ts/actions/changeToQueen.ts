@@ -8,7 +8,7 @@ export function changeToKueen(pawnPR: GameTool) {
   const newQueen2 = new Queen(
     pawnPR.color,
     `${pawnPR.color}nq${pawnPR.type}`,
-    `./${pawnPR.color.toLowerCase()}Q.png`
+    `./img/${pawnPR.color.toLowerCase()}Q.png`
   );
   divForNewQueen.appendChild(newQueen2.htmlElement);
   divForNewQueen.appendChild(newQueen2.htmlElement);

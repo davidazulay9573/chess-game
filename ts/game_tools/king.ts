@@ -1,6 +1,7 @@
 import { GameTool } from "./tools.js";
-import { game, onlyClosSlots } from "../script.js";
+import { game, onlyClosSlots,openSlots } from "../script.js";
 import { castling } from "../actions/castling.js";
+import { checkMovingAllowed } from "../rules/checkMovingAllowed.js";
 export class King extends GameTool {
   enemies: GameTool[];
   friendsToFight: GameTool[];
@@ -34,17 +35,8 @@ export class King extends GameTool {
           this.location.col == Number(div.id[1]) + 1 ||
           this.location.col == Number(div.id[1]) - 1
         ) {
-          this.possibleSlots.push(Number(div.id));
+           openSlots(div, this.color);
 
-          div.setAttribute("ondrop", "drop(event)");
-          div.setAttribute("ondragover", "allowDrop(event)");
-
-          if (
-            !div.querySelector("img") ||
-            div.querySelector("img")?.id[0] != this.type[0]
-          ) {
-            div.setAttribute("data-toggle", "canMove");
-          }
         }
       }
       this.enemies.forEach((tool) => {
@@ -62,11 +54,20 @@ export class King extends GameTool {
           tool.location.col = -1;
         }
       });
-      
-       if (this.orderOfMovements.length == 1) {
-         castling(div, this);
-       }
        
+
+         
+
+      if (this.orderOfMovements.length == 1) {
+        if(shachcStat(this)){
+       let rooks = this.friendsToFight.filter((tool) =>tool.type[1] == 'r');
+
+       castling(div,this,rooks)
+      //  console.log(rooks);
+   
+       
+        }
+       }
       if (this.color == "W") {
         game.black.forEach((tool) => {
         
@@ -109,4 +110,17 @@ export class King extends GameTool {
       });
     });
   }
+}
+function shachcStat(king: King) {
+  for (const enemyTool of king.enemies) {
+    if (
+      enemyTool.possibleSlots.includes(
+        Number(`${king.location.row}${king.location.col}`)
+      )
+    ) {
+      return false;
+    }
+  }
+
+  return true;
 }

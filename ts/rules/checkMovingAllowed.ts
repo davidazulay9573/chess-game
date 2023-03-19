@@ -1,3 +1,4 @@
+import { King } from "../game_tools/king";
 import { GameTool } from "../game_tools/tools";
 import { onlyClosSlots, openSlots } from "../script.js";
 
@@ -5,7 +6,7 @@ export function checkMovingAllowed(
   toolPR: GameTool,
   enemies: GameTool[],
   friendsToFight: GameTool[]
-) {
+){
   let myKing = friendsToFight.filter((tool) => {
     return tool.type[1] == "k";
   })[0];
@@ -22,7 +23,6 @@ export function checkMovingAllowed(
       let divs = toolPR.chesBoard.querySelectorAll("div");
       divs.forEach((div) => {
         if (Number(enemyTool.htmlElement.parentElement!.id) == Number(div.id)) {
-          
         } else {
           onlyClosSlots(div, toolPR);
 
@@ -33,13 +33,13 @@ export function checkMovingAllowed(
               checkByStrateByCol(toolPR, enemyTool, myKing, div);
               checkByStrateByRow(toolPR, enemyTool, myKing, div);
               checkByDiagonal(toolPR, enemyTool, myKing, div);
-            }
-            return false
+          
+            }   
+          
         }
       });
     }
   });
-  return true
 }
 function checkByStrateByCol(
   toolPR: GameTool,
@@ -126,3 +126,5 @@ function checkByDiagonal(
     }
   }
 }
+
+

@@ -1,8 +1,5 @@
 import { Slot } from "./slot.js";
 export class Chessboard {
-    querySelectorAll(arg0) {
-        throw new Error("Method not implemented.");
-    }
     constructor(container) {
         this.slots = [];
         this.container = container;

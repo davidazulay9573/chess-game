@@ -18,12 +18,10 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
                         checkByStrateByRow(toolPR, enemyTool, myKing, div);
                         checkByDiagonal(toolPR, enemyTool, myKing, div);
                     }
-                    return false;
                 }
             });
         }
     });
-    return true;
 }
 function checkByStrateByCol(toolPR, enemyTool, myKing, div) {
     if (enemyTool.location.col == myKing.location.col) {

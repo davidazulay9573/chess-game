@@ -18,23 +18,23 @@ export class Game {
     }
     createTools() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
-        const QueenW = new Queen("W", "Wqueen", "./wQ.png");
-        const QueenB = new Queen("B", "Bqueen", "./bQ.png");
-        const rookW1 = new Rook("W", `Wrook1`, "./wR.png");
-        const rookW2 = new Rook("W", `Wrook2`, "./wR.png");
-        const rookB1 = new Rook("B", `Brook1`, "./bR.png");
-        const rookB2 = new Rook("B", `Brook2`, "./bR.png");
-        const bishopW1 = new Bishop("W", `Wbishop1`, "./wB.png");
-        const bishopW2 = new Bishop("W", `Wbishop2`, "./wB.png");
-        const bishopB1 = new Bishop("B", `Bbishop1`, "./bB.png");
-        const bishopB2 = new Bishop("B", `Bbishop2`, "./bB.png");
-        const knightW1 = new Knight("W", `Wnight1`, "./wN.png");
-        const knightW2 = new Knight("W", `Wnight2`, "./wN.png");
-        const knightB1 = new Knight("B", `Bnight1`, "./bN.png");
-        const knightB2 = new Knight("B", `Bnight2`, "./bN.png");
+        const QueenW = new Queen("W", "Wqueen", "./img/wQ.png");
+        const QueenB = new Queen("B", "Bqueen", "./img/bQ.png");
+        const rookW1 = new Rook("W", `Wrook1`, "./img/wR.png");
+        const rookW2 = new Rook("W", `Wrook2`, "./img/wR.png");
+        const rookB1 = new Rook("B", `Brook1`, "./img/bR.png");
+        const rookB2 = new Rook("B", `Brook2`, "./img/bR.png");
+        const bishopW1 = new Bishop("W", `Wbishop1`, "./img/wB.png");
+        const bishopW2 = new Bishop("W", `Wbishop2`, "./img/wB.png");
+        const bishopB1 = new Bishop("B", `Bbishop1`, "./img/bB.png");
+        const bishopB2 = new Bishop("B", `Bbishop2`, "./img/bB.png");
+        const knightW1 = new Knight("W", `Wnight1`, "./img/wN.png");
+        const knightW2 = new Knight("W", `Wnight2`, "./img/wN.png");
+        const knightB1 = new Knight("B", `Bnight1`, "./img/bN.png");
+        const knightB2 = new Knight("B", `Bnight2`, "./img/bN.png");
         for (let i = 1; i <= 8; i++) {
-            let pawnW = new Pawn("W", `Wpawn${i}`, "./wP.png", this.white);
-            let pawnB = new Pawn("B", `Bpawn${i}`, "./bP.png", this.black);
+            let pawnW = new Pawn("W", `Wpawn${i}`, "./img/wP.png", this.white);
+            let pawnB = new Pawn("B", `Bpawn${i}`, "./img/bP.png", this.black);
             pawnB.startPoint = 2;
             pawnW.startPoint = 7;
             this.white.push(pawnW);
@@ -60,9 +60,9 @@ export class Game {
         this.white.push(rookW2, bishopW2, knightW2);
         this.black.push(rookB1, bishopB1, knightB1);
         this.black.push(rookB2, bishopB2, knightB2);
-        const kingW = new King("W", "Wking", "./wK.png", this.black, this.white);
+        const kingW = new King("W", "Wking", "./img/wK.png", this.black, this.white);
         this.white.push(QueenW, kingW);
-        const kingB = new King("B", "Bking", "./bK.png", this.white, this.black);
+        const kingB = new King("B", "Bking", "./img/bK.png", this.white, this.black);
         this.black.push(QueenB, kingB);
         (_s = document.getElementById("85")) === null || _s === void 0 ? void 0 : _s.appendChild(kingW.htmlElement);
         (_t = document.getElementById("15")) === null || _t === void 0 ? void 0 : _t.appendChild(kingB.htmlElement);

@@ -3,7 +3,7 @@ import { game } from "../script.js";
 export function changeToKueen(pawnPR) {
     let divForNewQueen = pawnPR.htmlElement.parentElement;
     pawnPR.htmlElement.remove();
-    const newQueen2 = new Queen(pawnPR.color, `${pawnPR.color}nq${pawnPR.type}`, `./${pawnPR.color.toLowerCase()}Q.png`);
+    const newQueen2 = new Queen(pawnPR.color, `${pawnPR.color}nq${pawnPR.type}`, `./img/${pawnPR.color.toLowerCase()}Q.png`);
     divForNewQueen.appendChild(newQueen2.htmlElement);
     divForNewQueen.appendChild(newQueen2.htmlElement);
     if (pawnPR.color == "W") {
