@@ -38,9 +38,8 @@ export class King extends GameTool {
             });
             if (this.orderOfMovements.length == 1) {
                 if (shachcStat(this)) {
-                    let rooks = this.friendsToFight.filter((tool) => tool.type[1] == 'r');
+                    let rooks = this.friendsToFight.filter((tool) => tool.type[1] == "r");
                     castling(div, this, rooks);
-                    //  console.log(rooks);
                 }
             }
             if (this.color == "W") {

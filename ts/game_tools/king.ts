@@ -54,24 +54,17 @@ export class King extends GameTool {
           tool.location.col = -1;
         }
       });
-       
-
-         
-
       if (this.orderOfMovements.length == 1) {
         if(shachcStat(this)){
-       let rooks = this.friendsToFight.filter((tool) =>tool.type[1] == 'r');
-
-       castling(div,this,rooks)
-      //  console.log(rooks);
-   
-       
+            let rooks = this.friendsToFight.filter(
+              (tool) => tool.type[1] == "r"
+            );
+              castling(div,this,rooks);
         }
        }
       if (this.color == "W") {
         game.black.forEach((tool) => {
-        
-            if (tool.type[1] != "p") {
+           if (tool.type[1] != "p") {
               tool.possibleSlots.forEach((location) => {
                 if (Number(div.id) == location) {
                   onlyClosSlots(div, this);
@@ -124,3 +117,4 @@ function shachcStat(king: King) {
 
   return true;
 }
+
