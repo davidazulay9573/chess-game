@@ -53,10 +53,10 @@ export class Pawn extends GameTool {
                                     this.location.col == pawn.location.col + 1) {
                                     if (pawn.orderOfMovements.length == 2) {
                                         let id = this.location.row + 1 + div.id[1];
-                                        let divSpashelMov = document.getElementById(id);
+                                        let divSpecialMov = document.getElementById(id);
                                         if (Number(id[1]) == pawn.location.col) {
                                             if (game.stepsList[game.stepsList.length - 1] == pawn) {
-                                                openSlots(divSpashelMov, this.color);
+                                                openSlots(divSpecialMov, this.color);
                                                 this.htmlElement.addEventListener("dragend", () => {
                                                     if (this.location.row == Number(id[0]) &&
                                                         this.location.col == Number(id[1])) {
@@ -112,10 +112,10 @@ export class Pawn extends GameTool {
                                     this.location.col == pawn.location.col + 1) {
                                     if (pawn.orderOfMovements.length == 2) {
                                         let id = this.location.row - 1 + div.id[1];
-                                        let divSpashelMov = document.getElementById(id);
+                                        let divSpecialMov = document.getElementById(id);
                                         if (Number(id[1]) == pawn.location.col) {
                                             if (game.stepsList[game.stepsList.length - 1] == pawn) {
-                                                openSlots(divSpashelMov, this.color);
+                                                openSlots(divSpecialMov, this.color);
                                                 this.htmlElement.addEventListener("dragend", () => {
                                                     if (this.location.row == Number(id[0]) &&
                                                         this.location.col == Number(id[1])) {

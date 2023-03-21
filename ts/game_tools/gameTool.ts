@@ -69,6 +69,7 @@ export class GameTool {
 
     this.setLocation();
   }
+  
   checkIfMovingAllowed() {
     if (this.color == "W") {
       checkMovingAllowed(this, game.black, game.white);

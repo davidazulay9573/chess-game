@@ -13,33 +13,30 @@ export function checkMovingAllowed(
   enemies.forEach((enemyTool) => {
     if (
       enemyTool.possibleSlots.includes(
-        Number(myKing.htmlElement.parentElement!.id)
+        Number(`${myKing.location.row}${myKing.location.col}`)
       ) ||
       enemyTool.posibleToEat.includes(
-        Number(myKing.htmlElement.parentElement!.id)
+        Number(`${myKing.location.row}${myKing.location.col}`)
       )
     ) {
       let divs = toolPR.chesBoard.querySelectorAll("div");
       divs.forEach((div) => {
-      
-              if (
-                Number(enemyTool.htmlElement.parentElement!.id) ==
-                Number(div.id)
-              ) {
-              } else {
-                onlyClosSlots(div, toolPR);
+        if (
+          Number(`${enemyTool.location.row}${enemyTool.location.col}`) ==
+          Number(div.id)
+        ) {
+        } else {
+          onlyClosSlots(div, toolPR);
 
-                if (
-                  enemyTool.possibleSlots.includes(Number(div.id)) &&
-                  toolPR.possibleSlots.includes(Number(div.id))
-                ) {
-                  checkByStrateByCol(toolPR, enemyTool, myKing, div);
-                  checkByStrateByRow(toolPR, enemyTool, myKing, div);
-                  checkByDiagonal(toolPR, enemyTool, myKing, div);
-                }
-              }
-        
-      
+          if (
+            enemyTool.possibleSlots.includes(Number(div.id)) &&
+            toolPR.possibleSlots.includes(Number(div.id))
+          ) {
+            checkByStrateByCol(toolPR, enemyTool, myKing, div);
+            checkByStrateByRow(toolPR, enemyTool, myKing, div);
+            checkByDiagonal(toolPR, enemyTool, myKing, div);
+          }
+        }
       });
     }
   });

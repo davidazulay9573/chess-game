@@ -38,6 +38,7 @@ export class Pawn extends GameTool {
           ) {
             if (!div.querySelector("img")) {
               this.possibleSlots.push(Number(div.id));
+             
               openSlots(div, this.color);
             }
           }
@@ -48,6 +49,7 @@ export class Pawn extends GameTool {
         ) {
           if (!div.querySelector("img")) {
             this.possibleSlots.push(Number(div.id));
+           
             openSlots(div, this.color);
           }
         }
@@ -59,9 +61,11 @@ export class Pawn extends GameTool {
             this.posibleToEat.push(Number(div.id));
             
             if (div.querySelector("img")) {
+             
               openSlots(div, this.color);
             }
           }
+          
           if (this.location.row == 5) {
             let pawns = game.white.filter((pawn) => {
               return pawn.type[1] == "p";
@@ -75,15 +79,17 @@ export class Pawn extends GameTool {
                 ) {
                   if (pawn.orderOfMovements.length == 2) {
                     let id = this.location.row + 1 + div.id[1];
-                    let divSpashelMov = document.getElementById(id)!;
+                    let divSpecialMov = document.getElementById(id)!;
                     if (Number(id[1]) == pawn.location.col) {
                       if (game.stepsList[game.stepsList.length - 1] == pawn) {
-                        openSlots(divSpashelMov!, this.color);
+                       
+                        openSlots(divSpecialMov!, this.color);
                         this.htmlElement.addEventListener("dragend", () => {
                           if (
                             this.location.row == Number(id[0]) &&
                             this.location.col == Number(id[1])
                           ) {
+                           
                             pawn.htmlElement.remove();
                           }
                         });
@@ -148,13 +154,13 @@ export class Pawn extends GameTool {
                 ) {
                   if (pawn.orderOfMovements.length == 2) {
                     let id = this.location.row - 1 + div.id[1];
-                    let divSpashelMov = document.getElementById(id)!;
+                    let divSpecialMov = document.getElementById(id)!;
                     if (Number(id[1]) == pawn.location.col) {
                       
                       
                       if (game.stepsList[game.stepsList.length - 1] == pawn) {
                       
-                        openSlots(divSpashelMov!, this.color);
+                        openSlots(divSpecialMov!, this.color);
                         this.htmlElement.addEventListener("dragend", () => {
                           if (
                             this.location.row == Number(id[0]) &&

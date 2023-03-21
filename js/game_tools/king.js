@@ -37,7 +37,7 @@ export class King extends GameTool {
                     tool.location.col = -1;
                 }
             });
-            let rooks = this.friendsToFight.filter((tool) => tool.type[1] == "r");
+            const rooks = this.friendsToFight.filter((tool) => tool.type[1] == "r");
             castling(div, this, rooks);
             this.enemies.forEach((tool) => {
                 if (tool.type[1] != "p") {

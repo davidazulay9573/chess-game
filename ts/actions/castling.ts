@@ -1,4 +1,4 @@
-import { game,openSlots } from "../script.js";
+import { openSlots } from "../script.js";
 import { King } from "../game_tools/king";
 import { GameTool } from "../game_tools/gameTool.js";
 
@@ -33,10 +33,7 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
     }
   
     king.htmlElement.addEventListener("dragend", () => {
-     
-
      swichKingAndRook(king, rook, "6", "7");
-      
     });
    
  }
@@ -58,10 +55,7 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
   
     king.htmlElement.addEventListener("dragend", () => {
        swichKingAndRook(king, rook, "4", "3");
-      
     });
-
-  
   }
 
   
@@ -78,27 +72,22 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
   }
  
 
-  function swichKingAndRook(king:King,rook:GameTool,rookNewLocation:string,kingNewLoction:string){
-      if (king.orderOfMovements.length == 2) {
-        if (rook.orderOfMovements.length == 1) {
-          let tool = document
-            .getElementById(`${king.location.row}${kingNewLoction}`)
-            ?.querySelector("img") as HTMLElement;
-          if (tool) {
-            if (tool.id[1] == "k") {
-              let rookOldLocation = document.getElementById(
-                `${king.location.row}${rook.location.col}`
-              )!;
-              let rookfor = rookOldLocation.querySelector("img")!;
-              if (rookfor) {
-                rookOldLocation.removeChild(rookfor);
-                document
-                  .getElementById(`${king.location.row}${rookNewLocation}`)
-                  ?.appendChild(rookfor);
-              }
-            }
-          }
-        }
-      }
+  function swichKingAndRook(king:King, rook:GameTool,rookNewLocation:string,kingNewLoction:string){
+   
+     let toolOnSlot = document.getElementById(`${king.location.row}${kingNewLoction}`)?.querySelector("img")!;
+   
+     if (king.htmlElement) {
+       if (king.htmlElement == toolOnSlot) {
+         if (king.orderOfMovements.length == 2) {
+             if (rook) {
+               if (rook.orderOfMovements.length == 1) {
+                 document
+                   .getElementById(`${king.location.row}${rookNewLocation}`)
+                   ?.appendChild(rook.htmlElement);
+               }
+             }
+         }
+       }
+     }
   }
  

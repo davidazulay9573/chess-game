@@ -4,11 +4,11 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
         return tool.type[1] == "k";
     })[0];
     enemies.forEach((enemyTool) => {
-        if (enemyTool.possibleSlots.includes(Number(myKing.htmlElement.parentElement.id)) ||
-            enemyTool.posibleToEat.includes(Number(myKing.htmlElement.parentElement.id))) {
+        if (enemyTool.possibleSlots.includes(Number(`${myKing.location.row}${myKing.location.col}`)) ||
+            enemyTool.posibleToEat.includes(Number(`${myKing.location.row}${myKing.location.col}`))) {
             let divs = toolPR.chesBoard.querySelectorAll("div");
             divs.forEach((div) => {
-                if (Number(enemyTool.htmlElement.parentElement.id) ==
+                if (Number(`${enemyTool.location.row}${enemyTool.location.col}`) ==
                     Number(div.id)) {
                 }
                 else {
