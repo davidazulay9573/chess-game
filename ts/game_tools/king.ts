@@ -1,7 +1,6 @@
 import { GameTool } from "./tools.js";
 import { game, onlyClosSlots,openSlots } from "../script.js";
 import { castling } from "../actions/castling.js";
-import { checkMovingAllowed } from "../rules/checkMovingAllowed.js";
 export class King extends GameTool {
   enemies: GameTool[];
   friendsToFight: GameTool[];
