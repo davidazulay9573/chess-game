@@ -91,6 +91,7 @@ function chengKingTOrook(king, rook, rookNewLocation, kingNewLoction) {
 function initializeKing(king) {
     king.setsOfMovs();
     king.Initialize();
+    king.checkIfMovingAllowed();
     game.stepsList.push(king);
     game.white.forEach((tool2) => {
         tool2.setsOfMovs();

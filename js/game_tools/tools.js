@@ -1,6 +1,12 @@
 import { game } from "../script.js";
 import { checkMovingAllowed } from "../rules/checkMovingAllowed.js";
 export class GameTool {
+    stratDetention(tool, kingW, black) {
+        throw new Error("Method not implemented.");
+    }
+    diagonalDetention(tool, kingW, black) {
+        throw new Error("Method not implemented.");
+    }
     constructor(color, type, img) {
         this.color = color;
         this.type = type;

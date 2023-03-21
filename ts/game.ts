@@ -87,7 +87,7 @@ export class Game {
   
     
     this.white.forEach((tool) => {
-       if (tool.type[1] != "k") {    
+      //  if (tool.type[1] != "k") {    
       
        tool.htmlElement.addEventListener("dragend", () => {
            tool.Initialize();
@@ -110,10 +110,10 @@ export class Game {
 
            });
          });
-       }
+      //  }
     });
     this.black.forEach((tool) => {
-      if (tool.type[1] != "k") {
+      // if (tool.type[1] != "k") {
         tool.htmlElement.addEventListener("dragend", () => {
           tool.Initialize();
           tool.setsOfMovs();
@@ -128,8 +128,6 @@ export class Game {
             tool2.setsOfMovs();
             tool2.Initialize();
             tool2.checkIfMovingAllowed();
-            // stratDetention(tool, kingW, this.black);
-            // diagonalDetention(tool, kingW, this.black);
           });
           this.black.forEach((tool2) => {
             tool2.setsOfMovs();
@@ -138,7 +136,7 @@ export class Game {
            
           });
         });
-      }
+      // }
     });
     
     this.white.forEach((tool) => {
@@ -148,7 +146,7 @@ export class Game {
         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
         stratDetention(tool, kingW, this.black);
         diagonalDetention(tool, kingW, this.black);
-        
+          
       });
     });
     this.black.forEach((tool) => {

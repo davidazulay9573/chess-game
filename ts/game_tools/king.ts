@@ -76,7 +76,7 @@ export class King extends GameTool {
               });
             }
         });
-        
+
       this.possibleSlots = this.possibleSlots.filter((location) => {
         return location != Number(`${this.location.row}${this.location.col}`);
       });

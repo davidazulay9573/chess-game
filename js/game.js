@@ -67,49 +67,47 @@ export class Game {
         (_s = document.getElementById("85")) === null || _s === void 0 ? void 0 : _s.appendChild(kingW.htmlElement);
         (_t = document.getElementById("15")) === null || _t === void 0 ? void 0 : _t.appendChild(kingB.htmlElement);
         this.white.forEach((tool) => {
-            if (tool.type[1] != "k") {
-                tool.htmlElement.addEventListener("dragend", () => {
-                    tool.Initialize();
-                    tool.setsOfMovs();
-                    this.stste = "b";
-                    this.stepsList.push(tool);
-                    tool.checkIfMovingAllowed();
-                    this.black.forEach((tool2) => {
-                        tool2.setsOfMovs();
-                        tool2.Initialize();
-                        tool2.checkIfMovingAllowed();
-                    });
-                    this.white.forEach((tool2) => {
-                        tool2.setsOfMovs();
-                        tool2.Initialize();
-                        tool2.checkIfMovingAllowed();
-                    });
+            //  if (tool.type[1] != "k") {    
+            tool.htmlElement.addEventListener("dragend", () => {
+                tool.Initialize();
+                tool.setsOfMovs();
+                this.stste = "b";
+                this.stepsList.push(tool);
+                tool.checkIfMovingAllowed();
+                this.black.forEach((tool2) => {
+                    tool2.setsOfMovs();
+                    tool2.Initialize();
+                    tool2.checkIfMovingAllowed();
                 });
-            }
+                this.white.forEach((tool2) => {
+                    tool2.setsOfMovs();
+                    tool2.Initialize();
+                    tool2.checkIfMovingAllowed();
+                });
+            });
+            //  }
         });
         this.black.forEach((tool) => {
-            if (tool.type[1] != "k") {
-                tool.htmlElement.addEventListener("dragend", () => {
-                    tool.Initialize();
-                    tool.setsOfMovs();
-                    this.stste = "w";
-                    this.stepsList.push(tool);
-                    tool.checkIfMovingAllowed();
-                    kingW.setsOfMovs();
-                    this.white.forEach((tool2) => {
-                        tool2.setsOfMovs();
-                        tool2.Initialize();
-                        tool2.checkIfMovingAllowed();
-                        // stratDetention(tool, kingW, this.black);
-                        // diagonalDetention(tool, kingW, this.black);
-                    });
-                    this.black.forEach((tool2) => {
-                        tool2.setsOfMovs();
-                        tool2.Initialize();
-                        tool2.checkIfMovingAllowed();
-                    });
+            // if (tool.type[1] != "k") {
+            tool.htmlElement.addEventListener("dragend", () => {
+                tool.Initialize();
+                tool.setsOfMovs();
+                this.stste = "w";
+                this.stepsList.push(tool);
+                tool.checkIfMovingAllowed();
+                kingW.setsOfMovs();
+                this.white.forEach((tool2) => {
+                    tool2.setsOfMovs();
+                    tool2.Initialize();
+                    tool2.checkIfMovingAllowed();
                 });
-            }
+                this.black.forEach((tool2) => {
+                    tool2.setsOfMovs();
+                    tool2.Initialize();
+                    tool2.checkIfMovingAllowed();
+                });
+            });
+            // }
         });
         this.white.forEach((tool) => {
             tool.htmlElement.addEventListener("mousedown", () => {
