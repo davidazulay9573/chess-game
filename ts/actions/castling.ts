@@ -16,7 +16,8 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
  
  function short(king:King,rooks:GameTool[], div:HTMLElement){
     const rook = rooks.find((rook) => rook.location.col === 8)!;
-
+  if(shachcStat(king)){
+   
   if (
     checkTheWay(king, Number(`${king.location.row}6`)) 
   ){
@@ -32,49 +33,20 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
          }
        }
      }
+    }
   }
     king.htmlElement.addEventListener("dragend", () => {
-      if (king.orderOfMovements.length == 1) {
-        if (rook.orderOfMovements.length == 1) {
-          let tool = document
-            .getElementById(`${king.location.row}7`)
-            ?.querySelector("img") as HTMLElement;
-          if (tool) {
-            if (tool.id[1] == "k") {
-              let rookOldLocation = document.getElementById(
-                `${king.location.row}8`
-              ) as HTMLElement;
-              let rookElement = rookOldLocation.querySelector("img")!;
-              if (rookElement) {
-                rookOldLocation.removeChild(rookElement);
-                document
-                  .getElementById(`${king.location.row}6`)
-                  ?.appendChild(rookElement);
-              }
-            }
-          }
-        }
+      if (king.orderOfMovements.length == 2) {
+
+      chengKingTOrook(king, rook, "6", "7");
       }
-
-      king.setsOfMovs();
-      king.Initialize();
-      game.stepsList.push(king);
-
-      game.white.forEach((tool2) => {
-        tool2.setsOfMovs();
-        tool2.Initialize();
-        tool2.checkIfMovingAllowed();
-      });
-      game.black.forEach((tool2) => {
-        tool2.setsOfMovs();
-        tool2.Initialize();
-        tool2.checkIfMovingAllowed();
-      });
     });
    
  }
   function long(king:King,rooks:GameTool[], div:HTMLElement){
-        const rook = rooks.find((rook) => rook.location.col === 1)!;
+   const rook = rooks.find((rook) => rook.location.col === 1)!;
+   if(shachcStat(king)){
+
 
      if (
     checkTheWay(king, Number(`${king.location.row}4`)) 
@@ -91,44 +63,13 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
           }
         }
      }
+    }
   }
 
     king.htmlElement.addEventListener("dragend", () => {
-      if (king.orderOfMovements.length == 2) {
-        if (rook.orderOfMovements.length == 1) {
-          let tool = document
-            .getElementById(`${king.location.row}3`)
-            ?.querySelector("img") as HTMLElement;
-          if (tool) {
-            if (tool.id[1] == "k") {
-              let rookOldLocation = document.getElementById(
-                `${king.location.row}1`
-              ) as HTMLElement;
-              let rookfor = rookOldLocation.querySelector("img")!;
-              if (rookfor) {
-                rookOldLocation.removeChild(rookfor);
-                document
-                  .getElementById(`${king.location.row}4`)
-                  ?.appendChild(rookfor);
-              }
-            }
-          }
-        }
+      if (king.orderOfMovements.length == 1) {
+         chengKingTOrook(king,rook,'4','3')
       }
-      king.setsOfMovs();
-      king.Initialize();
-      game.stepsList.push(king);
-      game.white.forEach((tool2) => {
-        tool2.setsOfMovs();
-        tool2.Initialize();
-        tool2.checkIfMovingAllowed();
-      });
-      game.black.forEach((tool2) => {
-        tool2.setsOfMovs();
-        tool2.Initialize();
-
-        tool2.checkIfMovingAllowed();
-      });
     });
 
   
@@ -143,4 +84,58 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
     }
 
     return true;
+  }
+  function shachcStat(king: King) {
+    for (const enemyTool of king.enemies) {
+      if (
+        enemyTool.possibleSlots.includes(
+          Number(`${king.location.row}${king.location.col}`)
+        )
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  function chengKingTOrook(king:King,rook:GameTool,rookNewLocation:string,kingNewLoction:string){
+        if (rook.orderOfMovements.length == 1) {
+          let tool = document
+            .getElementById(`${king.location.row}${kingNewLoction}`)
+            ?.querySelector("img") as HTMLElement;
+          if (tool) {
+            if (tool.id[1] == "k") {
+              let rookOldLocation = document.getElementById(
+                `${king.location.row}${rook.location.col}`
+              )!;
+              let rookfor = rookOldLocation.querySelector("img")!;
+              if (rookfor) {
+                rookOldLocation.removeChild(rookfor);
+                document
+                  .getElementById(`${king.location.row}${rookNewLocation}`)
+                  ?.appendChild(rookfor);
+              }
+            }
+          }
+      
+      }
+   initializeKing(king)
+  }
+
+  function initializeKing(king:King){
+        king.setsOfMovs();
+        king.Initialize();
+        game.stepsList.push(king);
+        game.white.forEach((tool2) => {
+          tool2.setsOfMovs();
+          tool2.Initialize();
+          tool2.checkIfMovingAllowed();
+        });
+        game.black.forEach((tool2) => {
+          tool2.setsOfMovs();
+          tool2.Initialize();
+
+          tool2.checkIfMovingAllowed();
+        });
   }

@@ -100,8 +100,7 @@ export class Game {
              tool2.setsOfMovs();
              tool2.Initialize();
             tool2.checkIfMovingAllowed();
-            //  stratDetention(tool, kingW, this.black);
-            //  diagonalDetention(tool, kingW, this.black);
+            
 
            });
            this.white.forEach((tool2) => {

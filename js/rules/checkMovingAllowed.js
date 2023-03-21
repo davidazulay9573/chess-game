@@ -8,7 +8,8 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
             enemyTool.posibleToEat.includes(Number(myKing.htmlElement.parentElement.id))) {
             let divs = toolPR.chesBoard.querySelectorAll("div");
             divs.forEach((div) => {
-                if (Number(enemyTool.htmlElement.parentElement.id) == Number(div.id)) {
+                if (Number(enemyTool.htmlElement.parentElement.id) ==
+                    Number(div.id)) {
                 }
                 else {
                     onlyClosSlots(div, toolPR);

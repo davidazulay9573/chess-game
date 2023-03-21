@@ -1,4 +1,3 @@
-import { King } from "../game_tools/king";
 import { GameTool } from "../game_tools/tools";
 import { onlyClosSlots, openSlots } from "../script.js";
 
@@ -22,21 +21,25 @@ export function checkMovingAllowed(
     ) {
       let divs = toolPR.chesBoard.querySelectorAll("div");
       divs.forEach((div) => {
-        if (Number(enemyTool.htmlElement.parentElement!.id) == Number(div.id)) {
-        } else {
-          onlyClosSlots(div, toolPR);
+      
+              if (
+                Number(enemyTool.htmlElement.parentElement!.id) ==
+                Number(div.id)
+              ) {
+              } else {
+                onlyClosSlots(div, toolPR);
 
-            if (
-              enemyTool.possibleSlots.includes(Number(div.id)) &&
-              toolPR.possibleSlots.includes(Number(div.id))
-            ) {
-              checkByStrateByCol(toolPR, enemyTool, myKing, div);
-              checkByStrateByRow(toolPR, enemyTool, myKing, div);
-              checkByDiagonal(toolPR, enemyTool, myKing, div);
-          
-            }   
-          
-        }
+                if (
+                  enemyTool.possibleSlots.includes(Number(div.id)) &&
+                  toolPR.possibleSlots.includes(Number(div.id))
+                ) {
+                  checkByStrateByCol(toolPR, enemyTool, myKing, div);
+                  checkByStrateByRow(toolPR, enemyTool, myKing, div);
+                  checkByDiagonal(toolPR, enemyTool, myKing, div);
+                }
+              }
+        
+      
       });
     }
   });

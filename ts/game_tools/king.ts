@@ -34,6 +34,7 @@ export class King extends GameTool {
           this.location.col == Number(div.id[1]) + 1 ||
           this.location.col == Number(div.id[1]) - 1
         ) {
+          this.possibleSlots.push(Number(div.id));
            openSlots(div, this.color);
 
         }
@@ -53,16 +54,14 @@ export class King extends GameTool {
           tool.location.col = -1;
         }
       });
-      if (this.orderOfMovements.length == 1) {
-        if(shachcStat(this)){
+      // if (this.orderOfMovements.length == 1) {
             let rooks = this.friendsToFight.filter(
               (tool) => tool.type[1] == "r"
             );
               castling(div,this,rooks);
-        }
-       }
-      if (this.color == "W") {
-        game.black.forEach((tool) => {
+      
+   
+        this.enemies.forEach((tool) => { 
            if (tool.type[1] != "p") {
               tool.possibleSlots.forEach((location) => {
                 if (Number(div.id) == location) {
@@ -77,43 +76,13 @@ export class King extends GameTool {
               });
             }
         });
-      }
-      if (this.color == "B") {
-        game.white.forEach((tool) => {
-            
-          if (tool.type[1] != "p") {
-            tool.possibleSlots.forEach((location) => {
-              if (Number(div.id) == location) {
-                onlyClosSlots(div, this);
-              }
-            });
-          } else {
-            tool.posibleToEat.forEach((location) => {
-              if (Number(div.id) == location) {
-                onlyClosSlots(div, this);
-              }
-            });
-          }
-        });
-      }
-     
+        
       this.possibleSlots = this.possibleSlots.filter((location) => {
         return location != Number(`${this.location.row}${this.location.col}`);
       });
+    
+      
     });
   }
-}
-function shachcStat(king: King) {
-  for (const enemyTool of king.enemies) {
-    if (
-      enemyTool.possibleSlots.includes(
-        Number(`${king.location.row}${king.location.col}`)
-      )
-    ) {
-      return false;
-    }
-  }
-
-  return true;
 }
 

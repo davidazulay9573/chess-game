@@ -1,5 +1,5 @@
 import { GameTool } from "./tools.js";
-import { game, onlyClosSlots, openSlots } from "../script.js";
+import { onlyClosSlots, openSlots } from "../script.js";
 import { castling } from "../actions/castling.js";
 export class King extends GameTool {
     constructor(color, type, img, opponentsTools, friendsToFight) {
@@ -19,6 +19,7 @@ export class King extends GameTool {
                 if (this.location.col == Number(div.id[1]) ||
                     this.location.col == Number(div.id[1]) + 1 ||
                     this.location.col == Number(div.id[1]) - 1) {
+                    this.possibleSlots.push(Number(div.id));
                     openSlots(div, this.color);
                 }
             }
@@ -36,59 +37,28 @@ export class King extends GameTool {
                     tool.location.col = -1;
                 }
             });
-            if (this.orderOfMovements.length == 1) {
-                if (shachcStat(this)) {
-                    let rooks = this.friendsToFight.filter((tool) => tool.type[1] == "r");
-                    castling(div, this, rooks);
+            // if (this.orderOfMovements.length == 1) {
+            let rooks = this.friendsToFight.filter((tool) => tool.type[1] == "r");
+            castling(div, this, rooks);
+            this.enemies.forEach((tool) => {
+                if (tool.type[1] != "p") {
+                    tool.possibleSlots.forEach((location) => {
+                        if (Number(div.id) == location) {
+                            onlyClosSlots(div, this);
+                        }
+                    });
                 }
-            }
-            if (this.color == "W") {
-                game.black.forEach((tool) => {
-                    if (tool.type[1] != "p") {
-                        tool.possibleSlots.forEach((location) => {
-                            if (Number(div.id) == location) {
-                                onlyClosSlots(div, this);
-                            }
-                        });
-                    }
-                    else {
-                        tool.posibleToEat.forEach((location) => {
-                            if (Number(div.id) == location) {
-                                onlyClosSlots(div, this);
-                            }
-                        });
-                    }
-                });
-            }
-            if (this.color == "B") {
-                game.white.forEach((tool) => {
-                    if (tool.type[1] != "p") {
-                        tool.possibleSlots.forEach((location) => {
-                            if (Number(div.id) == location) {
-                                onlyClosSlots(div, this);
-                            }
-                        });
-                    }
-                    else {
-                        tool.posibleToEat.forEach((location) => {
-                            if (Number(div.id) == location) {
-                                onlyClosSlots(div, this);
-                            }
-                        });
-                    }
-                });
-            }
+                else {
+                    tool.posibleToEat.forEach((location) => {
+                        if (Number(div.id) == location) {
+                            onlyClosSlots(div, this);
+                        }
+                    });
+                }
+            });
             this.possibleSlots = this.possibleSlots.filter((location) => {
                 return location != Number(`${this.location.row}${this.location.col}`);
             });
         });
     }
-}
-function shachcStat(king) {
-    for (const enemyTool of king.enemies) {
-        if (enemyTool.possibleSlots.includes(Number(`${king.location.row}${king.location.col}`))) {
-            return false;
-        }
-    }
-    return true;
 }
