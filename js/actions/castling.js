@@ -24,9 +24,7 @@ function short(king, rooks, div) {
         }
     }
     king.htmlElement.addEventListener("dragend", () => {
-        if (king.orderOfMovements.length == 2) {
-            swichKingAndRook(king, rook, "6", "7");
-        }
+        swichKingAndRook(king, rook, "6", "7");
     });
 }
 function long(king, rooks, div) {
@@ -44,9 +42,7 @@ function long(king, rooks, div) {
         }
     }
     king.htmlElement.addEventListener("dragend", () => {
-        if (king.orderOfMovements.length == 2) {
-            swichKingAndRook(king, rook, "4", "3");
-        }
+        swichKingAndRook(king, rook, "4", "3");
     });
 }
 function checkTheWay(king, location) {
@@ -60,17 +56,19 @@ function checkTheWay(king, location) {
 }
 function swichKingAndRook(king, rook, rookNewLocation, kingNewLoction) {
     var _a, _b;
-    if (rook.orderOfMovements.length == 1) {
-        let tool = (_a = document
-            .getElementById(`${king.location.row}${kingNewLoction}`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
-        if (tool) {
-            if (tool.id[1] == "k") {
-                let rookOldLocation = document.getElementById(`${king.location.row}${rook.location.col}`);
-                let rookfor = rookOldLocation.querySelector("img");
-                if (rookfor) {
-                    rookOldLocation.removeChild(rookfor);
-                    (_b = document
-                        .getElementById(`${king.location.row}${rookNewLocation}`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
+    if (king.orderOfMovements.length == 2) {
+        if (rook.orderOfMovements.length == 1) {
+            let tool = (_a = document
+                .getElementById(`${king.location.row}${kingNewLoction}`)) === null || _a === void 0 ? void 0 : _a.querySelector("img");
+            if (tool) {
+                if (tool.id[1] == "k") {
+                    let rookOldLocation = document.getElementById(`${king.location.row}${rook.location.col}`);
+                    let rookfor = rookOldLocation.querySelector("img");
+                    if (rookfor) {
+                        rookOldLocation.removeChild(rookfor);
+                        (_b = document
+                            .getElementById(`${king.location.row}${rookNewLocation}`)) === null || _b === void 0 ? void 0 : _b.appendChild(rookfor);
+                    }
                 }
             }
         }

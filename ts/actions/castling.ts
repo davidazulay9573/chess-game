@@ -33,10 +33,10 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
     }
   
     king.htmlElement.addEventListener("dragend", () => {
-      if (king.orderOfMovements.length == 2) {
+     
 
      swichKingAndRook(king, rook, "6", "7");
-      }
+      
     });
    
  }
@@ -57,9 +57,8 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
     }
   
     king.htmlElement.addEventListener("dragend", () => {
-      if (king.orderOfMovements.length == 2) {
        swichKingAndRook(king, rook, "4", "3");
-      }
+      
     });
 
   
@@ -80,6 +79,7 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
  
 
   function swichKingAndRook(king:King,rook:GameTool,rookNewLocation:string,kingNewLoction:string){
+      if (king.orderOfMovements.length == 2) {
         if (rook.orderOfMovements.length == 1) {
           let tool = document
             .getElementById(`${king.location.row}${kingNewLoction}`)
@@ -98,7 +98,7 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
               }
             }
           }
-      
+        }
       }
   }
  
