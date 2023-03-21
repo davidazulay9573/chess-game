@@ -1,5 +1,5 @@
 import { Game } from "./game.js";
-import { GameTool } from "./game_tools/tools.js";
+import { GameTool } from "./game_tools/gameTool.js";
 const container = document.getElementById("chessboard") as HTMLDivElement;
 
 export const game = new Game(container);

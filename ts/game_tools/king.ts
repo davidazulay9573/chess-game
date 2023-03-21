@@ -1,4 +1,4 @@
-import { GameTool } from "./tools.js";
+import { GameTool } from "./gameTool.js";
 import { game, onlyClosSlots,openSlots } from "../script.js";
 import { castling } from "../actions/castling.js";
 export class King extends GameTool {
@@ -54,7 +54,7 @@ export class King extends GameTool {
           tool.location.col = -1;
         }
       });
-      // if (this.orderOfMovements.length == 1) {
+    
             let rooks = this.friendsToFight.filter(
               (tool) => tool.type[1] == "r"
             );

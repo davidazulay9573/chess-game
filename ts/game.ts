@@ -4,11 +4,9 @@ import { Queen } from "./game_tools/queen.js";
 import { Knight } from "./game_tools/knight.js";
 import { King } from "./game_tools/king.js";
 import { Pawn } from "./game_tools/pawn.js";
-import { GameTool } from "./game_tools/tools.js";
-
+import { GameTool } from "./game_tools/gameTool.js";
 import { Chessboard } from "./ches_bord/board.js";
 import { diagonalDetention, stratDetention } from "./rules/dentention.js";
-import { castling } from "./actions/castling.js";
 export class Game {
   black: GameTool[];
   white: GameTool[];
@@ -84,80 +82,72 @@ export class Game {
 
     document.getElementById("85")?.appendChild(kingW.htmlElement);
     document.getElementById("15")?.appendChild(kingB.htmlElement);
-  
-    
-    this.white.forEach((tool) => {
-      //  if (tool.type[1] != "k") {    
-      
-       tool.htmlElement.addEventListener("dragend", () => {
-           tool.Initialize();
-           tool.setsOfMovs();
-           this.stste = "b";
-           this.stepsList.push(tool);
-            tool.checkIfMovingAllowed();
-           
-           this.black.forEach((tool2) => {
-             tool2.setsOfMovs();
-             tool2.Initialize();
-            tool2.checkIfMovingAllowed();
-            
-
-           });
-           this.white.forEach((tool2) => {
-             tool2.setsOfMovs();
-             tool2.Initialize();
-            tool2.checkIfMovingAllowed();
-
-           });
-         });
-      //  }
-    });
-    this.black.forEach((tool) => {
-      // if (tool.type[1] != "k") {
-        tool.htmlElement.addEventListener("dragend", () => {
-          tool.Initialize();
-          tool.setsOfMovs();
-          this.stste = "w";
-          this.stepsList.push(tool);
-          tool.checkIfMovingAllowed();
-            
-            
-           
-           kingW.setsOfMovs()
-          this.white.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-            tool2.checkIfMovingAllowed();
-          });
-          this.black.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-            tool2.checkIfMovingAllowed();
-           
-          });
-        });
-      // }
-    });
-    
-    this.white.forEach((tool) => {
-      tool.htmlElement.addEventListener("mousedown", () => {
-        tool.Initialize();
-        tool.setsOfMovs();
-        tool.htmlElement.setAttribute("ondragstart", "drag(event)");
-        stratDetention(tool, kingW, this.black);
-        diagonalDetention(tool, kingW, this.black);
-          
-      });
-    });
-    this.black.forEach((tool) => {
-      tool.htmlElement.addEventListener("mousedown", () => {
-        tool.Initialize();
-        tool.setsOfMovs();
-        tool.htmlElement.setAttribute("ondragstart", "drag(event)");
-        stratDetention(tool, kingB, this.white);
-        diagonalDetention(tool, kingB, this.white);
-      });
-    });
    
+    
+  this.startGame(kingW,kingB)
+  }
+  
+  startGame(kingW:King,kingB:King){
+     this.white.forEach((tool) => {
+       tool.htmlElement.addEventListener("dragend", () => {
+         tool.Initialize();
+         tool.setsOfMovs();
+         this.stste = "b";
+         this.stepsList.push(tool);
+         tool.checkIfMovingAllowed();
+
+         this.black.forEach((tool2) => {
+           tool2.setsOfMovs();
+           tool2.Initialize();
+           tool2.checkIfMovingAllowed();
+         });
+         this.white.forEach((tool2) => {
+           tool2.setsOfMovs();
+           tool2.Initialize();
+           tool2.checkIfMovingAllowed();
+         });
+       });
+     });
+     this.black.forEach((tool) => {
+       tool.htmlElement.addEventListener("dragend", () => {
+         tool.Initialize();
+         tool.setsOfMovs();
+         this.stste = "w";
+         this.stepsList.push(tool);
+         tool.checkIfMovingAllowed();
+
+         this.white.forEach((tool2) => {
+           tool2.setsOfMovs();
+           tool2.Initialize();
+           tool2.checkIfMovingAllowed();
+         });
+         this.black.forEach((tool2) => {
+           tool2.setsOfMovs();
+           tool2.Initialize();
+           tool2.checkIfMovingAllowed();
+         });
+       });
+     });
+
+     this.white.forEach((tool) => {
+       tool.htmlElement.addEventListener("mousedown", () => {
+         tool.Initialize();
+         tool.setsOfMovs();
+         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
+         stratDetention(tool, kingW, this.black);
+         diagonalDetention(tool, kingW, this.black);
+       });
+     });
+     this.black.forEach((tool) => {
+       tool.htmlElement.addEventListener("mousedown", () => {
+         tool.Initialize();
+         tool.setsOfMovs();
+         tool.htmlElement.setAttribute("ondragstart", "drag(event)");
+         stratDetention(tool, kingB, this.white);
+         diagonalDetention(tool, kingB, this.white);
+       });
+     });
+   
+  
   }
 }

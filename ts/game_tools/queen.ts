@@ -1,4 +1,4 @@
-import { GameTool } from "./tools.js";
+import { GameTool } from "./gameTool.js";
 import { openSlots } from "../script.js";
 import { skipLimitStrat } from "../rules/skipLimitStrate.js";
 import { skipLimitDiagonal } from "../rules/skipLimitDiagonal.js";

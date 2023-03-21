@@ -1,5 +1,5 @@
 import { openSlots } from "../script.js";
-import { GameTool } from "./tools.js";
+import { GameTool } from "./gameTool.js";
 export class Knight extends GameTool {
     setsOfMovs() {
         this.possibleSlots = [];

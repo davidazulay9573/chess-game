@@ -1,4 +1,4 @@
-import { GameTool } from "./tools.js";
+import { GameTool } from "./gameTool.js";
 import { game, openSlots } from "../script.js";
 import { skipLimitStrat } from "../rules/skipLimitStrate.js";
 import  {changeToKueen} from '../actions/changeToQueen.js'

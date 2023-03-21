@@ -1,4 +1,4 @@
-import { GameTool } from "../game_tools/tools";
+import { GameTool } from "../game_tools/gameTool.js";
 import { onlyClosSlots, openSlots } from "../script.js";
 
 export function checkMovingAllowed(

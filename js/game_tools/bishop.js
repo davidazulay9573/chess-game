@@ -1,6 +1,6 @@
 import { openSlots } from "../script.js";
 import { skipLimitDiagonal } from "../rules/skipLimitDiagonal.js";
-import { GameTool } from "./tools.js";
+import { GameTool } from "./gameTool.js";
 export class Bishop extends GameTool {
     setsOfMovs() {
         this.possibleSlots = [];

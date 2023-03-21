@@ -1,6 +1,6 @@
 import { game,openSlots } from "../script.js";
 import { King } from "../game_tools/king";
-import { GameTool } from "../game_tools/tools";
+import { GameTool } from "../game_tools/gameTool.js";
 
 export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
    if (king.location.row === Number(div.id[0])) {
@@ -16,11 +16,8 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
  
  function short(king:King,rooks:GameTool[], div:HTMLElement){
     const rook = rooks.find((rook) => rook.location.col === 8)!;
-  if(shachcStat(king)){
-   
-  if (
-    checkTheWay(king, Number(`${king.location.row}6`)) 
-  ){
+ 
+  if (checkTheWay(king, Number(`${king.location.row}6`))){
      if (
        document.getElementById(`${king.location.row}6`)?.children.length == 0
      ) {
@@ -34,26 +31,20 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
        }
      }
     }
-  }
+  
     king.htmlElement.addEventListener("dragend", () => {
       if (king.orderOfMovements.length == 2) {
 
-      chengKingTOrook(king, rook, "6", "7");
+     swichKingAndRook(king, rook, "6", "7");
       }
     });
    
  }
   function long(king:King,rooks:GameTool[], div:HTMLElement){
    const rook = rooks.find((rook) => rook.location.col === 1)!;
-   if(shachcStat(king)){
 
-
-     if (
-    checkTheWay(king, Number(`${king.location.row}4`)) 
-  ){
-      if (
-        document.getElementById(`${king.location.row}2`)?.children.length == 0
-      ) {
+     if ( checkTheWay(king, Number(`${king.location.row}4`))){
+      if ( document.getElementById(`${king.location.row}2`)?.children.length == 0) {
         if (rook) {
           if (rook.orderOfMovements.length == 1) {
             if (king.orderOfMovements.length == 1) {
@@ -64,11 +55,10 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
         }
      }
     }
-  }
-
+  
     king.htmlElement.addEventListener("dragend", () => {
-      if (king.orderOfMovements.length == 1) {
-         chengKingTOrook(king,rook,'4','3')
+      if (king.orderOfMovements.length == 2) {
+       swichKingAndRook(king, rook, "4", "3");
       }
     });
 
@@ -78,28 +68,18 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
   
   function checkTheWay(king: King, location: number) {
     for (const enemyTool of king.enemies) {
-      if (enemyTool.possibleSlots.includes(location)) {
+      if (enemyTool.possibleSlots.includes(location) ||    
+         enemyTool.possibleSlots.includes(Number(`${king.location.row}${king.location.col}`)
+        )) {
         return false;
       }
     }
 
     return true;
   }
-  function shachcStat(king: King) {
-    for (const enemyTool of king.enemies) {
-      if (
-        enemyTool.possibleSlots.includes(
-          Number(`${king.location.row}${king.location.col}`)
-        )
-      ) {
-        return false;
-      }
-    }
+ 
 
-    return true;
-  }
-
-  function chengKingTOrook(king:King,rook:GameTool,rookNewLocation:string,kingNewLoction:string){
+  function swichKingAndRook(king:King,rook:GameTool,rookNewLocation:string,kingNewLoction:string){
         if (rook.orderOfMovements.length == 1) {
           let tool = document
             .getElementById(`${king.location.row}${kingNewLoction}`)
@@ -120,22 +100,5 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
           }
       
       }
-   initializeKing(king)
   }
-  function initializeKing(king:King){
-        king.setsOfMovs();
-        king.Initialize();
-        king.checkIfMovingAllowed()
-        game.stepsList.push(king);
-        game.white.forEach((tool2) => {
-          tool2.setsOfMovs();
-          tool2.Initialize();
-          tool2.checkIfMovingAllowed();
-        });
-        game.black.forEach((tool2) => {
-          tool2.setsOfMovs();
-          tool2.Initialize();
-
-          tool2.checkIfMovingAllowed();
-        });
-  }
+ 

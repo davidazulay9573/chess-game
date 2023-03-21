@@ -66,8 +66,10 @@ export class Game {
         this.black.push(QueenB, kingB);
         (_s = document.getElementById("85")) === null || _s === void 0 ? void 0 : _s.appendChild(kingW.htmlElement);
         (_t = document.getElementById("15")) === null || _t === void 0 ? void 0 : _t.appendChild(kingB.htmlElement);
+        this.startGame(kingW, kingB);
+    }
+    startGame(kingW, kingB) {
         this.white.forEach((tool) => {
-            //  if (tool.type[1] != "k") {    
             tool.htmlElement.addEventListener("dragend", () => {
                 tool.Initialize();
                 tool.setsOfMovs();
@@ -85,17 +87,14 @@ export class Game {
                     tool2.checkIfMovingAllowed();
                 });
             });
-            //  }
         });
         this.black.forEach((tool) => {
-            // if (tool.type[1] != "k") {
             tool.htmlElement.addEventListener("dragend", () => {
                 tool.Initialize();
                 tool.setsOfMovs();
                 this.stste = "w";
                 this.stepsList.push(tool);
                 tool.checkIfMovingAllowed();
-                kingW.setsOfMovs();
                 this.white.forEach((tool2) => {
                     tool2.setsOfMovs();
                     tool2.Initialize();
@@ -107,7 +106,6 @@ export class Game {
                     tool2.checkIfMovingAllowed();
                 });
             });
-            // }
         });
         this.white.forEach((tool) => {
             tool.htmlElement.addEventListener("mousedown", () => {

@@ -1,5 +1,5 @@
 import { Queen } from "../game_tools/queen.js";
-import { GameTool } from "../game_tools/tools.js";
+import { GameTool } from "../game_tools/gameTool.js";
 import { game } from "../script.js";
 
 export function changeToKueen(pawnPR: GameTool) {
