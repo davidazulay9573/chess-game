@@ -1,22 +1,21 @@
 import { GameTool } from "./gameTool.js";
-import { game, openSlots } from "../script.js";
+import { openSlots } from "../actions/closeAndOpenSlots.js";
 import { skipLimitStrat } from "../rules/skipLimitStrate.js";
 import  {changeToKueen} from '../actions/changeToQueen.js'
+import { game } from "../script.js";
+
 export class Pawn extends GameTool {
-  
-  friendsToFight: GameTool[];
   public startPoint: number | undefined;
 
   constructor(
     color: string,
     type: string,
     img: string,
-    friendsToFight: GameTool[]
+    friendsToFight: GameTool[],
+    enemies:GameTool[]
   ) {
-    super(color, type, img);
+    super(color, type, img, enemies, friendsToFight);
     {
-     
-      this.friendsToFight = friendsToFight;
       this.startPoint;
     }
   }
@@ -24,7 +23,7 @@ export class Pawn extends GameTool {
   setsOfMovs(): void {
     this.possibleSlots = [];
     this.posibleToEat = [];
-    let divs = this.chesBoard.querySelectorAll("div");
+    const divs = document.getElementById("chessboard")!.querySelectorAll("div");
 
     if (this.startPoint == 2) {
       if (this.location.row == 8) {
@@ -38,7 +37,7 @@ export class Pawn extends GameTool {
           ) {
             if (!div.querySelector("img")) {
               this.possibleSlots.push(Number(div.id));
-             
+
               openSlots(div, this.color);
             }
           }
@@ -49,7 +48,7 @@ export class Pawn extends GameTool {
         ) {
           if (!div.querySelector("img")) {
             this.possibleSlots.push(Number(div.id));
-           
+
             openSlots(div, this.color);
           }
         }
@@ -59,13 +58,12 @@ export class Pawn extends GameTool {
         ) {
           if (this.location.row == Number(div.id[0]) - 1) {
             this.posibleToEat.push(Number(div.id));
-            
+
             if (div.querySelector("img")) {
-             
               openSlots(div, this.color);
             }
           }
-          
+
           if (this.location.row == 5) {
             let pawns = game.white.filter((pawn) => {
               return pawn.type[1] == "p";
@@ -82,18 +80,16 @@ export class Pawn extends GameTool {
                     let divSpecialMov = document.getElementById(id)!;
                     if (Number(id[1]) == pawn.location.col) {
                       if (game.stepsList[game.stepsList.length - 1] == pawn) {
-                       
                         openSlots(divSpecialMov!, this.color);
                         this.htmlElement.addEventListener("dragend", () => {
                           if (
                             this.location.row == Number(id[0]) &&
                             this.location.col == Number(id[1])
                           ) {
-                           
                             pawn.htmlElement.remove();
                           }
                         });
-                      } 
+                      }
                     }
                   }
                 }
@@ -156,10 +152,7 @@ export class Pawn extends GameTool {
                     let id = this.location.row - 1 + div.id[1];
                     let divSpecialMov = document.getElementById(id)!;
                     if (Number(id[1]) == pawn.location.col) {
-                      
-                      
                       if (game.stepsList[game.stepsList.length - 1] == pawn) {
-                      
                         openSlots(divSpecialMov!, this.color);
                         this.htmlElement.addEventListener("dragend", () => {
                           if (
@@ -169,7 +162,7 @@ export class Pawn extends GameTool {
                             pawn.htmlElement.remove();
                           }
                         });
-                      } 
+                      }
                     }
                   }
                 }

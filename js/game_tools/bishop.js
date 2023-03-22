@@ -1,11 +1,11 @@
-import { openSlots } from "../script.js";
+import { openSlots } from "../actions/closeAndOpenSlots.js";
 import { skipLimitDiagonal } from "../rules/skipLimitDiagonal.js";
 import { GameTool } from "./gameTool.js";
 export class Bishop extends GameTool {
     setsOfMovs() {
         this.possibleSlots = [];
-        let divs = this.chesBoard.querySelectorAll("div");
-        let filterDivs = Array.from(divs).filter((div) => {
+        const divs = document.getElementById("chessboard").querySelectorAll("div");
+        const filterDivs = Array.from(divs).filter((div) => {
             return (this.location.row - Number(div.id[0]) ==
                 this.location.col - Number(div.id[1]) ||
                 Number(div.id[0]) - this.location.row ==

@@ -1,4 +1,4 @@
-import { openSlots } from "../script.js";
+import { openSlots } from "../actions/closeAndOpenSlots.js";
 export function castling(div, king, rooks) {
     if (king.location.row === Number(div.id[0])) {
         if (king.location.col === Number(div.id[1]) - 2) {

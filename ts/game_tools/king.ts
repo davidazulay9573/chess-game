@@ -1,28 +1,14 @@
 import { GameTool } from "./gameTool.js";
-import { game, onlyClosSlots,openSlots } from "../script.js";
+import { openSlots,onlyClosSlots } from "../actions/closeAndOpenSlots.js";
 import { castling } from "../actions/castling.js";
-export class King extends GameTool {
-  enemies: GameTool[];
-  friendsToFight: GameTool[];
 
-  constructor(
-    color: string,
-    type: string,
-    img: string,
-    opponentsTools: GameTool[],
-    friendsToFight: GameTool[]
-  ) {
-    super(color, type, img);
-    {
-      this.enemies = opponentsTools;
-      this.friendsToFight = friendsToFight;
-      
-    }
-  }
+export class King extends GameTool {
+
   setsOfMovs(): void {
   
     this.possibleSlots = [];
-    let divs = this.chesBoard.querySelectorAll("div");
+    const divs = document.getElementById("chessboard")!.querySelectorAll("div");
+    
     divs.forEach((div) => {
       if (
         this.location.row == Number(div.id[0]) ||
@@ -54,11 +40,8 @@ export class King extends GameTool {
           tool.location.col = -1;
         }
       });
-    
-            const rooks = this.friendsToFight.filter(
-              (tool) => tool.type[1] == "r"
-            );
-              castling(div,this,rooks);
+    const rooks = this.friendsToFight.filter( (tool) => tool.type[1] == "r");
+        castling(div,this,rooks);
         this.enemies.forEach((tool) => { 
            if (tool.type[1] != "p") {
               tool.possibleSlots.forEach((location) => {

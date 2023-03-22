@@ -5,7 +5,8 @@ import { Knight } from "./game_tools/knight.js";
 import { King } from "./game_tools/king.js";
 import { Pawn } from "./game_tools/pawn.js";
 import { Chessboard } from "./ches_bord/board.js";
-import { diagonalDetention, stratDetention } from "./rules/dentention.js";
+import { stratDetention } from "./rules/dententionStrate.js";
+import { diagonalDetention } from './rules/dententionDiagonal.js';
 export class Game {
     constructor(container) {
         this.black = [];
@@ -18,23 +19,23 @@ export class Game {
     }
     createTools() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
-        const QueenW = new Queen("W", "Wqueen", "./img/wQ.png");
-        const QueenB = new Queen("B", "Bqueen", "./img/bQ.png");
-        const rookW1 = new Rook("W", `Wrook1`, "./img/wR.png");
-        const rookW2 = new Rook("W", `Wrook2`, "./img/wR.png");
-        const rookB1 = new Rook("B", `Brook1`, "./img/bR.png");
-        const rookB2 = new Rook("B", `Brook2`, "./img/bR.png");
-        const bishopW1 = new Bishop("W", `Wbishop1`, "./img/wB.png");
-        const bishopW2 = new Bishop("W", `Wbishop2`, "./img/wB.png");
-        const bishopB1 = new Bishop("B", `Bbishop1`, "./img/bB.png");
-        const bishopB2 = new Bishop("B", `Bbishop2`, "./img/bB.png");
-        const knightW1 = new Knight("W", `Wnight1`, "./img/wN.png");
-        const knightW2 = new Knight("W", `Wnight2`, "./img/wN.png");
-        const knightB1 = new Knight("B", `Bnight1`, "./img/bN.png");
-        const knightB2 = new Knight("B", `Bnight2`, "./img/bN.png");
+        const QueenW = new Queen("W", "Wqueen", "./img/wQ.png", this.black, this.white);
+        const QueenB = new Queen("B", "Bqueen", "./img/bQ.png", this.white, this.black);
+        const rookW1 = new Rook("W", `Wrook1`, "./img/wR.png", this.black, this.white);
+        const rookW2 = new Rook("W", `Wrook2`, "./img/wR.png", this.black, this.white);
+        const rookB1 = new Rook("B", `Brook1`, "./img/bR.png", this.white, this.black);
+        const rookB2 = new Rook("B", `Brook2`, "./img/bR.png", this.white, this.black);
+        const bishopW1 = new Bishop("W", `Wbishop1`, "./img/wB.png", this.black, this.white);
+        const bishopW2 = new Bishop("W", `Wbishop2`, "./img/wB.png", this.black, this.white);
+        const bishopB1 = new Bishop("B", `Bbishop1`, "./img/bB.png", this.white, this.black);
+        const bishopB2 = new Bishop("B", `Bbishop2`, "./img/bB.png", this.white, this.black);
+        const knightW1 = new Knight("W", `Wnight1`, "./img/wN.png", this.black, this.white);
+        const knightW2 = new Knight("W", `Wnight2`, "./img/wN.png", this.black, this.white);
+        const knightB1 = new Knight("B", `Bnight1`, "./img/bN.png", this.white, this.black);
+        const knightB2 = new Knight("B", `Bnight2`, "./img/bN.png", this.white, this.black);
         for (let i = 1; i <= 8; i++) {
-            let pawnW = new Pawn("W", `Wpawn${i}`, "./img/wP.png", this.white);
-            let pawnB = new Pawn("B", `Bpawn${i}`, "./img/bP.png", this.black);
+            let pawnW = new Pawn("W", `Wpawn${i}`, "./img/wP.png", this.black, this.white);
+            let pawnB = new Pawn("B", `Bpawn${i}`, "./img/bP.png", this.white, this.black);
             pawnB.startPoint = 2;
             pawnW.startPoint = 7;
             this.white.push(pawnW);

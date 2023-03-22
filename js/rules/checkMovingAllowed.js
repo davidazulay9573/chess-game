@@ -1,4 +1,4 @@
-import { onlyClosSlots, openSlots } from "../script.js";
+import { openSlots, onlyClosSlots } from "../actions/closeAndOpenSlots.js";
 export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
     let myKing = friendsToFight.filter((tool) => {
         return tool.type[1] == "k";
@@ -6,7 +6,7 @@ export function checkMovingAllowed(toolPR, enemies, friendsToFight) {
     enemies.forEach((enemyTool) => {
         if (enemyTool.possibleSlots.includes(Number(`${myKing.location.row}${myKing.location.col}`)) ||
             enemyTool.posibleToEat.includes(Number(`${myKing.location.row}${myKing.location.col}`))) {
-            let divs = toolPR.chesBoard.querySelectorAll("div");
+            const divs = document.getElementById("chessboard").querySelectorAll("div");
             divs.forEach((div) => {
                 if (Number(`${enemyTool.location.row}${enemyTool.location.col}`) ==
                     Number(div.id)) {

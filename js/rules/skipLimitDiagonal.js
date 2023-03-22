@@ -1,22 +1,21 @@
-import { closSlots, onlyClosSlots } from "../script.js";
+import { closSlots, onlyClosSlots } from "../actions/closeAndOpenSlots.js";
 export function skipLimitDiagonal(tool) {
-    let divs = document.getElementById("chessboard").querySelectorAll("div");
-    let filterDivs = Array.from(divs).filter((div) => {
+    const divs = document.getElementById("chessboard").querySelectorAll("div");
+    const filterDivs = Array.from(divs).filter((div) => {
         return (tool.location.row - Number(div.id[0]) ==
             tool.location.col - Number(div.id[1]) ||
             Number(div.id[0]) - tool.location.row ==
                 tool.location.col - Number(div.id[1]));
     });
-    filterDivs.forEach((div) => {
-        let imgTool = div.querySelector("img");
+    for (const div of filterDivs) {
+        const imgTool = div.querySelector("img");
         if (imgTool) {
             if (tool.location.col < Number(imgTool.parentElement.id[1])) {
                 if (tool.location.row < Number(imgTool.parentElement.id[0])) {
                     filterDivs.forEach((div) => {
                         if (Number(div.id[1]) > Number(imgTool.parentElement.id[1]) &&
                             Number(div.id[0]) > Number(imgTool.parentElement.id[0])) {
-                            if (imgTool.id[1] == "k" &&
-                                imgTool.id[0] != tool.color) {
+                            if (imgTool.id[1] == "k" && imgTool.id[0] != tool.color) {
                                 onlyClosSlots(div, tool);
                             }
                             else {
@@ -29,8 +28,7 @@ export function skipLimitDiagonal(tool) {
                     filterDivs.forEach((div) => {
                         if (Number(div.id[1]) > Number(imgTool.parentElement.id[1]) &&
                             Number(div.id[0]) < Number(imgTool.parentElement.id[0])) {
-                            if (imgTool.id[1] == "k" &&
-                                imgTool.id[0] != tool.color) {
+                            if (imgTool.id[1] == "k" && imgTool.id[0] != tool.color) {
                                 onlyClosSlots(div, tool);
                             }
                             else {
@@ -45,8 +43,7 @@ export function skipLimitDiagonal(tool) {
                     filterDivs.forEach((div) => {
                         if (Number(div.id[1]) < Number(imgTool.parentElement.id[1]) &&
                             Number(div.id[0]) < Number(imgTool.parentElement.id[0])) {
-                            if (imgTool.id[1] == "k" &&
-                                imgTool.id[0] != tool.color) {
+                            if (imgTool.id[1] == "k" && imgTool.id[0] != tool.color) {
                                 onlyClosSlots(div, tool);
                             }
                             else {
@@ -59,8 +56,7 @@ export function skipLimitDiagonal(tool) {
                     filterDivs.forEach((div) => {
                         if (Number(div.id[1]) < Number(imgTool.parentElement.id[1]) &&
                             Number(div.id[0]) > Number(imgTool.parentElement.id[0])) {
-                            if (imgTool.id[1] == "k" &&
-                                imgTool.id[0] != tool.color) {
+                            if (imgTool.id[1] == "k" && imgTool.id[0] != tool.color) {
                                 onlyClosSlots(div, tool);
                             }
                             else {
@@ -71,5 +67,5 @@ export function skipLimitDiagonal(tool) {
                 }
             }
         }
-    });
+    }
 }

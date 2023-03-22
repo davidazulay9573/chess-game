@@ -1,22 +1,19 @@
 import { game } from "../script.js";
 import { checkMovingAllowed } from "../rules/checkMovingAllowed.js";
 export class GameTool {
-  stratDetention(tool: any, kingW: any, black: any) {
-    throw new Error("Method not implemented.");
-  }
-  diagonalDetention(tool: any, kingW: any, black: any) {
-    throw new Error("Method not implemented.");
-  }
+
   public type: string;
   private img: string;
   public color: string;
   public htmlElement: HTMLImageElement;
-  public chesBoard: HTMLDivElement;
   public location: { row: number; col: number };
-  public orderOfMovements: ({ row: number; col: number } | string) [];
+  public orderOfMovements: ({ row: number; col: number } | string)[];
   public possibleSlots: number[];
-  public posibleToEat:number[];
-  constructor(color: string, type: string, img: string) {
+  public posibleToEat: number[];
+  public enemies: GameTool[];
+  public friendsToFight:GameTool[];
+  
+  constructor(color: string, type: string, img: string,enemies:GameTool[] ,friendsToFight:GameTool[]) {
     this.color = color;
     this.type = type;
     this.img = img;
@@ -24,11 +21,12 @@ export class GameTool {
     this.possibleSlots = [];
     this.posibleToEat = [];
     this.htmlElement = document.createElement("img");
-    this.chesBoard = document.querySelector("#chessboard")!;
     this.location = {
       row: Number(this.htmlElement.id[0]),
       col: Number(this.htmlElement.id[1]),
     };
+    this.enemies = enemies;
+    this.friendsToFight = friendsToFight;
     this.renderHTML();
   }
   private renderHTML(): void {
@@ -40,7 +38,7 @@ export class GameTool {
     this.htmlElement.setAttribute("data-values", JSON.stringify([]));
   }
   public setLocation() {
-    let thisChessPiece = this.chesBoard.querySelector(
+    let thisChessPiece =  document.getElementById("chessboard")!.querySelector(
       `img#${this.htmlElement.id}`
     );
     if (thisChessPiece) {
@@ -60,7 +58,7 @@ export class GameTool {
   }
   public setsOfMovs() {}
   public Initialize() {
-    let divs = this.chesBoard.querySelectorAll("div");
+   const divs = document.getElementById("chessboard")!.querySelectorAll("div");
     divs.forEach((div) => {
       div.removeAttribute("ondrop");
       div.removeAttribute("ondragover");
@@ -69,7 +67,7 @@ export class GameTool {
 
     this.setLocation();
   }
-  
+
   checkIfMovingAllowed() {
     if (this.color == "W") {
       checkMovingAllowed(this, game.black, game.white);
@@ -77,7 +75,5 @@ export class GameTool {
     if (this.color == "B") {
       checkMovingAllowed(this, game.white, game.black);
     }
-    
   }
-  
 }

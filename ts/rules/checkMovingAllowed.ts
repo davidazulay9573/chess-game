@@ -1,5 +1,6 @@
 import { GameTool } from "../game_tools/gameTool.js";
-import { onlyClosSlots, openSlots } from "../script.js";
+import { openSlots, onlyClosSlots } from "../actions/closeAndOpenSlots.js";
+
 
 export function checkMovingAllowed(
   toolPR: GameTool,
@@ -19,7 +20,8 @@ export function checkMovingAllowed(
         Number(`${myKing.location.row}${myKing.location.col}`)
       )
     ) {
-      let divs = toolPR.chesBoard.querySelectorAll("div");
+    const divs = document.getElementById("chessboard")!.querySelectorAll("div");
+      
       divs.forEach((div) => {
         if (
           Number(`${enemyTool.location.row}${enemyTool.location.col}`) ==

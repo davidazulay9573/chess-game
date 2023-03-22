@@ -1,11 +1,11 @@
 import { GameTool } from "./gameTool.js";
-import { openSlots } from "../script.js";
+import { openSlots } from "../actions/closeAndOpenSlots.js";
 import { skipLimitStrat } from "../rules/skipLimitStrate.js";
 import { skipLimitDiagonal } from "../rules/skipLimitDiagonal.js";
 export class Queen extends GameTool {
     setsOfMovs() {
         this.possibleSlots = [];
-        let divs = this.chesBoard.querySelectorAll("div");
+        const divs = document.getElementById("chessboard").querySelectorAll("div");
         let divsCanMove = Array.from(divs).filter((div) => {
             return (this.location.row == Number(div.id[0]) ||
                 this.location.col == Number(div.id[1]) ||

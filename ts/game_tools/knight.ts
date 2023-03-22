@@ -1,11 +1,13 @@
-import { openSlots } from "../script.js";
+
 import { GameTool } from "./gameTool.js";
+import { openSlots } from "../actions/closeAndOpenSlots.js";
 
 
 export class Knight extends GameTool {
   setsOfMovs(): void {
     this.possibleSlots = [];
-    let divs = this.chesBoard.querySelectorAll("div");
+    const divs = document.getElementById("chessboard")!.querySelectorAll("div");
+    
     divs.forEach((div) => {
       if (
         this.location.row - Number(div.id[0]) > 3 ||

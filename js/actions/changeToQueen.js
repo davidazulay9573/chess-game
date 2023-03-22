@@ -1,35 +1,38 @@
 import { Queen } from "../game_tools/queen.js";
 import { game } from "../script.js";
 export function changeToKueen(pawnPR) {
-    let divForNewQueen = pawnPR.htmlElement.parentElement;
+    const divForNewQueen = pawnPR.htmlElement.parentElement;
+    const newQueen = new Queen(pawnPR.color, `${pawnPR.color}nq${pawnPR.type}`, `./img/${pawnPR.color.toLowerCase()}Q.png`, pawnPR.enemies, pawnPR.friendsToFight);
     pawnPR.htmlElement.remove();
-    const newQueen2 = new Queen(pawnPR.color, `${pawnPR.color}nq${pawnPR.type}`, `./img/${pawnPR.color.toLowerCase()}Q.png`);
-    divForNewQueen.appendChild(newQueen2.htmlElement);
-    divForNewQueen.appendChild(newQueen2.htmlElement);
+    divForNewQueen.appendChild(newQueen.htmlElement);
+    divForNewQueen.appendChild(newQueen.htmlElement);
     if (pawnPR.color == "W") {
-        game.white.push(newQueen2);
+        game.white.push(newQueen);
     }
     if (pawnPR.color == "B") {
-        game.black.push(newQueen2);
+        game.black.push(newQueen);
     }
-    newQueen2.Initialize();
-    newQueen2.setsOfMovs();
-    newQueen2.htmlElement.addEventListener("mousedown", () => {
-        newQueen2.Initialize();
-        newQueen2.setsOfMovs();
+    initializeKueen(newQueen);
+}
+function initializeKueen(newQueen) {
+    newQueen.Initialize();
+    newQueen.setsOfMovs();
+    newQueen.htmlElement.addEventListener("mousedown", () => {
+        newQueen.Initialize();
+        newQueen.setsOfMovs();
     });
-    newQueen2.htmlElement.addEventListener("dragend", () => {
-        newQueen2.Initialize();
-        newQueen2.setsOfMovs();
-        game.white.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-            tool2.checkIfMovingAllowed();
+    newQueen.htmlElement.addEventListener("dragend", () => {
+        newQueen.Initialize();
+        newQueen.setsOfMovs();
+        game.white.forEach((tool) => {
+            tool.setsOfMovs();
+            tool.Initialize();
+            tool.checkIfMovingAllowed();
         });
-        game.black.forEach((tool2) => {
-            tool2.setsOfMovs();
-            tool2.Initialize();
-            tool2.checkIfMovingAllowed();
+        game.black.forEach((tool) => {
+            tool.setsOfMovs();
+            tool.Initialize();
+            tool.checkIfMovingAllowed();
         });
     });
 }

@@ -1,17 +1,10 @@
 import { GameTool } from "./gameTool.js";
-import { onlyClosSlots, openSlots } from "../script.js";
+import { openSlots, onlyClosSlots } from "../actions/closeAndOpenSlots.js";
 import { castling } from "../actions/castling.js";
 export class King extends GameTool {
-    constructor(color, type, img, opponentsTools, friendsToFight) {
-        super(color, type, img);
-        {
-            this.enemies = opponentsTools;
-            this.friendsToFight = friendsToFight;
-        }
-    }
     setsOfMovs() {
         this.possibleSlots = [];
-        let divs = this.chesBoard.querySelectorAll("div");
+        const divs = document.getElementById("chessboard").querySelectorAll("div");
         divs.forEach((div) => {
             if (this.location.row == Number(div.id[0]) ||
                 this.location.row == Number(div.id[0]) + 1 ||

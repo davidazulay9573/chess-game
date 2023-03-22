@@ -1,19 +1,19 @@
 import { GameTool } from "./gameTool.js";
-import { game, openSlots } from "../script.js";
+import { openSlots } from "../actions/closeAndOpenSlots.js";
 import { skipLimitStrat } from "../rules/skipLimitStrate.js";
 import { changeToKueen } from '../actions/changeToQueen.js';
+import { game } from "../script.js";
 export class Pawn extends GameTool {
-    constructor(color, type, img, friendsToFight) {
-        super(color, type, img);
+    constructor(color, type, img, friendsToFight, enemies) {
+        super(color, type, img, enemies, friendsToFight);
         {
-            this.friendsToFight = friendsToFight;
             this.startPoint;
         }
     }
     setsOfMovs() {
         this.possibleSlots = [];
         this.posibleToEat = [];
-        let divs = this.chesBoard.querySelectorAll("div");
+        const divs = document.getElementById("chessboard").querySelectorAll("div");
         if (this.startPoint == 2) {
             if (this.location.row == 8) {
                 changeToKueen(this);

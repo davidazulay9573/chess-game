@@ -1,11 +1,12 @@
-import { openSlots } from "../script.js";
+
 import { King } from "../game_tools/king";
 import { GameTool } from "../game_tools/gameTool.js";
+import { openSlots } from "../actions/closeAndOpenSlots.js";
+
 
 export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
    if (king.location.row === Number(div.id[0])) {
      if (king.location.col === Number(div.id[1]) - 2) {
-
           short(king,rooks, div)
        }
       if (king.location.col === Number(div.id[1]) + 2) {
@@ -15,7 +16,7 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
   }
  
  function short(king:King,rooks:GameTool[], div:HTMLElement){
-    const rook = rooks.find((rook) => rook.location.col === 8)!;
+  const rook = rooks.find((rook) => rook.location.col === 8)!;
  
   if (checkTheWay(king, Number(`${king.location.row}6`))){
      if (
@@ -67,7 +68,7 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
         return false;
       }
     }
-
+    
     return true;
   }
  
@@ -85,7 +86,7 @@ export function castling(div: HTMLElement, king: King,rooks:GameTool[]) {
                    .getElementById(`${king.location.row}${rookNewLocation}`)
                    ?.appendChild(rook.htmlElement);
                }
-             }
+           }
          }
        }
      }

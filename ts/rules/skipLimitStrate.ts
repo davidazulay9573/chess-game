@@ -1,17 +1,19 @@
-import { closSlots, onlyClosSlots } from "../script.js";
+
+import { closSlots, onlyClosSlots } from "../actions/closeAndOpenSlots.js";
 import { GameTool } from "../game_tools/gameTool.js";
 
 export function skipLimitStrat(tool:GameTool) {
-    let divs = document.getElementById("chessboard")!.querySelectorAll("div");
-    let filterDivs = Array.from(divs).filter((div) => {
+    const divs = document.getElementById("chessboard")!.querySelectorAll("div");
+    const filterDivs = Array.from(divs).filter((div) => {
       return (
         tool.location.col == Number(div.id[1]) ||
         tool.location.row == Number(div.id[0])
       );
     });
 
-    filterDivs.forEach((div) => {
-      let imgTool = div.querySelector("img")!;
+      for (const div of filterDivs) {
+
+      const imgTool = div.querySelector("img")!;
       if (imgTool) {
         if (Number(imgTool.parentElement!.id[1]) == tool.location.col) {
           if (
@@ -82,5 +84,5 @@ export function skipLimitStrat(tool:GameTool) {
           }
         }
       }
-    });
+    };
   }
