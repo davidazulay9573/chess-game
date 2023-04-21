@@ -1,7 +1,9 @@
 import { game } from "../script.js";
 import { checkMovingAllowed } from "../rules/checkMovingAllowed.js";
-export class GameTool {
+import { stratDetention } from "../rules/dententionStrate.js";
+import { diagonalDetention } from "../rules/dententionDiagonal.js";
 
+export class GameTool {
   public type: string;
   private img: string;
   public color: string;
@@ -64,7 +66,7 @@ export class GameTool {
       div.removeAttribute("ondragover");
       div.removeAttribute("data-toggle");
     });
-
+    
     this.setLocation();
   }
 

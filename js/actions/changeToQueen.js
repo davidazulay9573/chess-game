@@ -2,7 +2,7 @@ import { Queen } from "../game_tools/queen.js";
 import { game } from "../script.js";
 export function changeToKueen(pawnPR) {
     const divForNewQueen = pawnPR.htmlElement.parentElement;
-    const newQueen = new Queen(pawnPR.color, `${pawnPR.color}nq${pawnPR.type}`, `./img/${pawnPR.color.toLowerCase()}Q.png`, pawnPR.enemies, pawnPR.friendsToFight);
+    const newQueen = new Queen(pawnPR.color, `${pawnPR.color}q${pawnPR.type}`, `./img/${pawnPR.color.toLowerCase()}Q.png`, pawnPR.enemies, pawnPR.friendsToFight);
     pawnPR.htmlElement.remove();
     divForNewQueen.appendChild(newQueen.htmlElement);
     divForNewQueen.appendChild(newQueen.htmlElement);

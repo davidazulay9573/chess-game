@@ -4,7 +4,7 @@ import { game } from "../script.js";
 
 export function changeToKueen(pawnPR: GameTool) {
   const divForNewQueen = pawnPR.htmlElement.parentElement!;
-  const newQueen = new Queen(pawnPR.color, `${pawnPR.color}nq${pawnPR.type}`,
+  const newQueen = new Queen(pawnPR.color, `${pawnPR.color}q${pawnPR.type}`,
   `./img/${pawnPR.color.toLowerCase()}Q.png`,pawnPR.enemies,pawnPR.friendsToFight);
   pawnPR.htmlElement.remove();
   divForNewQueen.appendChild(newQueen.htmlElement);
@@ -20,25 +20,25 @@ export function changeToKueen(pawnPR: GameTool) {
  initializeKueen(newQueen)
 }
 function initializeKueen(newQueen:Queen){
-   newQueen.Initialize();
- newQueen.setsOfMovs();
- newQueen.htmlElement.addEventListener("mousedown", () => {
-   newQueen.Initialize();
-   newQueen.setsOfMovs();
- });
- newQueen.htmlElement.addEventListener("dragend", () => {
-   newQueen.Initialize();
-   newQueen.setsOfMovs();
+    newQueen.Initialize();
+    newQueen.setsOfMovs();
+    newQueen.htmlElement.addEventListener("mousedown", () => {
+      newQueen.Initialize();
+      newQueen.setsOfMovs();
+    });
+    newQueen.htmlElement.addEventListener("dragend", () => {
+      newQueen.Initialize();
+      newQueen.setsOfMovs();
 
-   game.white.forEach((tool) => {
-     tool.setsOfMovs();
-     tool.Initialize();
-     tool.checkIfMovingAllowed();
-   });
-   game.black.forEach((tool) => {
-     tool.setsOfMovs();
-     tool.Initialize();
-     tool.checkIfMovingAllowed();
-   });
- });
+      game.white.forEach((tool) => {
+        tool.setsOfMovs();
+        tool.Initialize();
+        tool.checkIfMovingAllowed();
+      });
+      game.black.forEach((tool) => {
+        tool.setsOfMovs();
+        tool.Initialize();
+        tool.checkIfMovingAllowed();
+      });
+    });
 }
